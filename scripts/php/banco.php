@@ -5,14 +5,14 @@
         public static function conectar(){
 
             $host = 'localhost'; // Host
-            $dbn = '';  // Nome do banco
+            $dbn = 'teste';  // Nome do banco
             $user = 'root'; // Usuario do DB
             $senha = ''; // Senha do DB
 
             try{
 
                 // Tentar conexão
-                $conn = new PDO("host=$host;dbname=$dbn", $user, $senha);
+                $conn = new PDO("mysql:host=$host;dbname=$dbn", $user, $senha);
 
             }catch(PDOException $erro){
 
