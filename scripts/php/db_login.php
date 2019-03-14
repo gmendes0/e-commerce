@@ -13,7 +13,6 @@
                 require_once 'banco.php';
 
                 $tabela = 'usuario'; // Configurar o nome da tabela
-                $logado = false;
                 $login = $_POST['login'];
                 $senha = $_POST['senha'];
 
@@ -29,7 +28,12 @@
 
                             if($u->senha == $senha){
 
-                                $logado = true;
+                                //  Login efetuado: $msg[3]
+                                $n = 3;
+                                $dados = $pdo->query("SELECT * FROM $tabela WHERE login = '$u->login'");
+                                $d = $dados->fetch(PDO::FETCH_OBJ);
+                                $_SESSION['nome'] = $d->nome;
+                                echo "<meta http-equiv='refresh' content='3;url=site.php'/>";
                                 break;
 
                             }else{
@@ -49,13 +53,6 @@
                             }
 
                         }
-
-                    }
-
-                    if($logado){
-
-                        //  Login efetuado: $msg[3]
-                        $n = 3;
 
                     }
 
