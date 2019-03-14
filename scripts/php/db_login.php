@@ -12,7 +12,7 @@
             
                 require_once 'banco.php';
 
-                $tabela = 'usuarasdio'; // Configurar o nome da tabela
+                $tabela = 'usuario'; // Configurar o nome da tabela
                 $logado = false;
                 $login = $_POST['login'];
                 $senha = $_POST['senha'];
