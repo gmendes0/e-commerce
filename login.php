@@ -1,5 +1,6 @@
 <?php
 
+    session_start();
     require_once 'scripts/php/db_login.php';
 
 ?>
@@ -11,12 +12,23 @@
     </head>
 
     <body>
-
+        
+        <?php if(!empty($n)){?><h2><?= $msg[$n]; ?></h2><?php }?>
         <form action="login.php" method="post">
         
-            <div><input type="text" name="login" required/><label>Login</label></div>
-            <div><input type="password" name="senha" required/><label>Senha</label></div>
-            <div><input type="submit" value="entrar"/></div>
+            <div>
+                <input type="text" name="login" required/>
+                <label>Login</label>
+            </div>
+
+            <div>
+                <input type="password" name="senha" required/>
+                <label>Senha</label>
+            </div>
+
+            <div>
+                <input type="submit" value="entrar"/>
+            </div>
 
         </form>
 

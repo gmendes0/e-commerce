@@ -1,6 +1,10 @@
 <?php
-
+    
     if(!empty($_POST)){
+
+        // Menssagens do formulário de login
+        // 0 = nada; 1 = login inexistente; 2 = senha errada; 3 = logado; 4 = campo login vazio; 5 = campo senha vazio;
+        $msg = ['','login inválido','senha incorreta','login efetuado com sucesso','preencha o campo login','preencha o campo senha'];
 
         if(!empty($_POST['login'])){
         
@@ -8,9 +12,8 @@
             
                 require_once 'banco.php';
 
-                $tabela = 'usuario'; // Configurar o nome da tabela
+                $tabela = 'usuarasdio'; // Configurar o nome da tabela
                 $logado = false;
-                $l_erro = 'login inválido';
                 $login = $_POST['login'];
                 $senha = $_POST['senha'];
 
@@ -31,8 +34,17 @@
 
                             }else{
 
-                                // Senha Incorreta
-                                $l_erro = "Senha Incorreta";
+                                // Senha Incorreta: $msg[2]
+                                $n = 2;
+
+                            }
+
+                        }else{
+
+                            if(empty($n)){
+
+                                // Login inválido: $msg[1]
+                                $n = 1;
 
                             }
 
@@ -42,31 +54,29 @@
 
                     if($logado){
 
-                        //  Login efetuado
-                        echo "logado";
-
-                    }else{
-
-                        // Login não efetuado
-                        echo $l_erro;
+                        //  Login efetuado: $msg[3]
+                        $n = 3;
 
                     }
 
                 } catch (PDOException $erro) {
 
-                    die("Falha na realização da consulta: ".$erro->getMessage());
+                    //die("Falha na realização da consulta: ".$erro->getMessage());
+                    echo "<p class='erro'>Falha na realização da consulta: ".$erro->getMessage()."</h2>";
 
                 }
             
             }else{
             
-                //$_POST['senha'] vazio
+                //$_POST['senha'] vazio: $msg[5]
+                $n = 5;
             
             }
         
         }else{
         
-            //$_POST['login'] vazio
+            //$_POST['login'] vazio: $msg[4]
+            $n = 4;
         
         }
 
