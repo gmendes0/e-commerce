@@ -1,5 +1,7 @@
 <?php
     
+    $tabela = 'usuario'; // Configurar o nome da tabela
+
     if(!empty($_POST)){
 
         // Menssagens do formulário de login
@@ -12,11 +14,10 @@
             
                 require_once 'banco.php';
 
-                $tabela = 'usuario'; // Configurar o nome da tabela
                 $login = $_POST['login'];
                 $senha = $_POST['senha'];
 
-                try {
+                try{
 
                     $pdo = Banco::conectar();
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -56,10 +57,13 @@
 
                     }
 
-                } catch (PDOException $erro) {
+                    Banco::desconectar();
+
+                }catch(PDOException $erro){
 
                     //die("Falha na realização da consulta: ".$erro->getMessage());
-                    echo "<p class='erro'>Falha na realização da consulta: ".$erro->getMessage()."</h2>";
+                    //echo "<p class='erro'>Falha na realização da consulta: ".$erro->getMessage()."</h2>";
+                    $db_erro = $erro->getMessage();
 
                 }
             

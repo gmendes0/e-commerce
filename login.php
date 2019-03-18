@@ -1,5 +1,12 @@
 <?php
 
+    if(!empty($_SESSION['nome'])){
+
+        echo "<script>window.location='site.php'</script>";
+        exit;
+
+    }
+
     session_start();
     require_once 'scripts/php/db_login.php';
 
@@ -14,7 +21,7 @@
     <body>
         
         <?php if(!empty($n)){?><h2><?= $msg[$n]; ?></h2><?php }?>
-        <form action="login.php" method="post">
+        <form method="post">
         
             <div>
                 <input type="text" name="login" required/>
@@ -29,6 +36,8 @@
             <div>
                 <input type="submit" value="entrar"/>
             </div>
+
+            <a href="cadastro.php">Cadastre-se</a>
 
         </form>
 
