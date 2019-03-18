@@ -1,14 +1,19 @@
 <?php
 
+    session_start();
+
     if(!empty($_SESSION['nome'])){
 
         echo "<script>window.location='site.php'</script>";
         exit;
 
-    }
+    }else{
 
-    session_start();
-    require_once 'scripts/php/db_login.php';
+        define('REQUERIDO', true);
+
+        require_once 'scripts/php/db_login.php';
+
+    }
 
 ?>
 <!DOCTYPE html>

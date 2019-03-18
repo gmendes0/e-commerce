@@ -1,5 +1,12 @@
 <?php
     
+    if(!defined('REQUERIDO')){
+
+        header('Location: ../../login.php');
+        exit;
+
+    }
+
     $tabela = 'usuario'; // Configurar o nome da tabela
 
     if(!empty($_POST)){

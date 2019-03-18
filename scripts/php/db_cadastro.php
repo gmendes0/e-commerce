@@ -1,5 +1,12 @@
 <?php
 
+    if(!defined('INCLUIDA')){
+
+        header('Location: ../../cadastro.php');
+        exit;
+
+    }
+
     if(!empty($_POST)){
         
         $tabela = 'usuario';

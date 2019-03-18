@@ -9,6 +9,8 @@
 
     }else{
 
+        define('INCLUIDA', true);
+
         require_once 'scripts/php/db_cadastro.php';
 
     }
