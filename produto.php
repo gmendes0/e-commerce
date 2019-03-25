@@ -27,8 +27,14 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <title><?php echo $prod['nome']; ?></title>
     </head>
-    
+
     <body>
-        
+
+        <!-- navbar -->
+        <?php include_once 'scripts/php/navbar.php'; ?>
+
+        <h1><?php echo $prod['nome']; ?></h1>
+        <img src="#"/>
+
     </body>
 </html>

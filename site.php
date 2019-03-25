@@ -16,17 +16,7 @@
     <body>
         
         <!-- navbar -->
-        <nav class="navbar">
-        
-            <ul>
-
-                <li><a href="cadastro.php">crie sua conta</a></li>
-                <li><a href="login.php">entre</a></li>
-                <li><a href="#">carrinho</a></li>
-
-            </ul>
-        
-        </nav>
+        <?php include_once 'scripts/php/navbar.php'; ?>
 
         <!-- lista -->
         <div class="container">
