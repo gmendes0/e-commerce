@@ -20,10 +20,15 @@
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
 
-        <!-- lista -->
-        <div class="container">
-        
-            <?php require_once 'scripts/php/lista.php'; ?>
+        <!-- conteúdo do site -->
+        <div class="site">
+
+            <!-- lista -->
+            <div class="container">
+            
+                <?php require_once 'scripts/php/lista.php'; ?>
+
+            </div>
 
         </div>
 

@@ -25,6 +25,8 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/style.css"/>
         <title><?php echo $prod['nome']; ?></title>
     </head>
 
@@ -33,8 +35,13 @@
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
 
-        <h1><?php echo $prod['nome']; ?></h1>
-        <img src="#"/>
+        <!-- conteúdo do site -->
+        <div class="site">
+
+            <h1><?php echo $prod['nome']; ?></h1>
+            <img src="#"/>
+
+        </div>
 
     </body>
 </html>
