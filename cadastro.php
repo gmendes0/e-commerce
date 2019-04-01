@@ -15,6 +15,36 @@
 
     }
 
+    $estados = array(
+        "AC" => "Acre",
+        "AL" => "Alagoas",
+        "AP" => "Amapá",
+        "AM" => "Amazonas",
+        "BA" => "Bahia",
+        "CE" => "Ceará",
+        "DF" => "Distrito Federal",
+        "ES" => "Espírito Santo",
+        "GO" => "Goiás",
+        "MA" => "Maranhão",
+        "MT" => "Mato Grosso",
+        "MS" => "Mato Grosso do Sul",
+        "MG" => "Minas Gerais",
+        "PA" => "Pará",
+        "PB" => "Paraíba",
+        "PR" => "Paraná",
+        "PE" => "Pernambuco",
+        "PI" => "Piauí",
+        "RJ" => "Rio de Janeiro",
+        "RN" => "Rio Grande do Norte",
+        "RS" => "Rio Grande do Sul",
+        "RO" => "Rondônia",
+        "RR" => "Roraima",
+        "SC" => "Santa Catarina",
+        "SP" => "São Paulo",
+        "SE" => "Sergipe",
+        "TO" => "Tocantins"
+    );
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,6 +66,11 @@
             </div>
 
             <div>
+                <input type="date" name="datanascimento"/>
+                <label>data de nascimento</label>
+            </div>
+
+            <div>
                 <input type="text" name="login"/>
                 <label>login</label>
             </div>
@@ -51,8 +86,41 @@
             </div>
 
             <div>
-                <input type="date" name="datanascimento"/>
-                <label>data de nascimento</label>
+                <input type="text" name="email"/>
+                <label>email</label>
+            </div>
+
+            <div>
+                <input type="text" name="telefone"/>
+                <label>telefone</label>
+            </div>
+
+            <div>
+                <input type="text" name="cpf"/>
+                <label>cpf</label>
+            </div>
+
+            <div>
+                <input type="text" name="endereco"/>
+                <label>endereço</label>
+            </div>
+
+            <div>
+                <input type="text" name="bairro"/>
+                <label>bairro</label>
+            </div>
+
+            <div>
+                <input type="text" name="cidade"/>
+                <label>cidade</label>
+            </div>
+
+            <div>
+                <select name="estado">
+                    <?php foreach($estados as $uf => $es_nome){ ?>
+                        <option value="<?php echo $uf ?>"><?php echo $es_nome; ?></option>
+                    <?php } ?>
+                </select>
             </div>
 
             <div>

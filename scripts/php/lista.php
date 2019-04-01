@@ -2,12 +2,14 @@
 
     require_once 'banco.php';
 
+    $tabela = 'produto';
+
     try{
 
         $pdo = Banco::conectar();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $query = "SELECT * FROM produto";
+        $query = "SELECT * FROM $tabela";
         $q = $pdo->query($query);
 
         while($prod = $q->fetch(PDO::FETCH_ASSOC)){

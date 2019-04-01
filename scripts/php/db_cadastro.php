@@ -21,10 +21,17 @@
 
         $cad = [
             'nome' => $_POST['nome'],
+            'dnasc' => $_POST['datanascimento'],
             'login' => $_POST['login'],
             'senha' => $_POST['senha'],
             'confirm' => $_POST['confirmacao'],
-            'dnasc' => $_POST['datanascimento'],
+            'email' => $_POST['email'],
+            'telefone' => $_POST['telefone'],
+            'cpf' => $_POST['cpf'],
+            'endereco' => $_POST['endereco'],
+            'bairro' => $_POST['bairro'],
+            'cidade' => $_POST['cidade'],
+            'estado' => $_POST['estado'],
             'dcad' => date('Y-m-d H-i-s')
         ];
 
@@ -74,9 +81,22 @@
 
                         $pdo = Banco::conectar();
                         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $query = "INSERT INTO $tabela(login, senha, nome, nascimento, datacadastro) VALUES(?, ?, ?, ?, ?)";
+                        $query = "INSERT INTO $tabela(login, senha, nome, email, telefone, cpf, endereco, bairro, cidade, estado, nascimento, datacadastro) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                         $q = $pdo->prepare($query);
-                        $q->execute(array($cad['login'],$cad['senha'],$cad['nome'],$cad['dnasc'],$cad['dcad']));
+                        $q->execute(array(
+                            $cad['login'],
+                            $cad['senha'],
+                            $cad['nome'],
+                            $cad['email'],
+                            $cad['telefone'],
+                            $cad['cpf'],
+                            $cad['endereco'],
+                            $cad['bairro'],
+                            $cad['cidade'],
+                            $cad['estado'],
+                            $cad['dnasc'],
+                            $cad['dcad']
+                        ));
                         Banco::desconectar();
                         echo "<meta http-equiv='refresh' content='3;url=login.php'/>";
                         $n = 4; // Cadastrado com sucesso
@@ -84,6 +104,7 @@
                     }catch(PDOException $e){
 
                         $db_error = $e->getMessage();
+                        echo $db_error;
 
                     }
 
