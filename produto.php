@@ -39,7 +39,9 @@
         <div class="site">
 
             <h1><?php echo $prod['nome']; ?></h1>
-            <img src="#"/>
+            <p>R$ <?php echo $prod['valor']; ?></p>
+            <button>comprar</button>
+            <img src="<?php echo $prod['foto']; ?>"/>
 
         </div>
 

@@ -2,19 +2,55 @@
 
     if(!empty($_POST)){
 
-        require_once 'lib/Produto.php';
-        require_once 'lib/DaoProduto.php';
+        if(!empty($_POST['nome'])){
+            
+            if(!empty($_POST['valor'])){
 
-        /* Insert */
-        $produto = new Produto();
-        $produto->setNome($_POST['nome']);
-        $produto->setValor($_POST['valor']);
-        $produto->setDescricao($_POST['descricao']);
-        $produto->setDetalhes($_POST['detalhes']);
-        $produto->setAtivo($_POST['ativo']);
+                if(!empty($_POST['descricao'])){
+                
+                    if(!empty($_POST['detalhes'])){
+                    
+                        if(!empty($_POST['ativo'])){
 
-        DaoProduto::getInstance()->create($produto);
-        /* Fim Insert */
+                            if($_FILES['miniatura']['name']){
+                                // Verifica se há arquivo
+                        
+                                if(!$_FILES['miniatura']['error']){
+                                    //Verifica se não há erro
+                                
+                                    $nome_arquivo = strtolower($_FILES['miniatura']['name']);
+                                    $caminho = 'fotage/';
+                                    
+                                    move_uploaded_file($_FILES['miniatura']['tmp_name'], $caminho.$nome_arquivo);
+                        
+                                }
+                        
+                            }
+
+                            require_once 'lib/Produto.php';
+                            require_once 'lib/DaoProduto.php';
+
+                            /* Insert */
+                            $produto = new Produto();
+                            $produto->setNome($_POST['nome']);
+                            $produto->setValor($_POST['valor']);
+                            $produto->setDescricao($_POST['descricao']);
+                            $produto->setDetalhes($_POST['detalhes']);
+                            $produto->setAtivo($_POST['ativo']);
+                            $produto->setFoto($caminho.$nome_arquivo);
+
+                            DaoProduto::getInstance()->create($produto);
+                            /* Fim Insert */
+                        
+                        }
+                    
+                    }
+                
+                }
+
+            }
+        
+        }
 
     }
 
@@ -33,7 +69,9 @@
         <!-- Formulario Produto -->
         <div>
 
-            <form method="post">
+            <h2>Novo Produto</h2>
+
+            <form method="post" enctype="multipart/form-data">
 
                 <div>
                     <input type="text" name="nome">
@@ -60,6 +98,11 @@
                         <option value="1">sim</option>
                         <option value="0">não</option>
                     </select>
+                </div>
+
+                <div>
+                    <input type="file" name="miniatura"/>
+                    <label>imagem</label>
                 </div>
 
                 <div>

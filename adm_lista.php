@@ -9,6 +9,7 @@
         if(!empty($_GET['del'])){
 
             DaoProduto::getInstance()->del($_GET['del']);
+            header('Location: adm_lista.php');
 
         }
         /* Fim deletar */
@@ -21,16 +22,38 @@
 
             if(!empty($_POST)){
 
-                $produto = new Produto();
-                $produto->setIdProduto($val['idproduto']);
-                $produto->setNome($_POST['nome']);
-                $produto->setValor($_POST['valor']);
-                $produto->setDescricao($_POST['descricao']);
-                $produto->setDetalhes($_POST['detalhes']);
-                $produto->setAtivo($_POST['ativo']);
-                DaoProduto::getInstance()->update($produto);
+                if(!empty($_POST['nome'])){
+        
+                    if(!empty($_POST['valor'])){
+        
+                        if(!empty($_POST['descricao'])){
+                        
+                            if(!empty($_POST['detalhes'])){
+                            
+                                if(!empty($_POST['ativo'])){
+                                    
+                                    /* Insert */
+                                    $produto = new Produto();
+                                    $produto->setIdProduto($val['idproduto']);
+                                    $produto->setNome($_POST['nome']);
+                                    $produto->setValor($_POST['valor']);
+                                    $produto->setDescricao($_POST['descricao']);
+                                    $produto->setDetalhes($_POST['detalhes']);
+                                    $produto->setAtivo($_POST['ativo']);
+                                    DaoProduto::getInstance()->update($produto);
 
-                header('Location: adm_lista.php');
+                                    header('Location: adm_lista.php');
+                                    /* Fim Insert */
+
+                                }
+                            
+                            }
+                        
+                        }
+        
+                    }
+                
+                }
 
             }
         

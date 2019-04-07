@@ -8,6 +8,7 @@
         private $descricao;
         private $detalhes;
         private $ativo;
+        private  $foto;
 
         public function setIdProduto($idproduto){
         
@@ -79,6 +80,18 @@
         
             return $this->ativo;
         
+        }
+
+        public function setFoto($foto){
+
+            $this->foto = $foto;
+
+        }
+
+        public function getFoto(){
+
+            return $this->foto;
+
         }
 
     }

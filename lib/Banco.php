@@ -30,4 +30,10 @@
 
         }
 
+        public static function close(){
+
+            self::$instance = null;
+
+        }
+
     }

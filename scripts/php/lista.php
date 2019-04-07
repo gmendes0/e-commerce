@@ -18,7 +18,7 @@
     <div>
         
         <!-- produto -->
-        <img src="#"/>
+        <img src="<?php echo $prod['foto']; ?>"/>
         <a href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>"><?php echo $prod['nome']; ?></a><!-- link para a página do produto -->
         <p><?php echo "R$ ".$prod['valor']; ?></p>
 
