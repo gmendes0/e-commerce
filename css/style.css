@@ -56,3 +56,26 @@ body{
     padding: 30px;
 
 }
+
+/* tables */
+table{
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table thead{
+    background: #212529;
+    color: #FFF;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+table tbody td{
+    border-bottom: 1px solid #dee2e6;
+}
+
+table td{
+    padding: 10px;
+}

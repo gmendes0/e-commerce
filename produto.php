@@ -1,5 +1,13 @@
 <?php
 
+    session_start();
+
+    if(!isset($_SESSION['venda'])){
+
+        $_SESSION['venda'] = array();
+
+    }
+
     if(!isset($_GET['id_prod']) || $_GET['id_prod'] == null){
 
         echo "<script>window.location='site.php'</script>";
@@ -15,6 +23,32 @@
         $q->bindParam(1, $_GET['id_prod']);
         $q->execute();
         $prod = $q->fetch(PDO::FETCH_ASSOC); // produto
+
+        if(isset($_GET['add'])){
+            
+            if($_GET['add'] == null || $_GET['add'] != 'true'){
+
+                unset($_GET['add']);
+                header('Location: produto.php?id_prod='.$prod['idproduto']);
+                exit;
+        
+            }else{
+                
+                if(!empty($_SESSION['venda'])){
+
+                    $_SESSION['venda'][$_GET['id_prod']] = 2;
+
+                }else{
+
+                    $_SESSION['venda'][$_GET['id_prod']] = 2;
+
+                }
+                header('Location: carrinho.php');
+                exit;
+
+            }
+
+        }
 
     }
 
@@ -40,7 +74,7 @@
 
             <h1><?php echo $prod['nome']; ?></h1>
             <p>R$ <?php echo $prod['valor']; ?></p>
-            <button>comprar</button>
+            <a href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>&add=true">adicionar ao carrinho</a>
             <img src="<?php echo $prod['foto']; ?>"/>
 
         </div>
