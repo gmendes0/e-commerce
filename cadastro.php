@@ -52,82 +52,92 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
         <title>Cadastro</title>
     </head>
     
     <body>
         
-        <?php if(!empty($n)){?><h2><?= $msg[$n];?></h2><?php }?>
-        <form method="post">
-        
-            <div>
-                <input type="text" name="nome"/>
-                <label>nome</label>
-            </div>
+        <div class="container">
 
-            <div>
-                <input type="date" name="datanascimento"/>
-                <label>data de nascimento</label>
-            </div>
+            <?php if(!empty($n)){?><h2><?= $msg[$n];?></h2><?php }?>
+            <form method="post">
+            
+                <div class="form-group">
+                    <label>nome</label>
+                    <input class="form-control" type="text" name="nome"/>
+                </div>
 
-            <div>
-                <input type="text" name="login"/>
-                <label>login</label>
-            </div>
+                <div class="form-group">
+                    <label>data de nascimento</label>
+                    <input class="form-control" type="date" name="datanascimento"/>
+                </div>
 
-            <div>
-                <input type="password" name="senha"/>
-                <label>senha</label>
-            </div>
+                <div class="form-group">
+                    <label>login</label>
+                    <input class="form-control" type="text" name="login"/>
+                </div>
 
-            <div>
-                <input type="password" name="confirmacao"/>
-                <label>confirmar senha</label>
-            </div>
+                <div class="form-group">
+                    <label>senha</label>
+                    <input class="form-control" type="password" name="senha"/>
+                </div>
 
-            <div>
-                <input type="text" name="email"/>
-                <label>email</label>
-            </div>
+                <div class="form-group">
+                    <label>confirmar senha</label>
+                    <input class="form-control" type="password" name="confirmacao"/>
+                </div>
 
-            <div>
-                <input type="text" name="telefone"/>
-                <label>telefone</label>
-            </div>
+                <div class="form-group">
+                    <label>email</label>
+                    <input class="form-control" type="text" name="email"/>
+                </div>
 
-            <div>
-                <input type="text" name="cpf"/>
-                <label>cpf</label>
-            </div>
+                <div class="form-group">
+                    <label>telefone</label>
+                    <input class="form-control" type="text" name="telefone"/>
+                </div>
 
-            <div>
-                <input type="text" name="endereco"/>
-                <label>endereço</label>
-            </div>
+                <div class="form-group">
+                    <label>cpf</label>
+                    <input class="form-control" type="text" name="cpf"/>
+                </div>
 
-            <div>
-                <input type="text" name="bairro"/>
-                <label>bairro</label>
-            </div>
+                <div class="form-group">
+                    <label>endereço</label>
+                    <input class="form-control" type="text" name="endereco"/>
+                </div>
 
-            <div>
-                <input type="text" name="cidade"/>
-                <label>cidade</label>
-            </div>
+                <div class="form-group">
+                    <label>bairro</label>
+                    <input class="form-control" type="text" name="bairro"/>
+                </div>
 
-            <div>
-                <select name="estado">
-                    <?php foreach($estados as $uf => $es_nome){ ?>
-                        <option value="<?php echo $uf ?>"><?php echo $es_nome; ?></option>
-                    <?php } ?>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label>cidade</label>
+                    <input class="form-control" type="text" name="cidade"/>
+                </div>
 
-            <div>
-                <input type="submit" value="cadastrar">
-            </div>
+                <div class="form-group">
+                    <label>estado</label>
+                    <select class="form-control" name="estado">
+                        <?php foreach($estados as $uf => $es_nome){ ?>
+                            <option value="<?php echo $uf ?>"><?php echo $es_nome; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
 
-        </form>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="cadastrar">
+                </div>
+
+            </form>
+
+        </div>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
 
     </body>
 </html>

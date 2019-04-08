@@ -68,48 +68,49 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
         <title>Lista Produtos</title>
     </head>
 
     <body>
         
-        <div>
+        <div class="container">
 
             <?php if(isset($form)){ ?>
             <div>
 
                 <form method="post">
 
-                    <div>
-                        <input type="text" name="nome" value="<?php echo (!empty($val)) ? $val['nome'] : ''; ?>"/>
+                    <div class="form-group">
                         <label>nome</label>
+                        <input class="form-control" type="text" name="nome" value="<?php echo (!empty($val)) ? $val['nome'] : ''; ?>"/>
                     </div>
 
-                    <div>
-                        <input type="text" name="valor" value="<?php echo (!empty($val)) ? $val['valor'] : ''; ?>"/>
+                    <div class="form-group">
                         <label>valor</label>
-                    </div>
+                        <input class="form-control" type="text" name="valor" value="<?php echo (!empty($val)) ? $val['valor'] : ''; ?>"/>
+                    </div class="form-group">
 
-                    <div>
-                        <input type="text" name="descricao" value="<?php echo (!empty($val)) ? $val['descricao'] : ''; ?>"/>
+                    <div class="form-group">
                         <label>descrição</label>
-                    </div>
+                        <input class="form-control" type="text" name="descricao" value="<?php echo (!empty($val)) ? $val['descricao'] : ''; ?>"/>
+                    </div class="form-group">
 
-                    <div>
-                        <input type="text" name="detalhes" value="<?php echo (!empty($val)) ? $val['detalhes_tecnicos'] : ''; ?>"/>
+                    <div class="form-group">
                         <label>detalhes técnicos</label>
+                        <input class="form-control" type="text" name="detalhes" value="<?php echo (!empty($val)) ? $val['detalhes_tecnicos'] : ''; ?>"/>
                     </div>
 
-                    <div>
-                        <select name="ativo">
+                    <div class="form-group">
+                        <label>ativo</label>
+                        <select class="form-control" name="ativo">
                             <option value="1">sim</option>
                             <option value="0">não</option>
                         </select>
                     </div>
 
-                    <div>
-                        <input type="submit" value="enviar"/>
+                    <div class="form-group">
+                        <input type="submit" value="enviar" class="btn btn-primary"/>
                     </div>
 
                 </form>
@@ -117,11 +118,11 @@
             </div>
             <?php } ?>
 
-        <!-- lista -->
-            <table>
+            <!-- lista -->
+            <table class="table">
 
-                <thead>
-                    <tr>
+                <thead class="table-dark">
+                    <tr scope="row">
                         <td>id</td>
                         <td>nome</td>
                         <td>valor</td>
@@ -142,9 +143,9 @@
 
                     ?>
                     
-                        <tr>
+                        <tr scope="row">
 
-                            <td><?php echo $dado['idproduto']; ?></td>
+                            <th class=""><?php echo $dado['idproduto']; ?></th>
                             <td><?php echo $dado['nome']; ?></td>
                             <td><?php echo $dado['valor'] ?></td>
                             <td><?php echo $dado['descricao'] ?></td>
@@ -163,6 +164,10 @@
             <a href="adm_cadastrar.php">novo</a>
 
         </div>
+        
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
 
     </body>
 </html>

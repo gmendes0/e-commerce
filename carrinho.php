@@ -39,7 +39,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
-        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
         <title>Carrinho</title>
     </head>
 
@@ -49,15 +49,15 @@
         <?php include_once 'scripts/php/navbar.php'; ?>
 
         <!-- conteúdo do site -->
-        <div class="site">
+        <div class="container">
 
-            <h1>carrinho</h1>
+            <h1 class="text-center">carrinho</h1>
                 
-            <table>
+            <table class="table">
 
-                <thead>
+                <thead class="table-dark">
 
-                    <tr>
+                    <tr scope="row">
                         <td>produto</td>
                         <td>preço unitário</td>
                         <td>quantidade</td>
@@ -76,7 +76,7 @@
 
                             $produto = DaoProduto::getInstance()->readOne($prod);
                     ?>
-                        <tr>
+                        <tr scope="row">
                             <td><?php echo $produto['nome']; ?></td>
                             <td><?php echo 'R$ '.$produto['valor']; ?></td>
                             <td><?php echo $qtd; ?></td>
@@ -86,7 +86,7 @@
                     
                     <?php }}else{ ?>
 
-                        <td colspan="5">Nenhum item para mostrar</td>
+                        <td colspan="5" class="text-center">Nenhum item para mostrar</td>
 
                     <?php } ?>
                 </tbody>
@@ -96,6 +96,10 @@
             <a href="site.php">continue comprando</a>
 
         </div>
+            
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
 
     </body>
 

@@ -61,81 +61,86 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
         <title>Cadastrar - Fornecedor</title>
     </head>
 
     <body>
 
         <!-- Formulário Fornecedor -->
-        <div>
+        <div class="container">
 
-            <h2>Novo Fornecedor</h2>
+            <h2 class="text-center">Novo Fornecedor</h2>
 
             <form method="post">
 
-                <div>
-                    <input type="text" name="nome"/>
+                <div class="form-group">
                     <label>nome</label>
+                    <input class="form-control" type="text" name="nome"/>
                 </div>
 
-                <div>
-                    <input type="text" name="endereco"/>
+                <div class="form-group">
                     <label>endereço</label>
+                    <input class="form-control" type="text" name="endereco"/>
                 </div>
 
-                <div>
-                    <input type="text" name="numero"/>
+                <div class="form-group">
                     <label>número</label>
+                    <input class="form-control" type="text" name="numero"/>
                 </div>
 
-                <div>
-                    <input type="text" name="bairro"/>
+                <div class="form-group">
                     <label>bairro</label>
+                    <input class="form-control" type="text" name="bairro"/>
                 </div>
 
-                <div>
-                    <select name="uf">
+                <div class="form-group">
+                    <label>estado</label>
+                    <select class="form-control" name="uf">
                         <?php foreach($estados as $uf => $estado){ ?>
                             <option value="<?php echo $uf; ?>"><?php echo $estado; ?></option>
                         <?php } ?>
                     </select>
-                    <label>estado</label>
                 </div>
 
-                <div>
-                    <input type="text" name="telefone"/>
+                <div class="form-group">
                     <label>telefone</label>
+                    <input class="form-control" type="text" name="telefone"/>
                 </div>
 
-                <div>
-                    <input type="text" name="email"/>
+                <div class="form-group">
                     <label>email</label>
+                    <input class="form-control" type="text" name="email"/>
                 </div>
 
-                <div>
-                    <input type="text" name="cnpj"/>
+                <div class="form-group">
                     <label>cnpj</label>
+                    <input class="form-control" type="text" name="cnpj"/>
                 </div>
 
-                <div>
-                    <input type="text" name="site"/>
+                <div class="form-group">
                     <label>site</label>
+                    <input class="form-control" type="text" name="site"/>
                 </div>
 
-                <div>
-                    <select name="ativo">
+                <div class="form-group">
+                    <label>ativo</label>
+                    <select class="form-control" name="ativo">
                         <option value="1">sim</option>
                         <option value="0">não</option>
                     </select>
-                    <label>ativo</label>
                 </div>
                 
-                <div>
-                    <input type="submit" value="cadastrar"/>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="cadastrar"/>
                 </div>
             </form>
 
         </div>
+        
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
 
     </body>
 </html>
