@@ -63,12 +63,31 @@
         <?php include_once 'scripts/php/navbar.php'; ?>
 
         <!-- conteúdo do site -->
-        <div class="site">
+        <div class="container">
 
-            <h1><?php echo $prod['nome']; ?></h1>
-            <p>R$ <?php echo $prod['valor']; ?></p>
-            <a href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>&add=true">adicionar ao carrinho</a>
-            <img src="<?php echo $prod['foto']; ?>"/>
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="product-galery">
+    
+                        <img src="<?php echo $prod['foto']; ?>"/>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <h1 class="h3 text-normal"><?php echo $prod['nome']; ?></h1>
+                    <span class="h4 d-block text-muted">R$ <?php echo $prod['valor']; ?></span>
+                    <p class="h6">descrição</p>
+                    <p><?php echo $prod['descricao']; ?></p>
+                    <a class="btn btn-primary" href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>&add=true">adicionar ao carrinho</a>
+
+                </div>
+
+            </div>
 
         </div>
 
