@@ -24,7 +24,7 @@
 
             try{
 
-                $sql = "INSERT INTO ".self::$tabela."(nome, valor, descricao, detalhes_tecnicos, ativo, foto) VALUES(:nome, :valor, :descricao, :detalhes, :ativo, :foto)";
+                $sql = "INSERT INTO ".self::$tabela."(nome, valor, descricao, detalhes_tecnicos, ativo, foto, fornecedor_idfornecedor) VALUES(:nome, :valor, :descricao, :detalhes, :ativo, :foto, :fornecedor)";
 
                 $stmt = Banco::getInstance()->prepare($sql);
                 $stmt->bindValue(':nome', $produto->getNome());
@@ -33,6 +33,7 @@
                 $stmt->bindValue(':detalhes', $produto->getDetalhes());
                 $stmt->bindValue(':ativo', $produto->getAtivo());
                 $stmt->bindValue(':foto', $produto->getFoto());
+                $stmt->bindValue(':fornecedor', $produto->getFornecedor());
                 return $stmt->execute();
 
             }catch(PDOException $e){

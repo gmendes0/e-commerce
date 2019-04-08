@@ -1,5 +1,9 @@
 <?php
 
+    require_once 'lib/DaoFornecedor.php';
+
+    $fornecedores = DaoFornecedor::getInstance()->readFieldAll(['idfornecedor','nome']);
+
     if(!empty($_POST)){
 
         if(!empty($_POST['nome'])){
@@ -37,6 +41,7 @@
                             $produto->setDescricao($_POST['descricao']);
                             $produto->setDetalhes($_POST['detalhes']);
                             $produto->setAtivo($_POST['ativo']);
+                            $produto->setFornecedor($_POST['fornecedor']);
                             $produto->setFoto($caminho.$nome_arquivo);
 
                             DaoProduto::getInstance()->create($produto);
@@ -98,6 +103,16 @@
                         <option value="1">sim</option>
                         <option value="0">não</option>
                     </select>
+                    <label>ativo</label>
+                </div>
+
+                <div>
+                    <select name="fornecedor">
+                        <?php foreach($fornecedores as $fornecedor){ ?>
+                            <option value="<?php echo $fornecedor['idfornecedor']; ?>"><?php echo $fornecedor['nome']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <label>fornecedor</label>
                 </div>
 
                 <div>

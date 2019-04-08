@@ -8,7 +8,8 @@
         private $descricao;
         private $detalhes;
         private $ativo;
-        private  $foto;
+        private $foto;
+        private $fornecedor;
 
         public function setIdProduto($idproduto){
         
@@ -91,6 +92,18 @@
         public function getFoto(){
 
             return $this->foto;
+
+        }
+
+        public function setFornecedor($fornecedor){
+
+            $this->fornecedor = $fornecedor;
+
+        }
+
+        public function getFornecedor(){
+
+            return $this->fornecedor;
 
         }
 
