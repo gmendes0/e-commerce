@@ -34,15 +34,8 @@
         
             }else{
                 
-                if(!empty($_SESSION['venda'])){
+                $_SESSION['venda'][$_GET['id_prod']] = 1;
 
-                    $_SESSION['venda'][$_GET['id_prod']] = 2;
-
-                }else{
-
-                    $_SESSION['venda'][$_GET['id_prod']] = 2;
-
-                }
                 header('Location: carrinho.php');
                 exit;
 

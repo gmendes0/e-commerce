@@ -2,6 +2,8 @@
 
     session_start();
 
+    $content = false;
+
     require_once 'lib/Compra.php';
 
     if(!empty($_SESSION)){
@@ -9,6 +11,8 @@
         if(!empty($_SESSION['venda'])){
 
             include_once 'lib/DaoProduto.php';
+
+            $content = true;
 
             // session_destroy();
 
@@ -48,45 +52,51 @@
         <div class="site">
 
             <h1>carrinho</h1>
-
-            <form method="post">
                 
-                <table>
+            <table>
 
-                    <thead>
+                <thead>
 
-                        <tr>
-                            <td>produto</td>
-                            <td>preço unitário</td>
-                            <td>quantidade</td>
-                            <td>subtotal</td>
-                            <td>ações</td>
-                        </tr>
+                    <tr>
+                        <td>produto</td>
+                        <td>preço unitário</td>
+                        <td>quantidade</td>
+                        <td>subtotal</td>
+                        <td>ações</td>
+                    </tr>
 
-                    </thead>
-                    
-                    <tbody>
-                        <?php 
+                </thead>
+                
+                <tbody>
+                    <?php 
+
+                        if($content){
 
                             foreach($_SESSION['venda'] as $prod => $qtd){
 
-                                $produto = DaoProduto::getInstance()->readOne($prod);
-                        ?>
-                            <tr>
-                                <td><?php echo $produto['nome']; ?></td>
-                                <td><?php echo 'R$ '.$produto['valor']; ?></td>
-                                <td><input type="number" name='qtd' min="0" value="<?php echo $qtd; ?>"></td>
-                                <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
-                                <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
+                            $produto = DaoProduto::getInstance()->readOne($prod);
+                    ?>
+                        <tr>
+                            <td><?php echo $produto['nome']; ?></td>
+                            <td><?php echo 'R$ '.$produto['valor']; ?></td>
+                            <td><?php echo $qtd; ?></td>
+                            <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
+                            <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
+                        </tr>
+                    
+                    <?php }}else{ ?>
 
-                </table>
+                        <td colspan="5">Nenhum item para mostrar</td>
 
-            </form>
+                    <?php } ?>
+                </tbody>
+
+            </table>
+
+            <a href="site.php">continue comprando</a>
 
         </div>
 
     </body>
+
 </html>

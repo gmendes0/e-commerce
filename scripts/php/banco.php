@@ -5,7 +5,7 @@
         public static function conectar(){
 
             $host = 'localhost'; // Host
-            $dbn = 'tcc';  // Nome do banco
+            $dbn = 'tcc2';  // Nome do banco
             $user = 'root'; // Usuario do DB
             $senha = ''; // Senha do DB
 
