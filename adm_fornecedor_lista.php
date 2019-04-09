@@ -84,79 +84,81 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <title>Fornecedores - Lista</title>
     </head>
 
     <body>
         
-        <div>
+        <div class="container-fluid">
 
             <?php if(isset($form) && $form){ ?>
 
                 <div>
 
+                    <h2>Editar Fornecedor</h2>
+
                     <form method="post">
 
-                        <div>
-                            <input type="text" name="nome" value="<?php echo (!empty($val)) ? $val['nome'] : ''; ?>"/>
+                        <div class="form-group">
                             <label>nome</label>
+                            <input class="form-control" type="text" name="nome" value="<?php echo (!empty($val)) ? $val['nome'] : ''; ?>"/>
                         </div>
 
-                        <div>
-                            <input type="text" name="endereco" value="<?php echo (!empty($val)) ? $val['endereco'] : ''; ?>"/>
+                        <div class="form-group">
                             <label>endereço</label>
+                            <input class="form-control" type="text" name="endereco" value="<?php echo (!empty($val)) ? $val['endereco'] : ''; ?>"/>
                         </div>
 
-                        <div>
-                            <input type="text" name="numero" value="<?php echo (!empty($val)) ? $val['numero'] : ''; ?>"/>
+                        <div class="form-group">
                             <label>número</label>
+                            <input class="form-control" type="text" name="numero" value="<?php echo (!empty($val)) ? $val['numero'] : ''; ?>"/>
                         </div>
 
-                        <div>
-                            <input type="text" name="bairro" value="<?php echo (!empty($val)) ? $val['bairro'] : ''; ?>"/>
+                        <div class="form-group">
                             <label>bairro</label>
+                            <input class="form-control" type="text" name="bairro" value="<?php echo (!empty($val)) ? $val['bairro'] : ''; ?>"/>
                         </div>
 
-                        <div>
-                            <select name="uf">
+                        <div class="form-group">
+                            <label>estado</label>
+                            <select class="form-control" name="uf">
                                 <?php foreach($estados as $uf => $estado){ ?>
                                     <option value="<?php echo $uf; ?>" <?php if(!empty($val) && $val['uf'] == $uf){ echo 'selected'; }?> ><?php echo $estado; ?></option>
                                 <?php } ?>
                             </select>
-                            <label>estado</label>
                         </div>
 
-                        <div>
-                            <input type="text" name="telefone" value="<?php echo (!empty($val)) ? $val['telefone'] : ''; ?>"/>
+                        <div class="form-group">
                             <label>telefone</label>
+                            <input class="form-control" type="text" name="telefone" value="<?php echo (!empty($val)) ? $val['telefone'] : ''; ?>"/>
                         </div>
 
-                        <div>
-                            <input type="text" name="email" value="<?php echo (!empty($val)) ? $val['email'] : ''; ?>"/>
+                        <div class="form-group">
                             <label>email</label>
+                            <input class="form-control" type="text" name="email" value="<?php echo (!empty($val)) ? $val['email'] : ''; ?>"/>
                         </div>
 
-                        <div>
-                            <input type="text" name="cnpj" value="<?php echo (!empty($val)) ? $val['cnpj'] : ''; ?>"/>
+                        <div class="form-group">
                             <label>cnpj</label>
+                            <input class="form-control" type="text" name="cnpj" value="<?php echo (!empty($val)) ? $val['cnpj'] : ''; ?>"/>
                         </div>
 
-                        <div>
-                            <input type="text" name="site" value="<?php echo (!empty($val)) ? $val['site'] : ''; ?>"/>
+                        <div class="form-group">
                             <label>site</label>
+                            <input class="form-control" type="text" name="site" value="<?php echo (!empty($val)) ? $val['site'] : ''; ?>"/>
                         </div>
 
-                        <div>
-                            <select name="ativo">
+                        <div class="form-group">
+                            <label>ativo</label>
+                            <select class="form-control" name="ativo">
                                 <option value="1">sim</option>
                                 <option value="0">não</option>
                             </select>
-                            <label>ativo</label>
                         </div>
 
-                        <div>
-                            <input type="submit" value="atualizar"/>
+                        <div class="form-group">
+                            <input class="btn btn-primary" type="submit" value="atualizar"/>
                         </div>
 
                     </form>
@@ -165,23 +167,23 @@
 
             <?php } ?>
 
-            <table>
+            <table class="table">
 
-                <thead>
+                <thead class="table-dark">
 
-                    <tr>
-                        <td>ID</td>
-                        <td>nome</td>
-                        <td>cnpj</td>
-                        <td>endereço</td>
-                        <td>nº</td>
-                        <td>bairro</td>
-                        <td>estado</td>
-                        <td>telefone</td>
-                        <td>email</td>
-                        <td>site</td>
-                        <td>ativo</td>
-                        <td>ações</td>
+                    <tr scope="row">
+                        <th>ID</th>
+                        <th>nome</th>
+                        <th>cnpj</th>
+                        <th>endereço</th>
+                        <th>nº</th>
+                        <th>bairro</th>
+                        <th>estado</th>
+                        <th>telefone</th>
+                        <th>email</th>
+                        <th>site</th>
+                        <th>ativo</th>
+                        <th>ações</th>
                     </tr>
 
                 </thead>
@@ -190,8 +192,8 @@
 
                     <?php foreach($fornecedores as $fornecedor){ ?>
 
-                        <tr>
-                            <td><?php echo $fornecedor['idfornecedor']; ?></td>
+                        <tr scope="row">
+                            <th><?php echo $fornecedor['idfornecedor']; ?></th>
                             <td><?php echo $fornecedor['nome']; ?></td>
                             <td><?php echo $fornecedor['cnpj']; ?></td>
                             <td><?php echo $fornecedor['endereco']; ?></td>
@@ -217,6 +219,10 @@
             <a href="adm_fornecedor.php">novo fornecedor</a>
 
         </div>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
 
     </body>
 </html>
