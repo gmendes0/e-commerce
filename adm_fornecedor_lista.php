@@ -214,6 +214,8 @@
 
             </table>
 
+            <a href="adm_fornecedor.php">novo produto</a>
+
         </div>
 
     </body>
