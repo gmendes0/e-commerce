@@ -127,6 +127,7 @@
             </form>
 
             <a href="adm_lista.php">lista</a>
+            <a href="adm_fornecedor.php">novo fornecedor</a>
 
         </div>
 

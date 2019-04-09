@@ -214,7 +214,7 @@
 
             </table>
 
-            <a href="adm_fornecedor.php">novo produto</a>
+            <a href="adm_fornecedor.php">novo fornecedor</a>
 
         </div>
 
