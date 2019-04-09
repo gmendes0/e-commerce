@@ -135,6 +135,8 @@
                     <input class="btn btn-primary" type="submit" value="cadastrar"/>
                 </div>
             </form>
+            
+            <a href="adm_fornecedor_lista.php">lista de fornecedores</a>
 
         </div>
         
