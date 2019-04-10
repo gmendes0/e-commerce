@@ -9,7 +9,7 @@
             if(!isset(self::$instance)){
 
                 $host = 'localhost';
-                $dbname = 'tcc2';
+                $dbname = 'tcc3';
                 $user = 'root';
                 $senha = '';
 
