@@ -4,7 +4,7 @@
 
     $content = false;
 
-    require_once 'lib/Venda.php';
+    require_once 'lib/Pedvenda.php';
 
     if(!empty($_SESSION)){
     
