@@ -4,6 +4,7 @@
 
         private $idusuario;
         private $login;
+        private $senha;
         private $nome;
         private $cpf;
         private $nascimento;
@@ -239,5 +240,21 @@
         public function setDatacadastro($datacadastro)
         {
             $this->datacadastro = $datacadastro;
+        }
+
+        /**
+         * Get the value of senha
+         */ 
+        public function getSenha()
+        {
+            return $this->senha;
+        }
+
+        /**
+         * Set the value of senha
+         */ 
+        public function setSenha($senha)
+        {
+            $this->senha = $senha;
         }
     }
