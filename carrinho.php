@@ -14,8 +14,6 @@
 
             $content = true;
 
-            // session_destroy();
-
         }
     
     }
@@ -50,48 +48,67 @@
 
         <!-- conteúdo do site -->
         <div class="site">
-
+        
             <h1>carrinho</h1>
-                
-            <table>
 
-                <thead>
+            <form method="post" action="comprar.php">
 
-                    <tr>
-                        <td>produto</td>
-                        <td>preço unitário</td>
-                        <td>quantidade</td>
-                        <td>subtotal</td>
-                        <td>ações</td>
-                    </tr>
+                <table>
 
-                </thead>
-                
-                <tbody>
-                    <?php 
+                    <thead>
 
-                        if($content){
-
-                            foreach($_SESSION['venda'] as $prod => $qtd){
-
-                            $produto = DaoProduto::getInstance()->readOne($prod);
-                    ?>
                         <tr>
-                            <td><?php echo $produto['nome']; ?></td>
-                            <td><?php echo 'R$ '.$produto['valor']; ?></td>
-                            <td><?php echo $qtd; ?></td>
-                            <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
-                            <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
+                            <td>produto</td>
+                            <td>preço unitário</td>
+                            <td>quantidade</td>
+                            <td>subtotal</td>
+                            <td>ações</td>
                         </tr>
+
+                    </thead>
                     
-                    <?php }}else{ ?>
+                    <tbody>
+                        <?php 
 
-                        <td colspan="5">Nenhum item para mostrar</td>
+                            if($content){
 
-                    <?php } ?>
-                </tbody>
+                                $total = null;
 
-            </table>
+                                foreach($_SESSION['venda'] as $prod => $qtd){
+
+                                    $produto = DaoProduto::getInstance()->readOne($prod);
+                                    $total += $produto['valor']*$qtd;
+                        ?>
+                            <tr>
+                                <td><?php echo $produto['nome']; ?></td>
+                                <td><?php echo 'R$ '.$produto['valor']; ?></td>
+                                <td><input type="number" name="qtd[]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"></td>
+                                <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
+                                <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
+                            </tr>
+                            
+                        <?php } ?>
+
+                            <tr>
+                                <td colspan="5" align="right">Total = R$ <?php echo $total; ?></td>
+                            </tr>
+
+                            <tr>
+                                <input type="hidden" name="total" value="<?php echo (isset($total)) ? $total : ''; ?>"/>
+                                <td colspan="5" align="right"><input type="submit" value="comprar"></td>
+                            </tr>
+
+                        <?php }else{ ?>
+
+                            <td colspan="5">Nenhum item para mostrar</td>
+
+                        <?php } ?>
+
+                    </tbody>
+
+                </table>
+            
+            </form>
 
             <a href="site.php">continue comprando</a>
 

@@ -66,7 +66,7 @@
         <div class="site">
 
             <h1><?php echo $prod['nome']; ?></h1>
-            <p>R$ <?php echo $prod['valor']; ?></p>
+            <p id='preco'><?php echo $prod['valor']; ?></p>
             <a href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>&add=true">adicionar ao carrinho</a>
             <img src="<?php echo $prod['foto']; ?>"/>
 
