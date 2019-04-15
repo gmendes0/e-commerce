@@ -28,11 +28,55 @@
                 </li>
             </ul>
 
-            <!-- dropdown -->
+            <!-- Direita -->
             <ul class="navbar-nav ml-auto mr-2">
-                <li class="nav-item"><a href="cadastro.php" class="nav-link">crie sua conta</a></li>
-                <li class="nav-item"><a href="login.php" class="nav-link">entre</a></li>
-                <li class="nav-item"><a href="carrinho.php" class="nav-link">carrinho</a></li>
+
+                <?php
+
+                    /**
+                     * Se Logado
+                     */
+                    if(isset($_SESSION['usuario'])){
+
+                        if(!empty($_SESSION['usuario'])){
+
+                ?>
+                            <!-- Se Logado -->
+                            <li class="nav-item"><a href="<?php echo $_SERVER['REQUEST_URI']; ?>?sair=1" class="nav-link">sair</a></li>
+
+                <?php
+
+                            if(isset($_GET['sair'])){
+
+                                if(!empty($_GET['sair']) && intval($_GET['sair']) == 1){
+
+                                    /**
+                                     * Realiza o logout
+                                     */
+
+                                    unset($_SESSION['usuario']);
+                                    unset($_GET['sair']);
+                                    header("Location: site.php");
+
+                                }
+
+                            }
+
+                        }
+
+                    }else{
+
+                ?>
+
+                        <li class="nav-item"><a href="cadastro.php" class="nav-link">crie sua conta</a></li>
+                        <li class="nav-item"><a href="login.php" class="nav-link">entre</a></li>
+                        <li class="nav-item"><a href="carrinho.php" class="nav-link">carrinho</a></li>
+
+                <?php
+
+                    }
+
+                ?>
             </ul>
 
             <!-- Barra de pesquisa -->
