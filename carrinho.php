@@ -48,7 +48,7 @@
 
         <!-- conteúdo do site -->
         <div class="site">
-        
+            <pre><?php print_r($_SESSION); ?></pre>
             <h1>carrinho</h1>
 
             <form method="post" action="comprar.php">
@@ -82,7 +82,7 @@
                             <tr>
                                 <td><?php echo $produto['nome']; ?></td>
                                 <td><?php echo 'R$ '.$produto['valor']; ?></td>
-                                <td><input type="number" name="qtd[]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"></td>
+                                <td><input type="number" name="qtd[<?php echo $prod; ?>]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"></td>
                                 <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
                                 <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
                             </tr>
@@ -95,7 +95,7 @@
 
                             <tr>
                                 <input type="hidden" name="total" value="<?php echo (isset($total)) ? $total : ''; ?>"/>
-                                <td colspan="5" align="right"><input type="submit" value="comprar"></td>
+                                <td colspan="5" align="right"><input type="submit" value="comprar"></td><!-- submit -->
                             </tr>
 
                         <?php }else{ ?>
