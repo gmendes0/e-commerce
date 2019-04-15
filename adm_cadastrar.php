@@ -66,62 +66,66 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
         <title>Cadastrar Produto</title>
     </head>
 
     <body>
 
-        <!-- Formulario Produto -->
-        <div>
+        <!-- navbar -->
+        <?php include_once 'scripts/php/navbar.php'; ?>
 
-            <h2>Novo Produto</h2>
+        <!-- Formulario Produto -->
+        <div class="container">
+
+            <h2 class="text-center">Novo Produto</h2>
 
             <form method="post" enctype="multipart/form-data">
 
-                <div>
-                    <input type="text" name="nome">
+                <div class="form-group">
                     <label>nome</label>
+                    <input class="form-control" type="text" name="nome">
                 </div>
 
-                <div>
-                    <input type="text" name="valor">
+                <div class="form-group">
                     <label>valor</label>
+                    <input class="form-control" type="text" name="valor">
                 </div>
 
-                <div>
-                    <input type="text" name="descricao">
+                <div class="form-group">
                     <label>descrição</label>
+                    <input class="form-control" type="text" name="descricao">
                 </div>
 
-                <div>
-                    <input type="text" name="detalhes">
+                <div class="form-group">
                     <label>detalhes técnicos</label>
+                    <input class="form-control" type="text" name="detalhes">
                 </div>
 
-                <div>
-                    <select name="ativo">
+                <div class="form-group">
+                    <label>ativo</label>
+                    <select class="form-control" name="ativo">
                         <option value="1">sim</option>
                         <option value="0">não</option>
                     </select>
-                    <label>ativo</label>
                 </div>
 
-                <div>
-                    <select name="fornecedor">
+                <div class="form-group">
+                    <label>fornecedor</label>
+                    <select class="form-control" name="fornecedor">
                         <?php foreach($fornecedores as $fornecedor){ ?>
                             <option value="<?php echo $fornecedor['idfornecedor']; ?>"><?php echo $fornecedor['nome']; ?></option>
                         <?php } ?>
                     </select>
-                    <label>fornecedor</label>
                 </div>
 
-                <div>
-                    <input type="file" name="miniatura"/>
+                <div class="form-group">
                     <label>imagem</label>
+                    <input class="form-control-file" type="file" name="miniatura"/>
                 </div>
 
-                <div>
-                    <input type="submit" value="enviar"/>
+                <div class="form-group">
+                    <input type="submit" value="enviar" class="btn btn-primary"/>
                 </div>
 
             </form>
@@ -130,6 +134,10 @@
             <a href="adm_fornecedor.php">novo fornecedor</a>
 
         </div>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
 
     </body>
 </html>
