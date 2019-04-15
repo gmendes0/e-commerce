@@ -5,29 +5,27 @@
     /**
      * Exige login par entrar na página
      */
-    if(!isset($_SESSION['nome'])){
+    if (!isset($_SESSION['nome'])) {
 
         header('Location: login.php');
         exit;
-
     }
 
     /**
      * Verifica se há itens
      */
-    if(!empty($_SESSION['venda'])){
+    if (!empty($_SESSION['venda'])) {
 
         require_once 'lib/DaoProduto.php';
         $subtotal = null;
 
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
 
-            if(isset($_POST['qtd'])){
+            if (isset($_POST['qtd'])) {
 
-                foreach($_SESSION['venda'] as $prod => $qtd){
+                foreach ($_SESSION['venda'] as $prod => $qtd) {
 
                     $_SESSION['venda'][$prod] = intval($_POST['qtd'][$prod]);
-
                 }
 
                 header('Location: comprar.php'); // Atualiza a página destruindo o $_POST
@@ -37,9 +35,9 @@
             /**
              * Se finalizar a compra
              */
-            if(!empty($_POST['finalizar'])){
+            if (!empty($_POST['finalizar'])) {
 
-                if(intval($_POST['finalizar'] == 1) && isset($_SESSION['venda'])){
+                if (intval($_POST['finalizar'] == 1) && isset($_SESSION['venda'])) {
 
                     require_once 'lib/ItensVenda.php';
                     require_once 'lib/PedVenda.php';
@@ -54,7 +52,7 @@
 
                     $insertPV = DaoPedvenda::getInstance()->create($pedvenda);
 
-                    if($insertPV){
+                    if ($insertPV) {
 
                         /**
                          * Arrumar: Salvar ID do Usuario + ID Itens Venda
@@ -63,8 +61,8 @@
                         $idpedvenda = DaoPedvenda::getInstance()->readOne(1);
 
                         $itensvenda = new Itensvenda();
-                    
-                        foreach($_SESSION['venda'] as $id => $q){
+
+                        foreach ($_SESSION['venda'] as $id => $q) {
 
                             $p = DaoProduto::getInstance()->readOne($id);
 
@@ -75,44 +73,33 @@
                             $itensvenda->setFk_idpedvenda(1);
 
                             DaoItensvenda::getInstance()->create($itensvenda);
-
                         }
-
                     }
-
                 }
-
             }
-
         }
-
-    }else{
+    } else {
 
         header('Location: site.php');
         exit;
-
     }
-
-    echo '<pre>';
-    print_r($_SESSION['venda']);
-    print_r($_POST);
-    echo '</pre>';
 
 ?>
 <!-- Exigir o Login -->
 <!DOCTYPE html>
 <html>
+
     <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
-        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" />
+        <link rel="stylesheet" href="css/bootstrap.css" />
         <title>Comprar</title>
     </head>
 
     <body>
-        
+
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
 
@@ -122,18 +109,18 @@
             <div class="card shadow-sm mb-5 col-sm-3">
                 <div class="card-body">
                     <?php
-                        echo '<pre>';
-                        print_r($_SESSION['venda']);
-                        print_r($_POST);
-                        echo '</pre>';
+                    echo '<pre>';
+                    print_r($_SESSION['venda']);
+                    print_r($_POST);
+                    echo '</pre>';
                     ?>
                 </div>
             </div>
 
             <div class="col-lg-6 order-lg-2 mb-9 mb-lg-0">
-            
+
                 <div class="mb-4">
-                        
+
                     <h2 class="h2">Seu Pedido</h2>
 
                 </div>
@@ -141,35 +128,35 @@
                 <div class="card shadow-sm mb-5">
 
                     <div class="card-body p-5">
-                    
+
                         <!-- produtos -->
                         <?php
-                            foreach($_SESSION['venda'] as $prod => $qtd){
+                            foreach ($_SESSION['venda'] as $prod => $qtd) {
                                 $produto = DaoProduto::getInstance()->readOne($prod);
-                                $subtotal += $produto['valor']*$qtd;
+                                $subtotal += $produto['valor'] * $qtd;
                         ?>
 
-                        <div class="media align-items-center mb-5">
+                            <div class="media align-items-center mb-5">
 
-                            <div class="media-body">
-                                <h2 class="h6 mb-0"><?php echo $produto['nome']; ?></h2>
-                                <small class="d-block text-secondary">x<?php echo $qtd; ?></small>
+                                <div class="media-body">
+                                    <h2 class="h6 mb-0"><?php echo $produto['nome']; ?></h2>
+                                    <small class="d-block text-secondary">x<?php echo $qtd; ?></small>
+                                </div>
+
+                                <div class="media-body text-right">
+                                    <span>R$ <?php echo number_format($produto['valor'] * $qtd, 2, ',', '.'); ?></span>
+                                </div>
+
                             </div>
-
-                            <div class="media-body text-right">
-                                <span>R$ <?php echo number_format($produto['valor']*$qtd, 2, ',', '.'); ?></span>
-                            </div>
-
-                        </div>
 
                         <?php } ?>
                         <!-- Fim produtos -->
 
-                        <hr class="my-5"/>
+                        <hr class="my-5" />
 
                         <!-- Subtotal + Frete -->
                         <div class="media align-items-center">
-                            
+
                             <h3 class="h6 text-secondary mr-3">Subtotal</h3>
 
                             <div class="media-body text-right">
@@ -183,7 +170,7 @@
 
                         <!-- Frete -->
                         <div class="media align-items-center">
-                            
+
                             <h3 class="h6 text-secondary mr-3">Frete</h3>
 
                             <div class="media-body text-right">
@@ -195,11 +182,11 @@
                         </div>
                         <!-- Fim Frete -->
 
-                        <hr class="my-5"/>
+                        <hr class="my-5" />
 
                         <!-- Total -->
                         <div class="media align-items-center">
-                            
+
                             <h3 class="h6 text-secondary mr-3">Total</h3>
 
                             <div class="media-body text-right">
@@ -217,13 +204,24 @@
 
             </div>
 
-        </div>
+            <form method="post">
+                
+                <input type="hidden" name="finalizar" value="1"/>
 
-    </div>
+                <div class="form-group">
+
+                    <input class="btn btn-success" type="submit" value="Finalizar Compra"/>
+
+                </div>
+
+            </form>
+
+        </div>
 
         <script src="js/jquery.js"></script>
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.js"></script>
 
     </body>
+
 </html>
