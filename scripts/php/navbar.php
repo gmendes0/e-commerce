@@ -30,7 +30,7 @@
 
             <!-- Direita -->
             <ul class="navbar-nav ml-auto mr-2">
-
+                <li class="nav-item"><a href="carrinho.php" class="nav-link">carrinho</a></li>
                 <?php
 
                     /**
@@ -70,7 +70,6 @@
 
                         <li class="nav-item"><a href="cadastro.php" class="nav-link">crie sua conta</a></li>
                         <li class="nav-item"><a href="login.php" class="nav-link">entre</a></li>
-                        <li class="nav-item"><a href="carrinho.php" class="nav-link">carrinho</a></li>
 
                 <?php
 
