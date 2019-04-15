@@ -63,7 +63,16 @@
 
             <h2 class="mb-5 mt-5">Cadastrar</h2>
 
-            <?php if(!empty($n)){?><h2><?= $msg[$n];?></h2><?php }?>
+            <?php if(!empty($n)){?>
+
+                <div class="alert alert-primary" role="alert">
+
+                    <?= $msg[$n];?>
+                    
+                </div>
+
+            <?php }?>
+
             <form method="post">
             
                 <div class="form-group">
