@@ -1,6 +1,7 @@
 <?php
 
     require_once 'Usuario.php';
+    require_once 'Banco.php';
 
     class DaoUsuario{
 
