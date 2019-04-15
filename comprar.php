@@ -13,7 +13,7 @@
 
                 foreach($_SESSION['venda'] as $prod => $qtd){
 
-                    $_SESSION['venda'][$prod] = intval($_POST['qtd'][$prod - 1]);
+                    $_SESSION['venda'][$prod] = intval($_POST['qtd'][$prod]);
                     //
 
                 }

@@ -83,7 +83,7 @@
                                 <td><?php echo $produto['nome']; ?></td>
                                 <td><?php echo 'R$ '.$produto['valor']; ?></td>
                                 <td>
-                                    <input class="form-control col-sm-3" type="number" name="qtd[]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/>
+                                    <input class="form-control col-sm-3" type="number" name="qtd[<?php echo $prod; ?>]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/>
                                 </td>
                                 <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
                                 <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
