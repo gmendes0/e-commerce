@@ -2,9 +2,22 @@
 
     session_start();
 
+    /**
+     * Exige login par entrar na página
+     */
+    if(!isset($_SESSION['nome'])){
+
+        header('Location: login.php');
+        exit;
+
+    }
+
+    /**
+     * Verifica se há itens
+     */
     if(!empty($_SESSION['venda'])){
 
-        include_once 'lib/DaoProduto.php';
+        require_once 'lib/DaoProduto.php';
         $subtotal = null;
 
         if(!empty($_POST)){
@@ -14,7 +27,58 @@
                 foreach($_SESSION['venda'] as $prod => $qtd){
 
                     $_SESSION['venda'][$prod] = intval($_POST['qtd'][$prod]);
-                    //
+
+                }
+
+                header('Location: comprar.php'); // Atualiza a página destruindo o $_POST
+
+            }
+
+            /**
+             * Se finalizar a compra
+             */
+            if(!empty($_POST['finalizar'])){
+
+                if(intval($_POST['finalizar'] == 1) && isset($_SESSION['venda'])){
+
+                    require_once 'lib/ItensVenda.php';
+                    require_once 'lib/PedVenda.php';
+                    require_once 'lib/DaoUsuario.php';
+                    require_once 'lib/DaoItensVenda.php';
+                    require_once 'lib/DaoPedVenda.php';
+
+                    $pedvenda = new Pedvenda();
+                    $pedvenda->setData(date('Y-m-d H:i:s'));
+                    $pedvenda->setAtivo(1);
+                    $pedvenda->setFk_idusuario(1);
+
+                    $insertPV = DaoPedvenda::getInstance()->create($pedvenda);
+
+                    if($insertPV){
+
+                        /**
+                         * Arrumar: Salvar ID do Usuario + ID Itens Venda
+                         */
+
+                        $idpedvenda = DaoPedvenda::getInstance()->readOne(1);
+
+                        $itensvenda = new Itensvenda();
+                    
+                        foreach($_SESSION['venda'] as $id => $q){
+
+                            $p = DaoProduto::getInstance()->readOne($id);
+
+                            $itensvenda->setQuantidade($q);
+                            $itensvenda->setValorunitario($p['valor']);
+                            $itensvenda->setValordesconto(0);
+                            $itensvenda->setFk_idproduto($id);
+                            $itensvenda->setFk_idpedvenda(1);
+
+                            DaoItensvenda::getInstance()->create($itensvenda);
+
+                        }
+
+                    }
 
                 }
 
@@ -22,7 +86,17 @@
 
         }
 
+    }else{
+
+        header('Location: site.php');
+        exit;
+
     }
+
+    echo '<pre>';
+    print_r($_SESSION['venda']);
+    print_r($_POST);
+    echo '</pre>';
 
 ?>
 <!-- Exigir o Login -->
