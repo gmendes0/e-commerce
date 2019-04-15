@@ -24,11 +24,6 @@
 
     }
 
-    echo '<pre>';
-    print_r($_SESSION['venda']);
-    print_r($_POST);
-    echo '</pre>';
-
 ?>
 <!-- Exigir o Login -->
 <!DOCTYPE html>
@@ -44,88 +39,105 @@
 
     <body>
         
+        <!-- navbar -->
+        <?php include_once 'scripts/php/navbar.php'; ?>
+
         <div class="container">
 
-        <div class="col-lg-6 order-lg-2 mb-9 mb-lg-0">
-            
-            <div class="mb-4">
-                    
-                <h2 class="h2">Seu Pedido</h2>
-
+            <!-- VarDump Test -->
+            <div class="card shadow-sm mb-5 col-sm-3">
+                <div class="card-body">
+                    <?php
+                        echo '<pre>';
+                        print_r($_SESSION['venda']);
+                        print_r($_POST);
+                        echo '</pre>';
+                    ?>
+                </div>
             </div>
 
-            <div class="card shadow-sm mb-5">
-
-                <div class="card-body p-5">
-                
-                    <!-- produtos -->
-                    <?php
-                        foreach($_SESSION['venda'] as $prod => $qtd){
-                            $produto = DaoProduto::getInstance()->readOne($prod);
-                            $subtotal += $produto['valor']*$qtd;
-                    ?>
-
-                    <div class="media align-items-center mb-5">
-
-                        <div class="media-body">
-                            <h2 class="h6 mb-0"><?php echo $produto['nome']; ?></h2>
-                            <small class="d-block text-secondary">x<?php echo $qtd; ?></small>
-                        </div>
-
-                        <div class="media-body text-right">
-                            <span>R$ <?php echo number_format($produto['valor']*$qtd, 2, ',', '.'); ?></span>
-                        </div>
-
-                    </div>
-
-                    <?php } ?>
-                    <!-- Fim produtos -->
-
-                    <hr class="my-5"/>
-
-                    <!-- Subtotal + Frete -->
-                    <div class="media align-items-center">
+            <div class="col-lg-6 order-lg-2 mb-9 mb-lg-0">
+            
+                <div class="mb-4">
                         
-                        <h3 class="h6 text-secondary mr-3">Subtotal</h3>
+                    <h2 class="h2">Seu Pedido</h2>
 
-                        <div class="media-body text-right">
+                </div>
 
-                            <span>R$ <?php echo number_format($subtotal, 2, ',', '.'); ?></span>
+                <div class="card shadow-sm mb-5">
 
-                        </div>
+                    <div class="card-body p-5">
+                    
+                        <!-- produtos -->
+                        <?php
+                            foreach($_SESSION['venda'] as $prod => $qtd){
+                                $produto = DaoProduto::getInstance()->readOne($prod);
+                                $subtotal += $produto['valor']*$qtd;
+                        ?>
 
-                    </div>
-                    <!-- FIM Subtotal -->
+                        <div class="media align-items-center mb-5">
 
-                    <!-- Frete -->
-                    <div class="media align-items-center">
-                        
-                        <h3 class="h6 text-secondary mr-3">Frete</h3>
+                            <div class="media-body">
+                                <h2 class="h6 mb-0"><?php echo $produto['nome']; ?></h2>
+                                <small class="d-block text-secondary">x<?php echo $qtd; ?></small>
+                            </div>
 
-                        <div class="media-body text-right">
-
-                            <span>R$ 0,00</span>
-
-                        </div>
-
-                    </div>
-                    <!-- Fim Frete -->
-
-                    <hr class="my-5"/>
-
-                    <!-- Total -->
-                    <div class="media align-items-center">
-                        
-                        <h3 class="h6 text-secondary mr-3">Total</h3>
-
-                        <div class="media-body text-right">
-
-                            <span>R$ <?php echo number_format($subtotal, 2, ',', '.'); ?></span>
+                            <div class="media-body text-right">
+                                <span>R$ <?php echo number_format($produto['valor']*$qtd, 2, ',', '.'); ?></span>
+                            </div>
 
                         </div>
 
+                        <?php } ?>
+                        <!-- Fim produtos -->
+
+                        <hr class="my-5"/>
+
+                        <!-- Subtotal + Frete -->
+                        <div class="media align-items-center">
+                            
+                            <h3 class="h6 text-secondary mr-3">Subtotal</h3>
+
+                            <div class="media-body text-right">
+
+                                <span>R$ <?php echo number_format($subtotal, 2, ',', '.'); ?></span>
+
+                            </div>
+
+                        </div>
+                        <!-- FIM Subtotal -->
+
+                        <!-- Frete -->
+                        <div class="media align-items-center">
+                            
+                            <h3 class="h6 text-secondary mr-3">Frete</h3>
+
+                            <div class="media-body text-right">
+
+                                <span>R$ 0,00</span>
+
+                            </div>
+
+                        </div>
+                        <!-- Fim Frete -->
+
+                        <hr class="my-5"/>
+
+                        <!-- Total -->
+                        <div class="media align-items-center">
+                            
+                            <h3 class="h6 text-secondary mr-3">Total</h3>
+
+                            <div class="media-body text-right">
+
+                                <span>R$ <?php echo number_format($subtotal, 2, ',', '.'); ?></span>
+
+                            </div>
+
+                        </div>
+                        <!-- Fim Total -->
+
                     </div>
-                    <!-- Fim Total -->
 
                 </div>
 
