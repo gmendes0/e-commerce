@@ -23,7 +23,7 @@
 
             try{
 
-                $sql = "INSERT INTO {self::$tabela}(data, ativo, usuario_idusuario) VALUES(:data, :ativo, :idusuario)";
+                $sql = "INSERT INTO ".self::$tabela."(data, ativo, usuario_idusuario) VALUES(:data, :ativo, :idusuario)";
 
                 $stmt = Banco::getInstance()->prepare($sql);
                 $stmt->bindValue(":data", $pedvenda->getData());
@@ -79,7 +79,7 @@
         {
             try{
 
-                $sql = "UPDATE {self::$tabela} SET ativo = :ativo WHERE idpedvenda = :idpedvenda";
+                $sql = "UPDATE ".self::$tabela." SET ativo = :ativo WHERE idpedvenda = :idpedvenda";
 
                 $stmt = Banco::getInstance()->prepare($sql);
                 $stmt->bindValue(":ativo", $pedvenda->getAtivo());
