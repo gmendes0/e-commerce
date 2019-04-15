@@ -83,12 +83,7 @@
                                 <td><?php echo $produto['nome']; ?></td>
                                 <td><?php echo 'R$ '.$produto['valor']; ?></td>
                                 <td>
-                                    <div class="form-group">
-                                        
-                                        <input class="form-control col-sm-3" type="number" name="qtd[]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/>
-
-
-                                    </div>
+                                    <input class="form-control col-sm-3" type="number" name="qtd[]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/>
                                 </td>
                                 <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
                                 <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
@@ -102,7 +97,11 @@
 
                             <tr>
                                 <input type="hidden" name="total" value="<?php echo (isset($total)) ? $total : ''; ?>"/>
-                                <td colspan="5" align="right"><input type="submit" value="comprar"></td>
+                                <td colspan="5" class="text-right">
+                                    <div class="form-group">
+                                        <input class="btn btn-success" type="submit" value="comprar"/>
+                                    </div>
+                                </td>
                             </tr>
 
                         <?php }else{ ?>
