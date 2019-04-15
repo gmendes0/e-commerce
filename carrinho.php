@@ -37,7 +37,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
-        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
         <title>Carrinho</title>
     </head>
 
@@ -47,17 +47,17 @@
         <?php include_once 'scripts/php/navbar.php'; ?>
 
         <!-- conteúdo do site -->
-        <div class="site">
+        <div class="container">
         
-            <h1>carrinho</h1>
+            <h1 class="text-center">carrinho</h1>
 
             <form method="post" action="comprar.php">
 
-                <table>
+                <table class="table">
 
-                    <thead>
+                    <thead class="table-dark">
 
-                        <tr>
+                        <tr scope="row">
                             <td>produto</td>
                             <td>preço unitário</td>
                             <td>quantidade</td>
@@ -79,10 +79,17 @@
                                     $produto = DaoProduto::getInstance()->readOne($prod);
                                     $total += $produto['valor']*$qtd;
                         ?>
-                            <tr>
+                            <tr scope="row">
                                 <td><?php echo $produto['nome']; ?></td>
                                 <td><?php echo 'R$ '.$produto['valor']; ?></td>
-                                <td><input type="number" name="qtd[]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"></td>
+                                <td>
+                                    <div class="form-group">
+                                        
+                                        <input class="form-control col-sm-3" type="number" name="qtd[]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/>
+
+
+                                    </div>
+                                </td>
                                 <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
                                 <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
                             </tr>
@@ -100,7 +107,7 @@
 
                         <?php }else{ ?>
 
-                            <td colspan="5">Nenhum item para mostrar</td>
+                            <td colspan="5" class="text-center">Nenhum item para mostrar</td>
 
                         <?php } ?>
 
@@ -113,6 +120,10 @@
             <a href="site.php">continue comprando</a>
 
         </div>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
 
     </body>
 
