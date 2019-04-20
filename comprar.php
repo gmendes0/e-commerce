@@ -47,21 +47,39 @@
                     require_once 'lib/DaoItensVenda.php';
                     require_once 'lib/DaoPedVenda.php';
 
+                    /**
+                     * Salva pedvenda
+                     */
                     $pedvenda = new Pedvenda();
+                    $pedvenda->setValortotal($_SESSION['subtotal']);
                     $pedvenda->setData(date('Y-m-d H:i:s'));
                     $pedvenda->setAtivo(1);
-                    $pedvenda->setFk_idusuario(1);
+                    $pedvenda->setFk_idusuario($_SESSION['usuario']);
 
                     $insertPV = DaoPedvenda::getInstance()->create($pedvenda);
 
                     if($insertPV){
 
                         /**
+                         * Recupera o ultimo ID do pedido do usuario
+                         */
+                        try{
+                            
+                            $idpedvenda = DaoPedvenda::getInstance()->lastIDpedvenda($_SESSION['usuario']);
+
+                            echo "<pre>";   //
+                            var_dump($idpedvenda);  //
+                            echo "</pre>";  //
+
+                        }catch(PDOException $e){
+
+                            $e->getMessage();
+
+                        }
+
+                        /**
                          * Arrumar: Salvar ID do Usuario + ID Itens Venda
                          */
-
-                        $idpedvenda = DaoPedvenda::getInstance()->readOne(1);
-
                         $itensvenda = new Itensvenda();
                     
                         foreach($_SESSION['venda'] as $id => $q){
@@ -72,7 +90,7 @@
                             $itensvenda->setValorunitario($p['valor']);
                             $itensvenda->setValordesconto(0);
                             $itensvenda->setFk_idproduto($id);
-                            $itensvenda->setFk_idpedvenda(1);
+                            $itensvenda->setFk_idpedvenda($idpedvenda['idpedvenda']);
 
                             DaoItensvenda::getInstance()->create($itensvenda);
 
@@ -144,6 +162,7 @@
                     <li>
                         <span>subtotal</span>
                         <span>R$ <?php echo number_format($subtotal, 2, ',', '.'); ?></span>
+                        <?php $_SESSION['subtotal'] = $subtotal; ?>
                     </li>
                 </ul>
 

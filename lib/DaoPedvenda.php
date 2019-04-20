@@ -23,9 +23,10 @@
 
             try{
 
-                $sql = "INSERT INTO ".self::$tabela."(data, ativo, usuario_idusuario) VALUES(:data, :ativo, :idusuario)";
+                $sql = "INSERT INTO ".self::$tabela."(valortotal, data, ativo, usuario_idusuario) VALUES(:valortotal, :data, :ativo, :idusuario)";
 
                 $stmt = Banco::getInstance()->prepare($sql);
+                $stmt->bindValue(":valortotal", $pedvenda->getValortotal());
                 $stmt->bindValue(":data", $pedvenda->getData());
                 $stmt->bindValue(":ativo", $pedvenda->getAtivo());
                 $stmt->bindValue(":idusuario", $pedvenda->getFk_idusuario());
@@ -65,6 +66,79 @@
                 $stmt = Banco::getInstance()->prepare($sql);
                 $stmt->bindValue(':idpedvenda', $id);
                 $stmt->execute();
+
+                return $stmt->fetch();
+
+            }catch(PDOException $e){
+
+                echo $e->getMessage();
+
+            }
+        }
+
+        public function readFieldAll($fields)
+        {
+
+            try{
+
+                if(count($fields) > 1){
+
+                    $field = implode(',',$fields);
+
+                }else{
+
+                    $field = $fields;
+
+                }
+
+                $sql = "SELECT $field FROM ".self::$tabela;
+
+                $stmt = Banco::getInstance()->query($sql);
+
+                return $stmt->fetchAll();
+
+            }catch(PDOException $e){
+
+                echo $e->getMessage();
+
+            }
+
+        }
+
+        public function readFieldWhere($fields, $index, $id)
+        {
+            try{
+
+                if(count($fields) > 1){
+
+                    $field = implode(',',$fields);
+
+                }else{
+
+                    $field = $fields[0];
+
+                }
+
+                $sql = "SELECT $field FROM ".self::$tabela." WHERE $index = $id";
+
+                $stmt = Banco::getInstance()->query($sql);
+
+                return $stmt->fetchAll();
+
+            }catch(PDOException $e){
+
+                echo $e->getMessage();
+
+            }
+        }
+
+        public function lastIDpedvenda($idusuario)
+        {
+            try{
+
+                $sql = "SELECT idpedvenda FROM ".self::$tabela." WHERE usuario_idusuario = $idusuario ORDER BY idpedvenda DESC LIMIT 1";
+
+                $stmt = Banco::getInstance()->query($sql);
 
                 return $stmt->fetch();
 
