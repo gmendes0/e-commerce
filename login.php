@@ -1,7 +1,8 @@
 <?php
+
     session_start();
 
-    if(!empty($_SESSION['nome'])){
+    if(!empty($_SESSION['usuario'])){
 
         echo "<script>window.location='site.php'</script>";
         exit;

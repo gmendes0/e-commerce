@@ -3,6 +3,7 @@
     class Pedvenda{
 
         private $idpedvenda;
+        private $valortotal;
         private $data;
         private $ativo;
         private $fk_idusuario;
@@ -70,4 +71,21 @@
         {
             $this->fk_idusuario = $fk_idusuario;
         }
+
+        /**
+         * Get the value of valortotal
+         */ 
+        public function getValortotal()
+        {
+            return $this->valortotal;
+        }
+
+        /**
+         * Set the value of valortotal
+         */ 
+        public function setValortotal($valortotal)
+        {
+            $this->valortotal = $valortotal;
+        }
+
     }

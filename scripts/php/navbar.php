@@ -54,7 +54,7 @@
                                      * Realiza o logout
                                      */
 
-                                    unset($_SESSION['usuario']);
+                                    $_SESSION['usuario'] = array();
                                     unset($_GET['sair']);
                                     header("Location: site.php");
 

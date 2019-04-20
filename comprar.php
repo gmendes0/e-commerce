@@ -1,31 +1,32 @@
 <?php
-
     session_start();
 
     /**
      * Exige login par entrar na página
      */
-    if (!isset($_SESSION['nome'])) {
+    if(!isset($_SESSION['usuario'])){
 
         header('Location: login.php');
         exit;
+
     }
 
     /**
      * Verifica se há itens
      */
-    if (!empty($_SESSION['venda'])) {
+    if(!empty($_SESSION['venda'])){
 
         require_once 'lib/DaoProduto.php';
         $subtotal = null;
 
-        if (!empty($_POST)) {
+        if(!empty($_POST)){
 
-            if (isset($_POST['qtd'])) {
+            if(isset($_POST['qtd'])){
 
-                foreach ($_SESSION['venda'] as $prod => $qtd) {
+                foreach($_SESSION['venda'] as $prod => $qtd){
 
                     $_SESSION['venda'][$prod] = intval($_POST['qtd'][$prod]);
+
                 }
 
                 header('Location: comprar.php'); // Atualiza a página destruindo o $_POST
@@ -35,9 +36,9 @@
             /**
              * Se finalizar a compra
              */
-            if (!empty($_POST['finalizar'])) {
+            if(!empty($_POST['finalizar'])){
 
-                if (intval($_POST['finalizar'] == 1) && isset($_SESSION['venda'])) {
+                if(intval($_POST['finalizar'] == 1) && isset($_SESSION['venda'])){
 
                     require_once 'lib/ItensVenda.php';
                     require_once 'lib/PedVenda.php';
@@ -45,48 +46,67 @@
                     require_once 'lib/DaoItensVenda.php';
                     require_once 'lib/DaoPedVenda.php';
 
+                    /**
+                     * Salva pedvenda
+                     */
                     $pedvenda = new Pedvenda();
+                    $pedvenda->setValortotal($_SESSION['subtotal']);
                     $pedvenda->setData(date('Y-m-d H:i:s'));
                     $pedvenda->setAtivo(1);
-                    $pedvenda->setFk_idusuario(1);
-
+                    $pedvenda->setFk_idusuario($_SESSION['usuario']);
                     $insertPV = DaoPedvenda::getInstance()->create($pedvenda);
 
-                    if ($insertPV) {
+                    if($insertPV){
+
+                        /**
+                         * Recupera o ultimo ID do pedido do usuario
+                         */
+                        try{
+                            
+                            $idpedvenda = DaoPedvenda::getInstance()->lastIDpedvenda($_SESSION['usuario']);
+
+                        }catch(PDOException $e){
+
+                            $e->getMessage();
+
+                        }
 
                         /**
                          * Arrumar: Salvar ID do Usuario + ID Itens Venda
                          */
-
-                        $idpedvenda = DaoPedvenda::getInstance()->readOne(1);
-
                         $itensvenda = new Itensvenda();
-
-                        foreach ($_SESSION['venda'] as $id => $q) {
+                    
+                        foreach($_SESSION['venda'] as $id => $q){
 
                             $p = DaoProduto::getInstance()->readOne($id);
-
                             $itensvenda->setQuantidade($q);
                             $itensvenda->setValorunitario($p['valor']);
                             $itensvenda->setValordesconto(0);
                             $itensvenda->setFk_idproduto($id);
-                            $itensvenda->setFk_idpedvenda(1);
-
+                            $itensvenda->setFk_idpedvenda($idpedvenda['idpedvenda']);
                             DaoItensvenda::getInstance()->create($itensvenda);
+
                         }
+
                     }
+
                 }
+
             }
+
         }
-    } else {
+
+    }else{
 
         header('Location: site.php');
         exit;
+
     }
 
 ?>
 <!-- Exigir o Login -->
 <!DOCTYPE html>
+
 <html>
 
     <head>
@@ -162,6 +182,8 @@
                             <div class="media-body text-right">
 
                                 <span>R$ <?php echo number_format($subtotal, 2, ',', '.'); ?></span>
+
+                                <?php $_SESSION['subtotal'] = $subtotal; ?>
 
                             </div>
 
