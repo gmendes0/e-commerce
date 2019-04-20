@@ -125,18 +125,6 @@
 
         <div class="container">
 
-            <!-- VarDump Test -->
-            <div class="card shadow-sm mb-5 col-sm-3">
-                <div class="card-body">
-                    <?php
-                    echo '<pre>';
-                    print_r($_SESSION['venda']);
-                    print_r($_POST);
-                    echo '</pre>';
-                    ?>
-                </div>
-            </div>
-
             <div class="col-lg-6 order-lg-2 mb-9 mb-lg-0">
 
                 <div class="mb-4">
