@@ -5,7 +5,7 @@
     /**
      * Exige login par entrar na página
      */
-    if(!isset($_SESSION['nome'])){
+    if(!isset($_SESSION['usuario'])){
 
         header('Location: login.php');
         exit;
