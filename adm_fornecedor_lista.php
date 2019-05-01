@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     /**
      * verifica se o adm está logado
      */
