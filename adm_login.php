@@ -2,6 +2,13 @@
 
     session_start();
 
+    if(isset($_SESSION['adm']) && !empty($_SESSION['adm'])){
+
+        echo "<script>window.location='site.php'</script>";
+        exit;
+
+    }
+
     if(empty($_SESSION['adm'])){
 
         if(!empty($_POST)){
@@ -21,12 +28,13 @@
                  */
                 $errors[] = $msgs[1];
 
-            }else if(empty($_POST['senha'])){
+            }
+            if(empty($_POST['senha'])){
 
                 /**
                  * O campo senha deve ser preechido
                  */
-                $errors = $msgs[2];
+                $errors[] = $msgs[2];
 
             }else{
 
@@ -39,7 +47,7 @@
                     /**
                      * Login inválido
                      */
-                    $errors = $msgs[3];
+                    $errors[] = $msgs[3];
                     
                 }else{
                     
@@ -50,7 +58,7 @@
                         /**
                          * Senha inválida
                          */
-                        $errors = $msgs[4];
+                        $errors[] = $msgs[4];
 
                     }else{
 
@@ -88,6 +96,20 @@
         <div class="container">
 
             <h2 class="mt-5">Entrar como admnistrador</h2>
+
+            <?php
+
+                if(isset($errors) && count($errors) > 0){
+
+                    foreach($errors as $erro){
+            ?>
+                        <div class="col-sm-4 alert alert-danger"><?php echo $erro; ?></div>
+            <?php
+                    }
+
+                }
+
+            ?>
 
             <form class="mt-5" method="POST">
             
