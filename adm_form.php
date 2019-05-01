@@ -136,6 +136,28 @@
             $valido = false;
 
         }
+
+        if($valido){
+
+            $newadm = new Administrador;
+            $newadm->setNome($_POST['nome']);
+            $newadm->setLogin($_POST['login']);
+            $newadm->setSenha($_POST['senha']);
+            $newadm->setAtivo($_POST['ativo']);
+            
+            $insert = DaoAdministrador::getInstance()->create($newadm);
+
+            if($insert){
+
+                header('Location: adm_login.php');
+
+            }else{
+
+                $errors[] = 'Falha ao cadastrar';
+
+            }
+
+        }
         
     }
 
@@ -178,14 +200,14 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nome:</label>
                     <div class="col-sm-4">
-                        <input type="text" name="nome" class="form-control"/>
+                        <input type="text" name="nome" class="form-control" value="<?php echo isset($_POST['nome']) ? $_POST['nome'] : '' ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Login:</label>
                     <div class="col-sm-4">
-                        <input type="text" name="login" class="form-control"/>
+                        <input type="text" name="login" class="form-control" value="<?php echo isset($_POST['login']) ? $_POST['login'] : '' ?>"/>
                     </div>
                 </div>
 
@@ -207,8 +229,8 @@
                     <label class="col-sm-2 col-form-label">Ativo:</label>
                     <div class="col-sm-4">
                         <select name="ativo" class="form-control">
-                            <option value="0">não</option>
-                            <option value="1">sim</option>
+                            <option value="0" <?php echo (isset($_POST['ativo']) && $_POST['ativo'] == 1) ? 'selected' : ''; ?>>não</option>
+                            <option value="1" <?php echo (isset($_POST['ativo']) && $_POST['ativo'] == 1) ? 'selected' : ''; ?>>sim</option>
                         </select>
                     </div>
                 </div>
