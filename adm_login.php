@@ -30,18 +30,12 @@
 
             }else{
 
-                /**
-                 * 
-                 * Criar o método existeLogin
-                 * retornar true se existir
-                 * 
-                 * 
-                 */
                 require_once 'lib/DaoAdministrador.php';
 
                 $logado = false;
+                $existe = DaoAdministrador::getInstance()->allFieldsWhere(['login'], ['login' => $_POST['login']]);
 
-                if(DaoAdministrador::getInstance()->allFieldsWhere(['login'], ['login' => $_POST['login']])){
+                if(empty($existe->login)){
 
                     /**
                      * Login inválido
@@ -50,20 +44,23 @@
                     
                 }else{
                     
-                    /**
-                     * tentar login:
-                     * 
-                     * **************************************************************************************
-                     * SELECT `idadmnistrador` FROM admnistrador WHERE `login` = :login AND `senha` = :senha;
-                     * 
-                     * bindValue(':login', $_POST['login']);
-                     * bindValue(':senha', $_POST['senha']);
-                     * 
-                     * execute();
-                     * fetch();
-                     * **************************************************************************************
-                     * 
-                     */
+                    $infos = DaoAdministrador::getInstance()->allFieldsWhere(['login', 'senha'], ['login' => $_POST['login'], 'senha' => $_POST['senha']]);
+
+                    if(!$infos){
+
+                        /**
+                         * Senha inválida
+                         */
+                        $errors = $msgs[4];
+
+                    }else{
+
+                        /**
+                         * logado
+                         */
+                        echo "logado";
+
+                    }
 
                 }
 
@@ -88,7 +85,7 @@
     <body>
         
         <div class="container">
-            <pre><?php var_dump($errors); ?></pre>
+
             <h2 class="mt-5">Entrar como admnistrador</h2>
 
             <form class="mt-5" method="POST">

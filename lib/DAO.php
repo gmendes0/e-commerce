@@ -36,7 +36,7 @@
 
                 $stmt = Banco::getInstance()->query($sql);
 
-                return $stmt->fetchAll();
+                return $stmt->fetchAll(PDO::FETCH_OBJ);
 
             }catch(PDOException $th){
 
@@ -88,7 +88,7 @@
 
                 $stmt = Banco::getInstance()->query($sql);
                 
-                return $stmt->fetchAll();
+                return $stmt->fetchAll(PDO::FETCH_OBJ);
 
                 echo $sql;
 
@@ -112,7 +112,7 @@
                 $stmt->bindValue(":id", $id);
                 $stmt->execute();
 
-                return $stmt->fetch();
+                return $stmt->fetch(PDO::FETCH_OBJ);
 
             }catch(PDOException $th){
 
@@ -192,7 +192,7 @@
 
                 $stmt = Banco::getInstance()->query($sql);
 
-                return $stmt->fetchAll();
+                return $stmt->fetchAll(PDO::FETCH_OBJ);
 
             }catch(PDOException $th){
 
@@ -249,7 +249,7 @@
                 }
 
                 $stmt = Banco::getInstance()->query($sql);
-                return $stmt->fetchAll();
+                return $stmt->fetch(PDO::FETCH_OBJ);
                 
             }catch(PDOException $th){
                 
@@ -278,7 +278,7 @@
                 $stmt = Banco::getInstance()->query($sql);
                 $stmt->bindValue(':id', $id);
 
-                return $stmt->fetch();
+                return $stmt->fetch(PDO::FETCH_OBJ);
 
             }catch(PDOException $th){
 
@@ -320,7 +320,7 @@
                 $stmt = Banco::getInstance()->query($sql);
                 $stmt->bindValue(':id', $id);
 
-                return $stmt->fetch();
+                return $stmt->fetch(PDO::FETCH_OBJ);
 
             }catch(PDOException $th){
 
