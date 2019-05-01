@@ -4,7 +4,7 @@
 
     class DAO
     {
-        protected static $tabela = 'teste';
+        protected static $tabela;
         protected static $pk;
 
         /**
@@ -57,8 +57,14 @@
 
                 if(count($condicoes) >= 1){
 
-                    $varias = implode(',', $condicoes);
-                    $condicao = str_replace(',', ' AND ', $varias);
+                    foreach($condicoes as $key => $value){
+                        
+                        $condicao[] = $key." = '$value'";
+
+                    }
+                   
+                    $condicao = implode(',', $condicao);
+                    $condicao = str_replace(',', ' AND ', $condicao);
 
                 }
 
@@ -126,8 +132,14 @@
 
                 if(count($condicoes) >= 1){
 
-                    $varias = implode(',', $condicoes);
-                    $condicao = str_replace(',', ' AND ', $varias);
+                    foreach($condicoes as $key => $value){
+                        
+                        $condicao[] = $key." = '$value'";
+
+                    }
+                   
+                    $condicao = implode(',', $condicao);
+                    $condicao = str_replace(',', ' AND ', $condicao);
 
                 }
 
@@ -154,7 +166,7 @@
         {
             try{
 
-                if(count($fields) > 1){
+                if(count($fields) >= 1){
 
                     $field = implode(',',$fields);
 
@@ -199,7 +211,7 @@
         {
             try{
 
-                if(count($fields) > 1){
+                if(count($fields) >= 1){
 
                     $field = implode(',',$fields);
 
@@ -207,8 +219,14 @@
 
                 if(count($condicoes) >= 1){
 
-                    $varias = implode(',', $condicoes);
-                    $condicao = str_replace(',', ' AND ', $varias);
+                    foreach($condicoes as $key => $value){
+                        
+                        $condicao[] = $key." = '$value'";
+
+                    }
+                   
+                    $condicao = implode(',', $condicao);
+                    $condicao = str_replace(',', ' AND ', $condicao);
 
                 }
 
@@ -231,14 +249,14 @@
                 }
 
                 $stmt = Banco::getInstance()->query($sql);
-
                 return $stmt->fetchAll();
-
+                
             }catch(PDOException $th){
-
+                
                 echo $th->getMessage();
-
+                
             }
+
         }
 
         /**
@@ -250,7 +268,7 @@
         {
             try{
 
-                if(count($fields) > 1){
+                if(count($fields) >= 1){
 
                     $field = implode(',',$fields);
 
@@ -279,7 +297,7 @@
         {
             try{
 
-                if(count($fields) > 1){
+                if(count($fields) >= 1){
 
                     $field = implode(',',$fields);
 
@@ -287,8 +305,14 @@
 
                 if(count($condicoes) >= 1){
 
-                    $varias = implode(',', $condicoes);
-                    $condicao = str_replace(',', ' AND ', $varias);
+                    foreach($condicoes as $key => $value){
+                        
+                        $condicao[] = $key." = '$value'";
+
+                    }
+                   
+                    $condicao = implode(',', $condicao);
+                    $condicao = str_replace(',', ' AND ', $condicao);
 
                 }
 

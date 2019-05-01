@@ -9,7 +9,7 @@
             $msgs = [
                 '',
                 'O campo login deve ser preechido',
-                'O compo senha deve ser preechido',
+                'O campo senha deve ser preechido',
                 'Login inválido',
                 'Senha incorreta'
             ];
@@ -19,38 +19,37 @@
                 /**
                  * O campo login deve ser preechido
                  */
-                $errors[] = $msg[1];
+                $errors[] = $msgs[1];
 
             }else if(empty($_POST['senha'])){
 
                 /**
                  * O campo senha deve ser preechido
                  */
-                $errors = $msg[2];
+                $errors = $msgs[2];
 
             }else{
 
                 /**
-                 * Crirar DAO Administrador
                  * 
                  * Criar o método existeLogin
                  * retornar true se existir
                  * 
                  * 
                  */
-                // require_once 'lib/DaoAdmnistrador.php';
+                require_once 'lib/DaoAdministrador.php';
 
                 $logado = false;
 
-                if(!DaoAdministrador::getInstance()->existeLogin()){
+                if(DaoAdministrador::getInstance()->allFieldsWhere(['login'], ['login' => $_POST['login']])){
 
                     /**
                      * Login inválido
                      */
-                    $errors = $msg[3];
-
+                    $errors = $msgs[3];
+                    
                 }else{
-
+                    
                     /**
                      * tentar login:
                      * 
@@ -89,7 +88,7 @@
     <body>
         
         <div class="container">
-
+            <pre><?php var_dump($errors); ?></pre>
             <h2 class="mt-5">Entrar como admnistrador</h2>
 
             <form class="mt-5" method="POST">
