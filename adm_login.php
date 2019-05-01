@@ -32,7 +32,6 @@
 
                 require_once 'lib/DaoAdministrador.php';
 
-                $logado = false;
                 $existe = DaoAdministrador::getInstance()->allFieldsWhere(['login'], ['login' => $_POST['login']]);
 
                 if(empty($existe->login)){
@@ -44,7 +43,7 @@
                     
                 }else{
                     
-                    $infos = DaoAdministrador::getInstance()->allFieldsWhere(['login', 'senha'], ['login' => $_POST['login'], 'senha' => $_POST['senha']]);
+                    $infos = DaoAdministrador::getInstance()->allFieldsWhere(['idadministrador', 'login', 'senha'], ['login' => $_POST['login'], 'senha' => $_POST['senha']]);
 
                     if(!$infos){
 
@@ -58,7 +57,9 @@
                         /**
                          * logado
                          */
-                        echo "logado";
+                        $adm = $infos;
+                        $_SESSION['adm'] = $infos->idadministrador;
+                        header('Location: site.php');
 
                     }
 
