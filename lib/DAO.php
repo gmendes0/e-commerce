@@ -2,6 +2,10 @@
 
     require_once 'Banco.php';
 
+    /**
+     * DAO
+     * @author Gabriel Mendes
+     */
     class DAO
     {
         protected static $tabela;
