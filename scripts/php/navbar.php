@@ -15,6 +15,7 @@
             <!-- conteúdos à esquerda -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a href="site.php" class="nav-link">Iníco</a></li>
+                <?php if(isset($_SESSION['adm'])){ ?>
                 <li class="nav-item dropdown">
                     <!-- Dropdown Toggler -->
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ADM</a>
@@ -26,6 +27,7 @@
                         <a href="adm_fornecedor_lista.php" class="dropdown-item">Fornecedores</a>
                     </div>
                 </li>
+                <?php } ?>
             </ul>
 
             <!-- Direita -->

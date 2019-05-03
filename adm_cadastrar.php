@@ -1,5 +1,17 @@
 <?php
 
+    session_start();
+
+    /**
+     * verifica se o adm está logado
+     */
+    if(!isset($_SESSION['adm']) || empty($_SESSION['adm'])){
+
+        echo "<script>window.location='adm_login.php'</script>";
+        exit;
+
+    }
+
     require_once 'lib/DaoFornecedor.php';
 
     $fornecedores = DaoFornecedor::getInstance()->readFieldAll(['idfornecedor','nome']);
