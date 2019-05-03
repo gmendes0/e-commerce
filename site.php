@@ -25,7 +25,7 @@
 
             <!-- lista -->
             <div class="container">
-            
+
                 <?php require_once 'scripts/php/lista.php'; ?>
 
             </div>

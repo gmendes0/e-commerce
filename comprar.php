@@ -96,6 +96,10 @@
 
                         }
 
+                        unset($_SESSION['subtotal']);
+                        unset($_SESSION['venda']);
+                        header('Location: site.php');
+
                     }
 
                 }
