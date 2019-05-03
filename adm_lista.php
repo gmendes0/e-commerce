@@ -117,6 +117,37 @@
                     </div>
 
                     <div class="form-group">
+                        <label>imagem</label>
+                        <select name="imagem" class="form-control">
+                            
+                            <?php
+                                $linha = null;
+                                $imagens = DaoProduto::getInstance()->readFieldAll('foto');
+                                foreach($imagens as $foto){
+                            ?>
+                                    <option value="<?php echo $foto['foto']; ?>">
+                                        <?php
+
+                                            $img = explode('fotage/', $foto['foto']);
+
+                                            if(count($img) > 1){
+
+                                                echo$img[1];
+
+                                            }else{
+
+                                                echo '--- --- --- --- --- --- --- --- --- --- --- ---';
+
+                                            }
+
+                                        ?>
+                                    </option>
+                            <?php } ?>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label>ativo</label>
                         <select class="form-control" name="ativo">
                             <option value="1">sim</option>
@@ -151,7 +182,7 @@
 
                 <tbody>
                     <?php
-                    
+
                         $q = DaoProduto::getInstance()->readAll();
                         foreach($q as $i => $dado){
                     ?>

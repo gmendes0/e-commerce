@@ -1,43 +1,49 @@
 <div class="card-columns">
-<?php
 
-    require_once 'banco.php';
-    $tabela = 'produto';
+    <div class="text-center">
 
-    try{
+        <?php
 
-        $pdo = Banco::conectar();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query = "SELECT * FROM $tabela";
-        $q = $pdo->query($query);
+            require_once 'banco.php';
+            $tabela = 'produto';
 
-        while($prod = $q->fetch(PDO::FETCH_ASSOC)){
-?>
+            try{
 
-            <div class="card" style="width: 18rem;">
-                
-                <!-- produto -->
-                <img src="<?php echo $prod['foto']; ?>" class="card-img-top"/>
-                
-                <div class="card-body">
-                    <a href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>"><?php echo $prod['nome']; ?></a><!-- link para a página do produto -->
-                    <p><?php echo "R$ ".$prod['valor']; ?></p>
-                    <a href="#" class="btn btn-primary">adicionar para o carrinho</a>
-                </div>
+                $pdo = Banco::conectar();
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query = "SELECT * FROM $tabela";
+                $q = $pdo->query($query);
 
-            </div>
+                while($prod = $q->fetch(PDO::FETCH_ASSOC)){
+        ?>
 
-<?php
+                    <div class="card mt-2" style="width: 18rem;">
+                        
+                        <!-- produto -->
+                        <img src="<?php echo $prod['foto']; ?>" class="card-img-top"/>
+                        
+                        <div class="card-body">
+                            <a href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>"><?php echo $prod['nome']; ?></a><!-- link para a página do produto -->
+                            <p><?php echo "R$ ".$prod['valor']; ?></p>
+                            <a href="#" class="btn btn-primary">adicionar para o carrinho</a>
+                        </div>
 
-        }
+                    </div>
 
-        Banco::desconectar();
+        <?php
 
-    }catch(PDOException $e){
+                }
 
-        $db_erro = $e->getMessage();
+                Banco::desconectar();
 
-    }
+            }catch(PDOException $e){
 
-?>
+                $db_erro = $e->getMessage();
+
+            }
+
+        ?>
+
+    </div>
+
 </div>

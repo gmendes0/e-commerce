@@ -81,6 +81,35 @@
 
         }
 
+        public function readFieldAll($fields)
+        {
+
+            try{
+
+                if(count($fields) > 1){
+
+                    $field = implode(',',$fields);
+
+                }else{
+
+                    $field = $fields;
+
+                }
+
+                $sql = "SELECT $field FROM ".self::$tabela;
+
+                $stmt = Banco::getInstance()->query($sql);
+
+                return $stmt->fetchAll();;
+
+            }catch(PDOException $e){
+
+                echo $e->getMessage();
+
+            }
+
+        }
+
         public function update(Produto $produto){
 
             try{
