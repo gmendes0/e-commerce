@@ -12,6 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/style.css">
         <title>Loja</title>
     </head>
 

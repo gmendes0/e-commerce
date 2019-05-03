@@ -17,7 +17,7 @@
                 while($prod = $q->fetch(PDO::FETCH_ASSOC)){
         ?>
 
-                    <div class="card mt-2" style="width: 18rem;">
+                    <div class="card mt-2" style="width: 16rem;">
                         
                         <!-- produto -->
                         <img src="<?php echo explode(';', $prod['foto'])[0]; ?>" class="card-img-top"/>
