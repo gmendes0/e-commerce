@@ -28,19 +28,40 @@
                     
                         if(!empty($_POST['ativo'])){
 
-                            if($_FILES['miniatura']['name']){
-                                // Verifica se há arquivo
-                        
-                                if(!$_FILES['miniatura']['error']){
-                                    //Verifica se não há erro
-                                
-                                    $nome_arquivo = strtolower($_FILES['miniatura']['name']);
-                                    $caminho = 'fotage/';
-                                    
-                                    move_uploaded_file($_FILES['miniatura']['tmp_name'], $caminho.$nome_arquivo);
-                        
+                            $img_list = null;
+
+                            for($i = 0; $i < count($_FILES['miniatura']['name']); $i++){
+
+                                if($_FILES['miniatura']['name'][$i]){
+                                    // Verifica se há arquivo
+                                    if(!$_FILES['miniatura']['error'][$i]){
+                            
+                                        //Verifica se não há erro
+
+                                        $nome_arquivo = strtolower($_FILES['miniatura']['name'][$i]);
+                                        $replace1 = array('/', '|', '\\', ' ');
+                                        $replace2 = array("'", ':', '*', '?', '"', '<', '>');
+                                        $dir = str_replace($replace1, '_', $_POST['nome']);
+                                        $dir = str_replace($replace2, '', $dir);
+                                        $caminho = 'fotage/'.$dir.'/';
+
+                                        if(!file_exists(__DIR__.'/fotage/'.$dir)){
+
+                                            mkdir(__DIR__.'/fotage/'.$dir.'/', 0777, true);
+
+                                        }
+
+                                        if(!is_null($img_list)){
+                                            $img_list .= ';';
+                                        }
+                                        
+                                        $img_list .= $caminho.$nome_arquivo;
+                                        move_uploaded_file($_FILES['miniatura']['tmp_name'][$i], $caminho.$nome_arquivo);
+                                            
+                                    }
+                                        
                                 }
-                        
+
                             }
 
                             require_once 'lib/Produto.php';
@@ -54,7 +75,7 @@
                             $produto->setDetalhes($_POST['detalhes']);
                             $produto->setAtivo($_POST['ativo']);
                             $produto->setFornecedor($_POST['fornecedor']);
-                            $produto->setFoto($caminho.$nome_arquivo);
+                            $produto->setFoto($img_list);
 
                             DaoProduto::getInstance()->create($produto);
                             /* Fim Insert */
@@ -79,6 +100,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
+        <script src="js/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#add').click(function(){
+                    $('#img-uploads').append("<div class='mb-1'><input class='file' type='file' name='miniatura[]'/><a href='#img-uploads' id='remove' class='btn btn-danger'>x</a></div>");
+                });
+
+                $('#img-uploads').on('click', '#remove', function(){
+                    $(this).parent('div').remove();
+                });
+            });
+        </script>
         <title>Cadastrar Produto</title>
     </head>
 
@@ -131,9 +164,14 @@
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="img-uploads">
                     <label>imagem</label>
-                    <input class="form-control-file" type="file" name="miniatura"/>
+                    <div class="row mb-1">
+                        <div class="col-sm-10">
+                            <input class="file" type="file" name="miniatura[]"/>
+                            <a href="#add" class="btn btn-primary mb-2" id='add'>+</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -147,7 +185,6 @@
 
         </div>
 
-        <script src="js/jquery.js"></script>
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.js"></script>
 

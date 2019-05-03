@@ -24,6 +24,14 @@
         $q->execute();
         $prod = $q->fetch(PDO::FETCH_ASSOC); // produto
 
+        unset($q, $query);
+
+        $query = "SELECT `nome` FROM fornecedor WHERE idfornecedor = ?";
+        $q = $pdo->prepare($query);
+        $q->bindParam(1, $prod['fornecedor_idfornecedor']);
+        $q->execute();
+        $fornecedor = $q->fetch(PDO::FETCH_OBJ); // fornecedor
+
         if(isset($_GET['add'])){
             
             if($_GET['add'] == null || $_GET['add'] != 'true'){
@@ -49,6 +57,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/style.css">
         <title><?php echo $prod['nome']; ?></title>
     </head>
 
@@ -60,14 +69,34 @@
         <!-- conteúdo do site -->
         <div class="container">
 
-            <div class="row">
+            <div class="row mt-5">
 
-                <div class="col-md-6">
+                <div class="col-sm-1">
 
-                    <div class="product-galery">
-    
-                        <img src="<?php echo $prod['foto']; ?>"/>
+                    <?php
+                        $img = explode(';', $prod['foto']);
+                        foreach ($img as $key => $image){
+                    ?>
 
+                        <img src="<?php echo $image; ?>" class="img-thumbnail mb-3 cursor-pointer" 
+                        data-target="#produtoImage" data-slide-to="<?php echo $key; ?>" role="buuton"/>
+
+                    <?php } ?>
+
+                </div>
+
+                <div class="figure col-md-5">
+
+                    <div id="produtoImage" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <?php
+                                foreach ($img as $key => $image){
+                            ?>
+                                    <div class="carousel-item <?php echo $key == 0 ? 'active' : ''; ?>">
+                                        <img class="d-block w-100" src="<?php echo $image; ?>" alt="First slide"/>
+                                    </div>
+                            <?php } ?>
+                        </div>
                     </div>
 
                 </div>
@@ -76,6 +105,8 @@
 
                     <h1 class="h3 text-normal"><?php echo $prod['nome']; ?></h1>
                     <span class="h4 d-block text-muted">R$ <?php echo $prod['valor']; ?></span>
+                    <p class="h5 mt-3">fabricante</p>
+                    <p class="h6 text-muted"><?php echo $fornecedor->nome; ?></p>
                     <p class="h6">descrição</p>
                     <p><?php echo $prod['descricao']; ?></p>
                     <a class="btn btn-primary" href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>&add=true">adicionar ao carrinho</a>
