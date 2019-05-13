@@ -46,6 +46,8 @@
                     require_once 'lib/DaoItensVenda.php';
                     require_once 'lib/DaoPedVenda.php';
 
+                    $user = DaoUsuario::getInstance()->readOne($_SESSION['usuario']);
+
                     /**
                      * Salva pedvenda
                      */
@@ -88,9 +90,11 @@
 
                         }
 
-                        unset($_SESSION['subtotal']);
-                        unset($_SESSION['venda']);
-                        header('Location: site.php');
+                        require_once 'lib/pagseguro/checkout.php';
+
+                        // unset($_SESSION['subtotal']);
+                        // unset($_SESSION['venda']);
+                        // header('Location: site.php');
 
                     }
 
