@@ -42,9 +42,19 @@
 
                         if(!empty($_SESSION['usuario'])){
 
+                            //
+
                 ?>
                             <!-- Se Logado -->
-                            <li class="nav-item"><a href="<?php echo $_SERVER['REQUEST_URI']; ?>?sair=1" class="nav-link">sair</a></li>
+                            <li class="nav-item dropdown">
+                                <!-- Dropdown Toggler -->
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['nome']; ?></a>
+                                <!-- Conteúdo -->
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="perfil.php" class="dropdown-item">Perfil</a>
+                                    <a href="<?php echo $_SERVER['REQUEST_URI']; ?>?sair=1" class="dropdown-item">Sair</a>
+                                </div>
+                            </li>
 
                 <?php
 
