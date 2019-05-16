@@ -24,6 +24,7 @@
     <body>
         <?php require_once 'scripts/php/navbar.php'; ?>
         <div class="container">
+
             <h2 class="text-center">Informações</h2>
             <div class="card text-center mt-5 mb-5">
                 <div class="card-header">
@@ -36,6 +37,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#cd-endereco" id="endereco">Endereço</a>
+                        </li>
+                        <li class="nav-item ml-auto">
+                            <form action="e_perfil.php" method="post">
+                                <input type="hidden" name="editar" value="<?php echo $user['idusuario']; ?>"/>
+                                <input class="btn btn-outline-danger" type="submit" value="Editar"/>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -50,7 +57,6 @@
                     <!---->
                     <h6 class="card-title">Nascimento: </h5>
                     <p class="card-text text-muted"><?php echo $user['nascimento']; ?></p>
-                    <a href="#" class="btn btn-primary">Editar</a>
                 </div>
 
                 <div class="card-body" id="cd-dados">
@@ -66,7 +72,6 @@
                     <!---->
                     <h6 class="card-title">Telefone: </h5>
                     <p class="card-text text-muted"><?php echo $user['telefone']; ?></p>
-                    <a href="#" class="btn btn-primary">Editar</a>
                 </div>
 
                 <div class="card-body" id="cd-endereco">
@@ -85,7 +90,6 @@
                     <!---->
                     <h6 class="card-title">Estado: </h5>
                     <p class="card-text text-muted"><?php echo $user['estado']; ?></p>
-                    <a href="#" class="btn btn-primary">Editar</a>
                 </div>
 
                 <div class="card-footer text-muted">
