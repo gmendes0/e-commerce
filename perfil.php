@@ -1,10 +1,23 @@
 <?php
 
     session_start();
+    require_once 'lib/Validacao.php';
+    $validar = new Validacao;
+    $validar->isLoggedIn();
     //apos verificação
     require_once 'lib/DaoUsuario.php';
     $user = new DaoUsuario;
     $user = $user->getInstance()->readOne($_SESSION['usuario']);
+
+    if(!empty($_GET)){
+
+        if(isset($_GET['id'])){
+
+            header('Location: e_perfil.php?id='.$_GET['id']);
+
+        }
+
+    }
 
 ?>
 <!DOCTYPE html>
@@ -39,10 +52,7 @@
                             <a class="nav-link" href="#cd-endereco" id="endereco">Endereço</a>
                         </li>
                         <li class="nav-item ml-auto">
-                            <form action="e_perfil.php" method="post">
-                                <input type="hidden" name="editar" value="<?php echo $user['idusuario']; ?>"/>
-                                <input class="btn btn-outline-danger" type="submit" value="Editar"/>
-                            </form>
+                            <a href="?id=<?php echo $user['idusuario']; ?>" class="btn btn-outline-danger">Editar</a>
                         </li>
                     </ul>
                 </div>
