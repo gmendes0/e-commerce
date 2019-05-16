@@ -52,7 +52,8 @@
                                 <!-- Conteúdo -->
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="perfil.php" class="dropdown-item">Perfil</a>
-                                    <a href="<?php echo $_SERVER['REQUEST_URI']; ?>?sair=1" class="dropdown-item">Sair</a>
+                                    <a href="<?php echo !empty($_GET) ? $_SERVER['REQUEST_URI'].'&' : $_SERVER['REQUEST_URI'].'?'; ?>sair=1" class="dropdown-item">Sair</a>
+                                    <!-- Se Logado -->
                                 </div>
                             </li>
 
