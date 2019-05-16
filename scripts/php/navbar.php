@@ -44,7 +44,7 @@
 
                 ?>
                             <!-- Se Logado -->
-                            <li class="nav-item"><a href="<?php echo $_SERVER['REQUEST_URI']; ?>?sair=1" class="nav-link">sair</a></li>
+                            <li class="nav-item"><a href="<?php echo !empty($_GET) ? $_SERVER['REQUEST_URI'].'&' : $_SERVER['REQUEST_URI'].'?'; ?>sair=1" class="nav-link">sair</a></li>
 
                 <?php
 
