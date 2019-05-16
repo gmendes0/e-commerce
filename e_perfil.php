@@ -51,11 +51,23 @@
 
                     /**
                      * Validação de formulário
+                     * Adicionar validação de data
+                     * Adicionar validação de senha + confirmação
                      */
                     $validar->validation([
 
                         'nome' => 'required|min:3|max:45',
-                        'login' => 'required|min:3|max:50'
+                        'login' => 'required|min:3|max:50',
+                        'senha' => 'required|min:3|max:50',
+                        'confirmacao' => 'required|min:3|max:50',
+                        'email' => 'required|email|min:3|max:45',
+                        'telefone' => 'required',
+                        'cpf' => 'required',
+                        'endereco' => 'required|min:3|max:45',
+                        'numero' => 'required|min:0|max:999',
+                        'bairro' => 'required|min:3|max:45',
+                        'cidade' => 'required|min:3|max:45',
+                        'estado' => 'required|min:2|max:2'
 
                     ]);
 
@@ -64,7 +76,22 @@
                      */
                     if($validar->getValido()){
                         
-                        #code
+                        $usuario = new Usuario;
+                        $usuario->setIdusuario($_GET['id']);
+                        $usuario->setNome($_POST['nome']);
+                        $usuario->setNascimento($_POST['nascimento']);
+                        $usuario->setLogin($_POST['login']);
+                        $usuario->setSenha($_POST['senha']);
+                        $usuario->setEmail($_POST['email']);
+                        $usuario->setTelefone($_POST['telefone']);
+                        $usuario->setCpf($_POST['cpf']);
+                        $usuario->setEndereco($_POST['endereco']);
+                        $usuario->setNumero($_POST['numero']);
+                        $usuario->setBairro($_POST['bairro']);
+                        $usuario->setCidade($_POST['cidade']);
+                        $usuario->setEstado($_POST['estado']);
+                        $usuario->setAtivo(1);
+                        DaoUsuario::getInstance()->update($usuario);
 
                     }
 
@@ -95,16 +122,10 @@
     </head>
 
     <body>
+        <!-- navbar -->
+        <?php require_once 'scripts/php/navbar.php'; ?>
+
         <div class="container">
-            <!------------------------------------------------------------------------------------------>
-                <div class="alert alert-warning mt-5 mb-5" role="alert">
-                    <h4 class="alert-heading">Aviso</h4>
-                    <p>Deseja mesmo alterar os dados? Esta ação é irreversível.</p>
-                    <hr>
-                    <a class="btn btn-secondary" href="perfil.php?stats=s">sim</a>
-                    <a class="btn btn-secondary" href="perfil.php?stats=n">não</a>
-                </div>
-            <!-------------------------------------------------------------------------------------------->
             <?php if(isset($visualizar) && $visualizar){ ?>
                 <?php
                 
@@ -114,11 +135,12 @@
 
                 ?>
 
-                            <div class="alert alert-danger col-sm-8"><?php echo $value; ?></div>
+                            <div class="alert alert-danger col-sm-7"><?php echo $value; ?></div>
 
                 <?php }} ?>
+                <h2 class="text-muted">Editar dados</h2>
                 <!-- form -->
-                <form method="post">
+                <form method="post" class="mt-5 mb-5">
             
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">nome</label>
@@ -182,6 +204,14 @@
                             <input class="form-control" type="text" name="endereco" value="<?php echo (isset($user['endereco'])) ? $user['endereco'] : ''; ?>"/>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Número</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" name="numero" value="<?php echo (isset($user['numero'])) ? $user['numero'] : ''; ?>"/>
+                        </div>
+                    </div>
+
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">bairro</label>

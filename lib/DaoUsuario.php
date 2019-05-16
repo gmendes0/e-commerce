@@ -118,7 +118,7 @@
         {
             try{
 
-                $sql = "UPDATE {self::$tabela} SET login = :login, senha = :senha, nome = :nome, email = :email, cpf = :cpf, nascimento = :nascimento, endereco = :endereco, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, ativo = :ativo, datacadastro = :datacadastro WHERE idusuario = :idusuario";
+                $sql = "UPDATE ".self::$tabela." SET login = :login, senha = :senha, nome = :nome, email = :email, cpf = :cpf, nascimento = :nascimento, endereco = :endereco, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, ativo = :ativo WHERE idusuario = :idusuario";
 
                 $stmt = Banco::getInstance()->prepare($sql);
                 $stmt->bindValue("login", $usuario->getLogin());
