@@ -17,24 +17,30 @@
         <link rel="stylesheet" href="css/bootstrap.css"/>
         <link rel="stylesheet" href="css/style.css">
         <title><?php echo $user['nome']; ?></title>
+        <script src="js/jquery.js"></script>
+        <script src="js/perfil.js"></script>
     </head>
 
     <body>
         <?php require_once 'scripts/php/navbar.php'; ?>
         <div class="container">
-            <div class="card text-center mt-5">
+            <h2 class="text-center">Informações</h2>
+            <div class="card text-center mt-5 mb-5">
                 <div class="card-header">
                     <ul class="nav nav-pills card-header-pills">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Perfil</a>
+                            <a class="nav-link active" href="#cd-perfil" id="perfil">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Dados pessoais</a>
+                            <a class="nav-link" href="#cd-dados" id="dados">Dados pessoais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#cd-endereco" id="endereco">Endereço</a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" id="cd-perfil">
                     <!---->
                     <h6 class="card-title">Nome: </h5>
                     <p class="card-text text-muted"><?php echo $user['nome']; ?></p>
@@ -46,6 +52,42 @@
                     <p class="card-text text-muted"><?php echo $user['nascimento']; ?></p>
                     <a href="#" class="btn btn-primary">Editar</a>
                 </div>
+
+                <div class="card-body" id="cd-dados">
+                    <!---->
+                    <h6 class="card-title">Nome: </h5>
+                    <p class="card-text text-muted"><?php echo $user['nome']; ?></p>
+                    <!---->
+                    <h6 class="card-title">CPF: </h5>
+                    <p class="card-text text-muted"><?php echo $user['cpf']; ?></p>
+                    <!---->
+                    <h6 class="card-title">Nascimento: </h5>
+                    <p class="card-text text-muted"><?php echo $user['nascimento']; ?></p>
+                    <!---->
+                    <h6 class="card-title">Telefone: </h5>
+                    <p class="card-text text-muted"><?php echo $user['telefone']; ?></p>
+                    <a href="#" class="btn btn-primary">Editar</a>
+                </div>
+
+                <div class="card-body" id="cd-endereco">
+                    <!---->
+                    <h6 class="card-title">Rua: </h5>
+                    <p class="card-text text-muted"><?php echo $user['endereco']; ?></p>
+                    <!---->
+                    <h6 class="card-title">Número: </h5>
+                    <p class="card-text text-muted"><?php echo $user['numero']; ?></p>
+                    <!---->
+                    <h6 class="card-title">Bairro: </h5>
+                    <p class="card-text text-muted"><?php echo $user['bairro']; ?></p>
+                    <!---->
+                    <h6 class="card-title">Cidade: </h5>
+                    <p class="card-text text-muted"><?php echo $user['cidade']; ?></p>
+                    <!---->
+                    <h6 class="card-title">Estado: </h5>
+                    <p class="card-text text-muted"><?php echo $user['estado']; ?></p>
+                    <a href="#" class="btn btn-primary">Editar</a>
+                </div>
+
                 <div class="card-footer text-muted">
                     <!-- <?php echo $user['datacadastro'] - date('Y-m-d H-i-s'); ?>
                     <?php echo date_diff($user['datacadastro'], date('Y-m-d H:i:s')); ?> -->
@@ -60,5 +102,7 @@
                 </div>
             </div>
         </div>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
     </body>
 </html>
