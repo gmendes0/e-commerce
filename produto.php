@@ -59,6 +59,16 @@
         <link rel="stylesheet" href="css/bootstrap.css"/>
         <link rel="stylesheet" href="css/style.css">
         <title><?php echo $prod['nome']; ?></title>
+        <script src="js/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#btn-calc').click(function(){
+                    $.post('lib/Frete.php', {cep:$('#in-destino').val()}, function(data){
+                        $('#frete').html(data);
+                    });
+                });
+            });
+        </script>
     </head>
 
     <body>
@@ -115,9 +125,20 @@
 
             </div>
 
+            <div class="col-sm-3 mt-3 mb-3">
+                <label class="text-muted">Digite seu cep</label>
+                <div class="input-group">
+                    <input id="in-destino" type="text" name="cep" class="form-control" maxlength="8"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" id="btn-calc">calcular</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" id="frete"></div>
+
         </div>
 
-        <script src="js/jquery.js"></script>
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.js"></script>
 
