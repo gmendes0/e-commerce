@@ -1,9 +1,11 @@
 <?php
 
-    try{
-
-        $cep_destino = $_POST['cep'];
-        $cep_origem = '85960000';
+try{
+    
+    $cep_destino = $_POST['cep'];
+    $cep_origem = '85960000';
+    
+    if(!isset($_POST['servico'])){
 
         $servicos = ['sedex' => '04014', 'pac' => '04510'];
 
@@ -36,46 +38,72 @@
             }
 
         }
+
 ?>
-        <div class="card mb-3 border-dark">
-            <div class="card-header text-center text-white bg-dark">
-                Frete
-            </div>
-            <div class="card-body">
-                <?php if($aviso && !empty($erros)){ ?>
-                    <h5 class="card-title text-center text-danger">
-                        <?php
-                            foreach($erros as $value){
+            <div class="card mb-3 border-dark">
+                <div class="card-header text-center text-white bg-dark">
+                    Frete
+                </div>
+                <div class="card-body">
+                    <?php if($aviso && !empty($erros)){ ?>
+                        <h5 class="card-title text-center text-danger">
+                            <?php
+                                foreach($erros as $value){
 
-                                echo $value;
+                                    echo $value;
 
-                            }
-                        ?>
-                    </h5>
-                <?php }else{ ?>
-                    <table class="table">
-                        <thead class="table-dark">
-                            <tr>
-                                <td>Serviço</td>
-                                <td>Valor</td>
-                                <td>Prazo</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($xml as $key => $value){ ?>
-                                <?php $$key = $value->cServico; ?>
+                                }
+                            ?>
+                        </h5>
+                    <?php }else{ ?>
+                        <table class="table">
+                            <thead class="table-dark">
                                 <tr>
-                                    <td><?php echo strtoupper($key); ?></td>
-                                    <td>R$ <?php echo $$key->Valor; ?></td>
-                                    <td><?php echo $$key->PrazoEntrega; ?> dias</td>
+                                    <td>Serviço</td>
+                                    <td>Valor</td>
+                                    <td>Prazo</td>
                                 </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
+                            </thead>
+                            <tbody>
+                                <?php foreach($xml as $key => $value){ ?>
+                                    <?php $$key = $value->cServico; ?>
+                                    <tr>
+                                        <td><?php echo strtoupper($key); ?></td>
+                                        <td>R$ <?php echo $$key->Valor; ?></td>
+                                        <td><?php echo $$key->PrazoEntrega; ?> dias</td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
 <?php
+
+        }else{
+
+            $url = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?";
+            $url .= "nCdEmpresa=0";
+            $url .= "&sDsSenha=0";
+            $url .= "&nCdServico=".$_POST['servico'];
+            $url .= "&sCepOrigem=".$cep_origem;
+            $url .= "&sCepDestino=".$cep_destino;
+            $url .= "&nVlPeso=2";
+            $url .= "&nCdFormato=1";
+            $url .= "&nVlComprimento=17";
+            $url .= "&nVlAltura=16";
+            $url .= "&nVlLargura=21";
+            $url .= "&nVlDiametro=11";
+            $url .= "&sCdMaoPropria=S";
+            $url .= "&nVlValorDeclarado=0";
+            $url .= "&sCdAvisoRecebimento=S";
+            $url .= "&StrRetorno=xml";
+            $url .= "&nIndicaCalculo=3";
+            $xml = simplexml_load_file($url);
+
+            echo $xml->cServico->Valor;
+
+        }
 
     }catch(Exception $th){
 

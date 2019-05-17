@@ -119,11 +119,27 @@
 
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" />
-        <link rel="stylesheet" href="css/bootstrap.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
         <title>Comprar</title>
+        <script src="js/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#form').on('input', function(e){
+                    if($('#cep').val().length == 8){
+                        $.post('lib/Frete.php', {cep:$('#cep').val(), servico:$('#servico option:selected').val()}, function(data){
+                            $('#frete').html(data);
+                            // $('#valorfrete').val() = $('#frete').html(data); aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            alert($('#valorfrete').val());
+                        });
+                    }
+                    // $('#frete').html($('#cep').val());
+                    // $('#cep').val();
+                });
+            });
+        </script>
     </head>
 
     <body>
@@ -193,7 +209,7 @@
 
                             <div class="media-body text-right">
 
-                                <span>R$ 0,00</span>
+                                <span>R$ <span id="frete"></span></span>
 
                             </div>
 
@@ -222,9 +238,27 @@
 
             </div>
 
-            <form method="post">
+            <form method="post" name="final" id="form">
                 
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label" for="cep">CEP</label>
+                    <div class="col-sm-2">
+                        <input type="text" name="cep" id="cep" class="form-control" maxlength="8"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label" for="servico">Entrega</label>
+                    <div class="col-sm-2">
+                        <select name="servico" id="servico" class="form-control">
+                            <option value="04014">SEDEX</option>
+                            <option value="04510">PAC</option>
+                        </select>
+                    </div>
+                </div>
+
                 <input type="hidden" name="finalizar" value="1"/>
+                <input type="hidden" name="valorfrete" id="valorfrete"/>
 
                 <div class="form-group">
 
@@ -236,7 +270,6 @@
 
         </div>
 
-        <script src="js/jquery.js"></script>
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.js"></script>
 
