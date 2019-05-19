@@ -52,7 +52,7 @@
                      * Salva pedvenda
                      */
                     $pedvenda = new Pedvenda();
-                    $pedvenda->setValortotal($_SESSION['subtotal']);
+                    $pedvenda->setValortotal($_SESSION['total']);
                     $pedvenda->setData(date('Y-m-d H:i:s'));
                     $pedvenda->setAtivo(1);
                     $pedvenda->setFk_idusuario($_SESSION['usuario']);
@@ -131,12 +131,12 @@
                     if($('#cep').val().length == 8){
                         $.post('lib/Frete.php', {cep:$('#cep').val(), servico:$('#servico option:selected').val()}, function(data){
                             $('#frete').html(data);
-                            // $('#valorfrete').val() = $('#frete').html(data); aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                            alert($('#valorfrete').val());
+                            $('#valorfrete').on('input').val(data);
+                            var total = parseFloat($('#subtotal').html());
+                            total = total + parseFloat((data).replace(',', '.'));
+                            $('#total').html((total).toFixed(2));
                         });
                     }
-                    // $('#frete').html($('#cep').val());
-                    // $('#cep').val();
                 });
             });
         </script>
@@ -146,7 +146,6 @@
 
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
-
         <div class="container">
 
             <div class="col-lg-6 order-lg-2 mb-9 mb-lg-0">
@@ -193,7 +192,7 @@
 
                             <div class="media-body text-right">
 
-                                <span>R$ <?php echo number_format($subtotal, 2, ',', '.'); ?></span>
+                                <span>R$ </span><span id="subtotal"><?php echo $subtotal; ?></span>
 
                                 <?php $_SESSION['subtotal'] = $subtotal; ?>
 
@@ -209,7 +208,7 @@
 
                             <div class="media-body text-right">
 
-                                <span>R$ <span id="frete"></span></span>
+                                <span>R$ <span id="frete">--,--</span></span>
 
                             </div>
 
@@ -225,7 +224,7 @@
 
                             <div class="media-body text-right">
 
-                                <span>R$ <?php echo number_format($subtotal, 2, ',', '.'); ?></span>
+                                <span>R$ </span><span id="total"><?php echo $subtotal; ?></span>
 
                             </div>
 
