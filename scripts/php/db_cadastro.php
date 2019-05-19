@@ -52,7 +52,7 @@
             'telefone' => 'required|smin:3|smax:13',
             'cpf' => 'required|smin:3|smax:14',
             'endereco' => 'required|smin:3|smax:45',
-            'numero' => 'required|min:0|max:99999',
+            'numero' => 'required|numeric|min:0|max:99999',
             'bairro' => 'required|smin:3|smax:45',
             'cidade' => 'required|smin:3|smax:45',
             'estado' => 'required|smin:2|smax:2'

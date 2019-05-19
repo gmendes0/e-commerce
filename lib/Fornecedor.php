@@ -10,6 +10,7 @@
         private $cnpj;
         private $site;
         private $numero;
+        private $cidade;
         private $bairro;
         private $uf;
         private $ativo;
@@ -207,4 +208,20 @@
             $this->datacadastro = $datacadastro;
         }
         
+
+        /**
+         * Get the value of cidade
+         */ 
+        public function getCidade()
+        {
+            return $this->cidade;
+        }
+
+        /**
+         * Set the value of cidade
+         */ 
+        public function setCidade($cidade)
+        {
+            $this->cidade = $cidade;
+        }
     }

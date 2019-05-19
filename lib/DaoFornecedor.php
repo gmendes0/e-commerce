@@ -26,7 +26,7 @@
             
             try{
                 
-                $sql = "INSERT INTO ".self::$tabela."(nome, endereco, telefone, email, cnpj, site, numero, bairro, uf, ativo, datacadastro) VALUES(:nome, :endereco, :telefone, :email, :cnpj, :site, :numero, :bairro, :uf, :ativo, :datacadastro)";
+                $sql = "INSERT INTO ".self::$tabela."(nome, endereco, telefone, email, cnpj, site, numero, bairro, cidade, uf, ativo, datacadastro) VALUES(:nome, :endereco, :telefone, :email, :cnpj, :site, :numero, :bairro, :cidade, :uf, :ativo, :datacadastro)";
 
                 $stmt = Banco::getInstance()->prepare($sql);
                 $stmt->bindValue(':nome', $fornecedor->getNome());
@@ -36,7 +36,8 @@
                 $stmt->bindValue(':cnpj', $fornecedor->getCnpj());
                 $stmt->bindValue(':site', $fornecedor->getSite());
                 $stmt->bindValue(':numero', $fornecedor->getNumero());
-                $stmt->bindValue(':bairro', $fornecedor->getNumero());
+                $stmt->bindValue(':bairro', $fornecedor->getBairro());
+                $stmt->bindValue(':cidade', $fornecedor->getCidade());
                 $stmt->bindValue(':uf', $fornecedor->getUf());
                 $stmt->bindValue(':ativo', $fornecedor->getAtivo());
                 $stmt->bindValue(':datacadastro', $fornecedor->getDatacadastro());
@@ -123,7 +124,7 @@
             
             try{
                 
-                $sql = "UPDATE ".self::$tabela." SET nome = :nome, endereco = :endereco, telefone = :telefone, email = :email, cnpj = :cnpj, site = :site, numero = :numero, bairro = :bairro, uf = :uf, ativo = :ativo WHERE idfornecedor = :idfornecedor";
+                $sql = "UPDATE ".self::$tabela." SET nome = :nome, endereco = :endereco, telefone = :telefone, email = :email, cnpj = :cnpj, site = :site, numero = :numero, bairro = :bairro, cidade = :cidade, uf = :uf, ativo = :ativo WHERE idfornecedor = :idfornecedor";
 
                 $stmt = Banco::getInstance()->prepare($sql);
                 $stmt->bindValue(':nome', $fornecedor->getNome());
@@ -133,7 +134,8 @@
                 $stmt->bindValue(':cnpj', $fornecedor->getCnpj());
                 $stmt->bindValue(':site', $fornecedor->getSite());
                 $stmt->bindValue(':numero', $fornecedor->getNumero());
-                $stmt->bindValue(':bairro', $fornecedor->getNumero());
+                $stmt->bindValue(':bairro', $fornecedor->getBairro());
+                $stmt->bindValue(':cidade', $fornecedor->getCidade());
                 $stmt->bindValue(':uf', $fornecedor->getUf());
                 $stmt->bindValue(':ativo', $fornecedor->getAtivo());
                 $stmt->bindValue(':idfornecedor', $fornecedor->getIdfornecedor());

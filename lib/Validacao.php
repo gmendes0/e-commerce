@@ -180,6 +180,43 @@
             }
         }
 
+        /**
+         * Mostra todos erros de validação de forma estilizada
+         * @param string $style
+         * @param string $size
+         * @return string
+         */
+        public function bootstrapGetErrors($style, $size = null)
+        {
+
+            if(!is_null($size)){
+
+                $col = $size;
+
+            }else{
+
+                $col = "col-sm-18";
+
+            }
+
+            $idiv = "<div class='alert alert-$style $col' role='alert'>";
+            $fdiv = "</div>";
+            $erros = null;
+
+            if(!empty($this->getErrors())){
+
+
+                foreach($this->getErrors() as $value){
+                    
+                    $erros .= $idiv.$value.$fdiv;
+
+                }
+
+            }
+
+            return $erros;
+        }
+
         //---------------------------------------------------------------------------------------//
         // GETTERS & SETTERS //
         //---------------------------------------------------------------------------------------//
