@@ -16,18 +16,30 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a href="site.php" class="nav-link">Iníco</a></li>
                 <?php if(isset($_SESSION['adm'])){ ?>
-                <li class="nav-item dropdown">
-                    <!-- Dropdown Toggler -->
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ADM</a>
-                    <!-- Conteúdo -->
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a href="adm_cadastrar.php" class="dropdown-item">Novo Produto</a>
-                        <a href="adm_fornecedor.php" class="dropdown-item">Novo Fornecedor</a>
-                        <a href="adm_lista.php" class="dropdown-item">Produtos</a>
-                        <a href="adm_fornecedor_lista.php" class="dropdown-item">Fornecedores</a>
-                    </div>
-                </li>
-                <?php } ?>
+                    <li class="nav-item dropdown">
+                        <!-- Dropdown Toggler -->
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ADM</a>
+                        <!-- Conteúdo -->
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="adm_cadastrar.php" class="dropdown-item">Novo Produto</a>
+                            <a href="adm_fornecedor.php" class="dropdown-item">Novo Fornecedor</a>
+                            <a href="adm_lista.php" class="dropdown-item">Produtos</a>
+                            <a href="adm_fornecedor_lista.php" class="dropdown-item">Fornecedores</a>
+                            <a href="<?php echo !empty($_GET) ? $_SERVER['REQUEST_URI'].'&' : $_SERVER['REQUEST_URI'].'?'; ?>a_sair=1" class="dropdown-item">Sair</a>
+                        </div>
+                    </li>
+                <?php
+
+                        if(isset($_GET['a_sair'])){
+
+                            unset($_SESSION['adm']);
+                            unset($_GET['a_sair']);
+                            header("Location: site.php");
+
+                        }
+
+                    }
+                ?>
             </ul>
 
             <!-- Direita -->
@@ -67,7 +79,13 @@
                                      * Realiza o logout
                                      */
                                     unset($_GET['sair']);
+                                    if(isset($_SESSION['adm'])){
+                                        $adm = $_SESSION['adm'];
+                                    }
+
                                     $_SESSION = array();
+                                    $_SESSION['adm'] = $adm;
+                                    
                                     header("Location: site.php");
 
                                 }
