@@ -105,7 +105,7 @@
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
 
-        <div class="container-fluid">
+        <div class="container">
 
             <?php if(isset($form) && $form){ ?>
 
@@ -191,15 +191,8 @@
                             <th>ID</th>
                             <th>nome</th>
                             <th>cnpj</th>
-                            <th>endereço</th>
-                            <th>nº</th>
-                            <th>bairro</th>
-                            <th>estado</th>
-                            <th>telefone</th>
-                            <th>email</th>
-                            <th>site</th>
-                            <th>ativo</th>
-                            <th>ações</th>
+                            <th class="text-center">detalhes</th>
+                            <th class="text-right">ações</th>
                         </tr>
     
                     </thead>
@@ -212,17 +205,10 @@
                                 <th><?php echo $fornecedor['idfornecedor']; ?></th>
                                 <td><?php echo $fornecedor['nome']; ?></td>
                                 <td><?php echo $fornecedor['cnpj']; ?></td>
-                                <td><?php echo $fornecedor['endereco']; ?></td>
-                                <td><?php echo $fornecedor['numero']; ?></td>
-                                <td><?php echo $fornecedor['bairro']; ?></td>
-                                <td><?php echo $fornecedor['uf']; ?></td>
-                                <td><?php echo $fornecedor['telefone']; ?></td>
-                                <td><?php echo $fornecedor['email']; ?></td>
-                                <td><a target="blank" href="<?php echo $fornecedor['site']; ?>"><?php echo $fornecedor['site']; ?></a></td>
-                                <td><?php echo $fornecedor['ativo']; ?></td>
-                                <td>
-                                    <p><a href="?edit=<?php echo $fornecedor['idfornecedor']; ?>">editar</a></p>
-                                    <p><a href="?del=<?php echo $fornecedor['idfornecedor']; ?>">apagar</a></p>
+                                <td class="text-center"><a href="detalhes.php?fdetalhes=<?php echo $fornecedor['idfornecedor']; ?>">Detalhes</a></td>
+                                <td class="text-right">
+                                    <a href="?edit=<?php echo $fornecedor['idfornecedor']; ?>" class="btn btn-warning">editar</a>
+                                    <a href="?del=<?php echo $fornecedor['idfornecedor']; ?>" class="btn btn-danger">apagar</a>
                                 </td>
                             </tr>
     
