@@ -173,9 +173,8 @@
                             <td>id</td>
                             <td>nome</td>
                             <td>valor</td>
-                            <td>descrição</td>
-                            <td>detalhes</td>
                             <td>ativo</td>
+                            <td class="text-center">detalhes</td>
                             <td>editar</td>
                             <td>deletar</td>
                         </tr>
@@ -193,11 +192,10 @@
                                 <th class=""><?php echo $dado['idproduto']; ?></th>
                                 <td><?php echo $dado['nome']; ?></td>
                                 <td><?php echo $dado['valor'] ?></td>
-                                <td><?php echo $dado['descricao'] ?></td>
-                                <td><?php echo $dado['detalhes_tecnicos']; ?></td>
                                 <td><?php echo $dado['ativo']; ?></td>
-                                <td><a href="?edit=<?php echo $dado['idproduto']; ?>">editar</a></td>
-                                <td><a href="?del=<?php echo $dado['idproduto']; ?>">excluir</a></td>
+                                <td class="text-center"><a href="detalhes.php?pdetalhes=<?php echo $dado['idproduto']; ?>">Detalhes</a></td>
+                                <td><a href="?edit=<?php echo $dado['idproduto']; ?>" class="btn btn-warning mb-1">editar</a></td>
+                                <td><a href="?del=<?php echo $dado['idproduto']; ?>" class="btn btn-danger mb-1">excluir</a></td>
     
                             </tr>
     

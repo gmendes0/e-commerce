@@ -58,8 +58,12 @@
 
         }else if(filter_var($_GET['pdetalhes'], FILTER_VALIDATE_INT)){
 
-            require_once 'lib/DaoFornecedor.php';
-            $dados = DaoFornecedor::getInstance()->readOne(intval($_GET['pdetalhes']));
+            $title = 'Produto';
+            $id = $_GET['pdetalhes'];
+            require_once 'lib/DaoProduto.php';
+            $dados = DaoProduto::getInstance()->readOne(intval($_GET['pdetalhes']));
+
+            $title .= " - {$dados['nome']}";
 
         }else{
 
@@ -91,9 +95,9 @@
             <div class="card mt-5 mb-5">
                 <div class="card-header">
                     <!-- link edit -->
-                    <a href="<?= (isset($_GET['fdetalhes'])) ? "adm_fornecedor_lista.php?edit=$id" : ''; ?>" class="btn btn-outline-warning">editar</a>
+                    <a href="<?= (isset($_GET['fdetalhes'])) ? "adm_fornecedor_lista.php?edit=$id" : "adm_lista.php?edit=$id"; ?>" class="btn btn-outline-warning">editar</a>
                     <!-- link delete -->
-                    <a href="<?= (isset($_GET['fdetalhes'])) ? "adm_fornecedor_lista.php?del=$id" : ''; ?>" class="btn btn-outline-danger">apagar</a>
+                    <a href="<?= (isset($_GET['fdetalhes'])) ? "adm_fornecedor_lista.php?del=$id" : "adm_lista.php?del=$id"; ?>" class="btn btn-outline-danger">apagar</a>
                 </div>
                 <div class="card-body">
                     <?php foreach ($dados as $key => $value){ ?>
@@ -110,6 +114,31 @@
                                             if($key == 'datacadastro' || $key == 'datanascimento' || $key == 'nascimento'){
                                                 $date = new DateTime($value);
                                                 echo $date->format('d/m/Y H:i:s');
+                                            }else if($key == 'foto'){
+
+                                                if(!empty($value)){
+
+                                                    $arrfoto = explode(';', $value);
+                                                
+                                                    if(is_array($arrfoto)){
+
+                                                        foreach ($arrfoto as $ufoto){
+    
+                                                            echo '<p class="text-center">'.$ufoto.'</p>';
+    
+                                                        }
+    
+                                                    }else{
+    
+                                                        echo $arrfoto;
+    
+                                                    }
+
+                                                }else{
+
+                                                    echo 'Idisponível';
+
+                                                }
                                             }else{
                                                 echo $value;
                                             }

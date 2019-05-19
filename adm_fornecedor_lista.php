@@ -191,6 +191,7 @@
                             <th>ID</th>
                             <th>nome</th>
                             <th>cnpj</th>
+                            <th>ativo</th>
                             <th class="text-center">detalhes</th>
                             <th class="text-right">ações</th>
                         </tr>
@@ -205,9 +206,10 @@
                                 <th><?php echo $fornecedor['idfornecedor']; ?></th>
                                 <td><?php echo $fornecedor['nome']; ?></td>
                                 <td><?php echo $fornecedor['cnpj']; ?></td>
+                                <td><?php echo $fornecedor['ativo'] == 1 ? 'sim' : 'não'; ?></td>
                                 <td class="text-center"><a href="detalhes.php?fdetalhes=<?php echo $fornecedor['idfornecedor']; ?>">Detalhes</a></td>
                                 <td class="text-right">
-                                    <a href="?edit=<?php echo $fornecedor['idfornecedor']; ?>" class="btn btn-warning">editar</a>
+                                    <a href="?edit=<?php echo $fornecedor['idfornecedor']; ?>" class="btn btn-warning mb-1">editar</a>
                                     <a href="?del=<?php echo $fornecedor['idfornecedor']; ?>" class="btn btn-danger">apagar</a>
                                 </td>
                             </tr>
