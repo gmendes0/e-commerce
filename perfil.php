@@ -8,6 +8,7 @@
     require_once 'lib/DaoUsuario.php';
     $user = new DaoUsuario;
     $user = $user->getInstance()->readOne($_SESSION['usuario']);
+    $nascimento = new DateTime($user['nascimento']);
 
     if(!empty($_GET)){
 
@@ -66,7 +67,7 @@
                     <p class="card-text text-muted"><?php echo $user['email']; ?></p>
                     <!---->
                     <h6 class="card-title">Nascimento: </h5>
-                    <p class="card-text text-muted"><?php echo $user['nascimento']; ?></p>
+                    <p class="card-text text-muted"><?php echo $nascimento->format('d/m/Y'); ?></p>
                 </div>
 
                 <div class="card-body" id="cd-dados">

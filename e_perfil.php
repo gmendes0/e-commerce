@@ -56,18 +56,18 @@
                      */
                     $validar->validation([
 
-                        'nome' => 'required|min:3|max:45',
-                        'login' => 'required|min:3|max:50',
-                        'senha' => 'required|min:3|max:50',
-                        'confirmacao' => 'required|min:3|max:50',
-                        'email' => 'required|email|min:3|max:45',
+                        'nome' => 'required|smin:3|smax:45',
+                        'login' => 'required|smin:3|smax:50',
+                        'senha' => 'required|smin:3|smax:50',
+                        'confirmacao' => 'required|smin:3|smax:50',
+                        'email' => 'required|email|smin:3|smax:45',
                         'telefone' => 'required',
                         'cpf' => 'required',
-                        'endereco' => 'required|min:3|max:45',
+                        'endereco' => 'required|smin:3|smax:45',
                         'numero' => 'required|min:0|max:999',
-                        'bairro' => 'required|min:3|max:45',
-                        'cidade' => 'required|min:3|max:45',
-                        'estado' => 'required|min:2|max:2'
+                        'bairro' => 'required|smin:3|smax:45',
+                        'cidade' => 'required|smin:3|smax:45',
+                        'estado' => 'required|smin:2|smax:2'
 
                     ]);
 
@@ -91,7 +91,11 @@
                         $usuario->setCidade($_POST['cidade']);
                         $usuario->setEstado($_POST['estado']);
                         $usuario->setAtivo(1);
-                        DaoUsuario::getInstance()->update($usuario);
+                        $update = DaoUsuario::getInstance()->update($usuario);
+
+                        if($update){
+                            header('Location: perfil.php');
+                        }
 
                     }
 
