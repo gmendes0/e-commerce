@@ -53,66 +53,69 @@
 
             <form method="post" action="comprar.php">
 
-                <table class="table">
-
-                    <thead class="table-dark">
-
-                        <tr scope="row">
-                            <td>produto</td>
-                            <td>preço unitário</td>
-                            <td>quantidade</td>
-                            <td>subtotal</td>
-                            <td>ações</td>
-                        </tr>
-
-                    </thead>
-                    
-                    <tbody>
-                        <?php 
-
-                            if($content){
-
-                                $total = null;
-
-                                foreach($_SESSION['venda'] as $prod => $qtd){
-
-                                    $produto = DaoProduto::getInstance()->readOne($prod);
-                                    $total += $produto['valor']*$qtd;
-                        ?>
+                <div class="table-responsive">
+                    <table class="table">
+    
+                        <thead class="table-dark">
+    
                             <tr scope="row">
-                                <td><?php echo $produto['nome']; ?></td>
-                                <td><?php echo 'R$ '.$produto['valor']; ?></td>
-                                <td>
-                                    <input class="form-control col-sm-3" type="number" name="qtd[<?php echo $prod; ?>]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/>
-                                </td>
-                                <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
-                                <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
+                                <td>produto</td>
+                                <td>preço unitário</td>
+                                <td>quantidade</td>
+                                <td>subtotal</td>
+                                <td>ações</td>
                             </tr>
-                            
-                        <?php } ?>
+    
+                        </thead>
+                        
+                        <tbody>
+                            <?php 
+    
+                                if($content){
+    
+                                    $total = null;
+    
+                                    foreach($_SESSION['venda'] as $prod => $qtd){
+    
+                                        $produto = DaoProduto::getInstance()->readOne($prod);
+                                        $total += $produto['valor']*$qtd;
+                            ?>
+                                <tr scope="row">
+                                    <td><?php echo $produto['nome']; ?></td>
+                                    <td><?php echo 'R$ '.$produto['valor']; ?></td>
+                                    <td>
+                                        <input class="form-control col-sm-3" type="number" name="qtd[<?php echo $prod; ?>]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/>
+                                    </td>
+                                    <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
+                                    <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
+                                </tr>
+                                
+                            <?php } ?>
+    
+                                <tr>
+                                    <td colspan="5" align="right">Total = R$ <?php echo $total; ?></td>
+                                </tr>
+    
+                                <tr>
+                                    <input type="hidden" name="total" value="<?php echo (isset($total)) ? $total : ''; ?>"/>
+                                    <td colspan="5" class="text-right">
+                                        <div class="form-group">
+                                            <input class="btn btn-success" type="submit" value="comprar"/>
+                                        </div>
+                                    </td>
+                                </tr>
+    
+                            <?php }else{ ?>
+    
+                                <td colspan="5" class="text-center">Nenhum item para mostrar</td>
+    
+                            <?php } ?>
+    
+                        </tbody>
+    
+                    </table>
+                </div>
 
-                            <tr>
-                                <td colspan="5" align="right">Total = R$ <?php echo $total; ?></td>
-                            </tr>
-
-                            <tr>
-                                <input type="hidden" name="total" value="<?php echo (isset($total)) ? $total : ''; ?>"/>
-                                <td colspan="5" class="text-right">
-                                    <div class="form-group">
-                                        <input class="btn btn-success" type="submit" value="comprar"/>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        <?php }else{ ?>
-
-                            <td colspan="5" class="text-center">Nenhum item para mostrar</td>
-
-                        <?php } ?>
-
-                    </tbody>
-
-                </table>
             
             </form>
 

@@ -164,46 +164,48 @@
             </div>
             <?php } ?>
 
-            <!-- lista -->
-            <table class="table">
-
-                <thead class="table-dark">
-                    <tr scope="row">
-                        <td>id</td>
-                        <td>nome</td>
-                        <td>valor</td>
-                        <td>descrição</td>
-                        <td>detalhes</td>
-                        <td>ativo</td>
-                        <td>editar</td>
-                        <td>deletar</td>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <?php
-
-                        $q = DaoProduto::getInstance()->readAll();
-                        foreach($q as $i => $dado){
-                    ?>
-                    
+            <div class="table-responsive">
+                <!-- lista -->
+                <table class="table">
+    
+                    <thead class="table-dark">
                         <tr scope="row">
-
-                            <th class=""><?php echo $dado['idproduto']; ?></th>
-                            <td><?php echo $dado['nome']; ?></td>
-                            <td><?php echo $dado['valor'] ?></td>
-                            <td><?php echo $dado['descricao'] ?></td>
-                            <td><?php echo $dado['detalhes_tecnicos']; ?></td>
-                            <td><?php echo $dado['ativo']; ?></td>
-                            <td><a href="?edit=<?php echo $dado['idproduto']; ?>">editar</a></td>
-                            <td><a href="?del=<?php echo $dado['idproduto']; ?>">excluir</a></td>
-
+                            <td>id</td>
+                            <td>nome</td>
+                            <td>valor</td>
+                            <td>descrição</td>
+                            <td>detalhes</td>
+                            <td>ativo</td>
+                            <td>editar</td>
+                            <td>deletar</td>
                         </tr>
-
-                    <?php } ?>
-                </tbody>
-
-            </table>
+                    </thead>
+    
+                    <tbody>
+                        <?php
+    
+                            $q = DaoProduto::getInstance()->readAll();
+                            foreach($q as $i => $dado){
+                        ?>
+                        
+                            <tr scope="row">
+    
+                                <th class=""><?php echo $dado['idproduto']; ?></th>
+                                <td><?php echo $dado['nome']; ?></td>
+                                <td><?php echo $dado['valor'] ?></td>
+                                <td><?php echo $dado['descricao'] ?></td>
+                                <td><?php echo $dado['detalhes_tecnicos']; ?></td>
+                                <td><?php echo $dado['ativo']; ?></td>
+                                <td><a href="?edit=<?php echo $dado['idproduto']; ?>">editar</a></td>
+                                <td><a href="?del=<?php echo $dado['idproduto']; ?>">excluir</a></td>
+    
+                            </tr>
+    
+                        <?php } ?>
+                    </tbody>
+    
+                </table>
+            </div>
             
             <a href="adm_cadastrar.php">novo</a>
 

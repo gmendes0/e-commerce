@@ -182,54 +182,56 @@
 
             <?php } ?>
 
-            <table class="table">
-
-                <thead class="table-dark">
-
-                    <tr scope="row">
-                        <th>ID</th>
-                        <th>nome</th>
-                        <th>cnpj</th>
-                        <th>endereço</th>
-                        <th>nº</th>
-                        <th>bairro</th>
-                        <th>estado</th>
-                        <th>telefone</th>
-                        <th>email</th>
-                        <th>site</th>
-                        <th>ativo</th>
-                        <th>ações</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <?php foreach($fornecedores as $fornecedor){ ?>
-
+            <div class="table-responsive">
+                <table class="table">
+    
+                    <thead class="table-dark">
+    
                         <tr scope="row">
-                            <th><?php echo $fornecedor['idfornecedor']; ?></th>
-                            <td><?php echo $fornecedor['nome']; ?></td>
-                            <td><?php echo $fornecedor['cnpj']; ?></td>
-                            <td><?php echo $fornecedor['endereco']; ?></td>
-                            <td><?php echo $fornecedor['numero']; ?></td>
-                            <td><?php echo $fornecedor['bairro']; ?></td>
-                            <td><?php echo $fornecedor['uf']; ?></td>
-                            <td><?php echo $fornecedor['telefone']; ?></td>
-                            <td><?php echo $fornecedor['email']; ?></td>
-                            <td><a target="blank" href="<?php echo $fornecedor['site']; ?>"><?php echo $fornecedor['site']; ?></a></td>
-                            <td><?php echo $fornecedor['ativo']; ?></td>
-                            <td>
-                                <p><a href="?edit=<?php echo $fornecedor['idfornecedor']; ?>">editar</a></p>
-                                <p><a href="?del=<?php echo $fornecedor['idfornecedor']; ?>">apagar</a></p>
-                            </td>
+                            <th>ID</th>
+                            <th>nome</th>
+                            <th>cnpj</th>
+                            <th>endereço</th>
+                            <th>nº</th>
+                            <th>bairro</th>
+                            <th>estado</th>
+                            <th>telefone</th>
+                            <th>email</th>
+                            <th>site</th>
+                            <th>ativo</th>
+                            <th>ações</th>
                         </tr>
-
-                    <?php } ?>
-
-                </tbody>
-
-            </table>
+    
+                    </thead>
+    
+                    <tbody>
+    
+                        <?php foreach($fornecedores as $fornecedor){ ?>
+    
+                            <tr scope="row">
+                                <th><?php echo $fornecedor['idfornecedor']; ?></th>
+                                <td><?php echo $fornecedor['nome']; ?></td>
+                                <td><?php echo $fornecedor['cnpj']; ?></td>
+                                <td><?php echo $fornecedor['endereco']; ?></td>
+                                <td><?php echo $fornecedor['numero']; ?></td>
+                                <td><?php echo $fornecedor['bairro']; ?></td>
+                                <td><?php echo $fornecedor['uf']; ?></td>
+                                <td><?php echo $fornecedor['telefone']; ?></td>
+                                <td><?php echo $fornecedor['email']; ?></td>
+                                <td><a target="blank" href="<?php echo $fornecedor['site']; ?>"><?php echo $fornecedor['site']; ?></a></td>
+                                <td><?php echo $fornecedor['ativo']; ?></td>
+                                <td>
+                                    <p><a href="?edit=<?php echo $fornecedor['idfornecedor']; ?>">editar</a></p>
+                                    <p><a href="?del=<?php echo $fornecedor['idfornecedor']; ?>">apagar</a></p>
+                                </td>
+                            </tr>
+    
+                        <?php } ?>
+    
+                    </tbody>
+    
+                </table>
+            </div>
 
             <a href="adm_fornecedor.php">novo fornecedor</a>
 
