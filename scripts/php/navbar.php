@@ -25,6 +25,7 @@
                             <a href="adm_fornecedor.php" class="dropdown-item">Novo Fornecedor</a>
                             <a href="adm_lista.php" class="dropdown-item">Produtos</a>
                             <a href="adm_fornecedor_lista.php" class="dropdown-item">Fornecedores</a>
+                            <a href="pedidos.php" class="dropdown-item">Pedidos</a>
                             <a href="<?php echo !empty($_GET) ? $_SERVER['REQUEST_URI'].'&' : $_SERVER['REQUEST_URI'].'?'; ?>a_sair=1" class="dropdown-item">Sair</a>
                         </div>
                     </li>
@@ -64,6 +65,7 @@
                                 <!-- Conteúdo -->
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="perfil.php" class="dropdown-item">Perfil</a>
+                                    <a href="pedidos.php" class="dropdown-item">Pedidos</a>
                                     <a href="<?php echo !empty($_GET) ? $_SERVER['REQUEST_URI'].'&' : $_SERVER['REQUEST_URI'].'?'; ?>sair=1" class="dropdown-item">Sair</a>
                                     <!-- Se Logado -->
                                 </div>
