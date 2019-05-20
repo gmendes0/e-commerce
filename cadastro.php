@@ -157,7 +157,7 @@
                     <label>estado</label>
                     <select class="form-control" name="estado">
                         <?php foreach($estados as $uf => $es_nome){ ?>
-                            <option value="<?php echo $uf ?>" <?php echo !empty($_POST['estado'] && $_POST['estado'] == $uf) ? 'selected' : ''; ?>><?php echo $es_nome; ?></option>
+                            <option value="<?php echo $uf ?>" <?php echo (!empty($_POST['estado']) && $_POST['estado'] == $uf) ? 'selected' : ''; ?>><?php echo $es_nome; ?></option>
                         <?php } ?>
                     </select>
                 </div>
