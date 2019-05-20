@@ -46,16 +46,16 @@
             <form method="post">
             
                 <div class="form-group row">
-                    <label>Login</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" name="login" required/>
+                    <label for="login" class="col-sm-1 col-form-label">Login</label>
+                    <div class="col-sm-4">
+                        <input id="login" class="form-control" type="text" name="login" required/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label>Senha</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="password" name="senha" required/>
+                    <label for="senha" class="col-sm-1 col-form-label">Senha</label>
+                    <div class="col-sm-4">
+                        <input id="senha" class="form-control" type="password" name="senha" required/>
                     </div>
                 </div>
 

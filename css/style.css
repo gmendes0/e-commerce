@@ -90,3 +90,8 @@
     cursor: pointer;
 
 }
+
+.card-login{
+    border-radius: 10px;
+    width: 23rem;
+}

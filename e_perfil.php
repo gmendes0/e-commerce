@@ -123,6 +123,45 @@
         <link rel="stylesheet" href="css/style.css">
         <title>Editar - <?php echo $user['nome']; ?></title>
         <script src="js/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+
+                $('#cep').blur(function(){
+
+                    var cep = $('#cep').val().replace(/\D/g, '');
+
+                    if(cep != ""){
+
+                        $.getJSON('https://viacep.com.br/ws/'+cep+'/json/', function(dados){
+                        
+                            if(!dados.erro){
+
+                                $('#endereco').val("");
+                                $('#bairro').val("");
+                                $('#cidade').val("");
+                                $('#estado option').each(function(){
+                                    $(this).removeAttr('selected');
+                                });
+
+                                $('#endereco').val(dados.logradouro);
+                                $('#bairro').val(dados.bairro);
+                                $('#cidade').val(dados.localidade);
+                                $('#estado option[value='+dados.uf+']').attr('selected', 'selected');
+
+                            }else{
+
+                                $('#modal1').modal('show');
+
+                            }
+
+                        });
+
+                    }
+
+                });
+
+            });
+        </script>
     </head>
 
     <body>
@@ -130,6 +169,23 @@
         <?php require_once 'scripts/php/navbar.php'; ?>
 
         <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal1title">Erro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body text-center text-danger">
+                            CEP Inválido
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php if(isset($visualizar) && $visualizar){ ?>
                 <?php
                 
@@ -149,70 +205,77 @@
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">nome</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="nome" value="<?php echo (isset($user['nome'])) ? $user['nome'] : ''; ?>"/>
+                            <input id="nome" class="form-control" type="text" name="nome" value="<?php echo (isset($user['nome'])) ? $user['nome'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">nascimento</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="date" name="nascimento" value="<?php echo (isset($user['nascimento'])) ? $user['nascimento'] : ''; ?>"/>
+                            <input id="nascimento" class="form-control" type="date" name="nascimento" value="<?php echo (isset($user['nascimento'])) ? $user['nascimento'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">login</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="login" value="<?php echo (isset($user['login'])) ? $user['login'] : ''; ?>"/>
+                            <input id="login" class="form-control" type="text" name="login" value="<?php echo (isset($user['login'])) ? $user['login'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">senha</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="password" name="senha" value="<?php echo (isset($user['senha'])) ? $user['senha'] : ''; ?>"/>
+                            <input id="senha" class="form-control" type="password" name="senha" value="<?php echo (isset($user['senha'])) ? $user['senha'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">confirmar senha</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="password" name="confirmacao" value="<?php echo (isset($user['senha'])) ? $user['senha'] : ''; ?>"/>
+                            <input id="confirmacao" class="form-control" type="password" name="confirmacao" value="<?php echo (isset($user['senha'])) ? $user['senha'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">email</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="email" value="<?php echo (isset($user['email'])) ? $user['email'] : ''; ?>"/>
+                            <input id="email" class="form-control" type="text" name="email" value="<?php echo (isset($user['email'])) ? $user['email'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">telefone</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="telefone" value="<?php echo (isset($user['telefone'])) ? $user['telefone'] : ''; ?>"/>
+                            <input id="telefone" class="form-control" type="text" name="telefone" value="<?php echo (isset($user['telefone'])) ? $user['telefone'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">cpf</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="cpf" value="<?php echo (isset($user['cpf'])) ? $user['cpf'] : ''; ?>"/>
+                            <input id="cpf" class="form-control" type="text" name="cpf" value="<?php echo (isset($user['cpf'])) ? $user['cpf'] : ''; ?>"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label" for="cep">cep</label>
+                        <div class="col-sm-6">
+                            <input id="cep"class="form-control" type="text" name="cep" value="<?php echo !empty($_POST['cep']) ? $_POST['cep'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">endereço</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="endereco" value="<?php echo (isset($user['endereco'])) ? $user['endereco'] : ''; ?>"/>
+                            <input id="endereco" class="form-control" type="text" name="endereco" value="<?php echo (isset($user['endereco'])) ? $user['endereco'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">Número</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="numero" value="<?php echo (isset($user['numero'])) ? $user['numero'] : ''; ?>"/>
+                            <input id="numero" class="form-control" type="text" name="numero" value="<?php echo (isset($user['numero'])) ? $user['numero'] : ''; ?>"/>
                         </div>
                     </div>
 
@@ -220,21 +283,21 @@
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">bairro</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="bairro" value="<?php echo (isset($user['bairro'])) ? $user['bairro'] : ''; ?>"/>
+                            <input id="bairro" class="form-control" type="text" name="bairro" value="<?php echo (isset($user['bairro'])) ? $user['bairro'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">cidade</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="cidade" value="<?php echo (isset($user['cidade'])) ? $user['cidade'] : ''; ?>"/>
+                            <input id="cidade" class="form-control" type="text" name="cidade" value="<?php echo (isset($user['cidade'])) ? $user['cidade'] : ''; ?>"/>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label">estado</label>
                         <div class="col-sm-6">
-                            <select class="form-control" name="estado">
+                            <select id="estado" class="form-control" name="estado">
                                 <?php foreach($estados as $uf => $es_nome){ ?>
                                     <option value="<?php echo $uf ?>" <?php echo (isset($user['estado']) && $user['estado'] == $uf) ? 'selected' : ''; ?>>
                                         <?php echo $es_nome; ?>

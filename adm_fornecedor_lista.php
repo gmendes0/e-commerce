@@ -122,6 +122,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link rel="stylesheet" href="css/bootstrap.css">
         <title>Fornecedores - Lista</title>
+        <script src="js/jquery.js"></script>
+        <script src="js/cep.js"></script>
     </head>
 
     <body>
@@ -130,6 +132,24 @@
         <?php include_once 'scripts/php/navbar.php'; ?>
 
         <div class="container">
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal1title">Erro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body text-center text-danger">
+                            CEP Inválido
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <?php if(isset($form) && $form){ ?>
 
@@ -143,66 +163,95 @@
 
                     <form method="post">
 
-                        <div class="form-group">
-                            <label>nome</label>
-                            <input class="form-control" type="text" name="nome" value="<?php echo (!empty($val)) ? $val['nome'] : ''; ?>"/>
+                        <div class="form-group row">
+                            <label for="nome" class="col-sm-1 col-form-label">nome</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="nome" name="nome" value="<?php echo (!empty($val)) ? $val['nome'] : ''; ?>"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>endereço</label>
-                            <input class="form-control" type="text" name="endereco" value="<?php echo (!empty($val)) ? $val['endereco'] : ''; ?>"/>
+                        <div class="form-group row">
+                            <label class="col-sm-1 col-form-label" for="cep">cep</label>
+                            <div class="col-sm-6">
+                                <input id="cep" class="form-control" type="text" name="cep" value="<?php echo !empty($_POST['cep']) ? $_POST['cep'] : ''; ?>"/>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label for="endereco" class="col-sm-1 col-form-label">endereço</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="endereco" name="endereco" value="<?php echo (!empty($val)) ? $val['endereco'] : ''; ?>"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>número</label>
-                            <input class="form-control" type="text" name="numero" value="<?php echo (!empty($val)) ? $val['numero'] : ''; ?>"/>
+                        <div class="form-group row">
+                            <label for="numero" class="col-sm-1 col-form-label">número</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="numero" name="numero" value="<?php echo (!empty($val)) ? $val['numero'] : ''; ?>"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>bairro</label>
-                            <input class="form-control" type="text" name="bairro" value="<?php echo (!empty($val)) ? $val['bairro'] : ''; ?>"/>
+                        <div class="form-group row">
+                            <label for="bairro" class="col-sm-1 col-form-label">bairro</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="bairro" name="bairro" value="<?php echo (!empty($val)) ? $val['bairro'] : ''; ?>"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>cidade</label>
-                            <input class="form-control" type="text" name="cidade" value="<?php echo (!empty($val)) ? $val['cidade'] : ''; ?>"/>
+                        <div class="form-group row">
+                            <label for="cidade" class="col-sm-1 col-form-label">cidade</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="cidade" name="cidade" value="<?php echo (!empty($val)) ? $val['cidade'] : ''; ?>"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>estado</label>
-                            <select class="form-control" name="uf">
-                                <?php foreach($estados as $uf => $estado){ ?>
-                                    <option value="<?php echo $uf; ?>" <?php if(!empty($val) && $val['uf'] == $uf){ echo 'selected'; }?> ><?php echo $estado; ?></option>
-                                <?php } ?>
-                            </select>
+                        <div class="form-group row">
+                            <label for="estado" class="col-sm-1 col-form-label">estado</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="estado" name="uf">
+                                    <?php foreach($estados as $uf => $estado){ ?>
+                                        <option value="<?php echo $uf; ?>" <?php if(!empty($val) && $val['uf'] == $uf){ echo 'selected'; }?> ><?php echo $estado; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>telefone</label>
-                            <input class="form-control" type="text" name="telefone" value="<?php echo (!empty($val)) ? $val['telefone'] : ''; ?>"/>
+                        <div class="form-group row">
+                            <label for="telefone" class="col-sm-1 col-form-label">telefone</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="telefone" name="telefone" value="<?php echo (!empty($val)) ? $val['telefone'] : ''; ?>"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>email</label>
-                            <input class="form-control" type="text" name="email" value="<?php echo (!empty($val)) ? $val['email'] : ''; ?>"/>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-1 col-form-label">email</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="email" name="email" value="<?php echo (!empty($val)) ? $val['email'] : ''; ?>"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>cnpj</label>
-                            <input class="form-control" type="text" name="cnpj" value="<?php echo (!empty($val)) ? $val['cnpj'] : ''; ?>"/>
+                        <div class="form-group row">
+                            <label for="cnpj" class="col-sm-1 col-form-label">cnpj</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="cnpj" name="cnpj" value="<?php echo (!empty($val)) ? $val['cnpj'] : ''; ?>"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>site</label>
-                            <input class="form-control" type="text" name="site" value="<?php echo (!empty($val)) ? $val['site'] : ''; ?>"/>
+                        <div class="form-group row">
+                            <label for="site" class="col-sm-1 col-form-label">site</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="site" name="site" value="<?php echo (!empty($val)) ? $val['site'] : ''; ?>"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>ativo</label>
-                            <select class="form-control" name="ativo">
-                                <option value="1">sim</option>
-                                <option value="0">não</option>
-                            </select>
+                        <div class="form-group row">
+                            <label for="ativo" class="col-sm-1 col-form-label">ativo</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="ativo" name="ativo">
+                                    <option value="1">sim</option>
+                                    <option value="0">não</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -258,7 +307,6 @@
 
         </div>
 
-        <script src="js/jquery.js"></script>
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.js"></script>
 
