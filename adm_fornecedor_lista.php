@@ -65,23 +65,47 @@
 
         if(!empty($_POST)){
 
+            require_once 'lib/Validacao.php';
             include_once 'lib/Fornecedor.php';
 
-            $fornecedor = new Fornecedor();
-            $fornecedor->setNome($_POST['nome']);
-            $fornecedor->setEndereco($_POST['endereco']);
-            $fornecedor->setNumero($_POST['numero']);
-            $fornecedor->setBairro($_POST['bairro']);
-            $fornecedor->setUf($_POST['uf']);
-            $fornecedor->setTelefone($_POST['telefone']);
-            $fornecedor->setEmail($_POST['email']);
-            $fornecedor->setCnpj($_POST['cnpj']);
-            $fornecedor->setSite($_POST['site']);
-            $fornecedor->setAtivo($_POST['ativo']);
-            $fornecedor->setIdfornecedor($val['idfornecedor']);
+            $validar = new Validacao;
+            /**
+             * Validação de formulário
+             */
+            $validar->validation([
+                'nome' => 'required|smin:3|smax:50',
+                'endereco' => 'required|smin:3|smax:50',
+                'numero' => 'required|numeric|min:0|max:9999',
+                'bairro' => 'required|smin:3|smax:50',
+                'cidade' => 'required|smin:3|smax:45',
+                'uf' => 'required|smin:2|smax:2',
+                'telefone' => 'required|smin:3|smax:13',
+                'email' => 'required|smin:3|smax:45',
+                'cnpj' => 'required|smin:3|smax:45',
+                'site' => 'required|smin:3|smax:50',
+                'ativo' => 'required|numeric|min:0|max:1'
+            ]);
 
-            DaoFornecedor::getInstance()->update($fornecedor);
-            header('Location: adm_fornecedor_lista.php');
+            if($validar->getValido()){
+
+                $fornecedor = new Fornecedor();
+                $fornecedor->setNome($_POST['nome']);
+                $fornecedor->setEndereco($_POST['endereco']);
+                $fornecedor->setNumero($_POST['numero']);
+                $fornecedor->setBairro($_POST['bairro']);
+                $fornecedor->setCidade($_POST['cidade']);
+                $fornecedor->setUf($_POST['uf']);
+                $fornecedor->setTelefone($_POST['telefone']);
+                $fornecedor->setEmail($_POST['email']);
+                $fornecedor->setCnpj($_POST['cnpj']);
+                $fornecedor->setSite($_POST['site']);
+                $fornecedor->setAtivo($_POST['ativo']);
+                $fornecedor->setIdfornecedor($val['idfornecedor']);
+    
+                DaoFornecedor::getInstance()->update($fornecedor);
+                header('Location: adm_fornecedor_lista.php');
+
+            }
 
         }
 
@@ -113,6 +137,10 @@
 
                     <h2>Editar Fornecedor</h2>
 
+                    <?php if(isset($validar) && !empty($validar->getErrors())){ ?>
+                        <?php echo $validar->bootstrapGetErrors('danger', 'col-sm-6'); ?>
+                    <?php } ?>
+
                     <form method="post">
 
                         <div class="form-group">
@@ -133,6 +161,11 @@
                         <div class="form-group">
                             <label>bairro</label>
                             <input class="form-control" type="text" name="bairro" value="<?php echo (!empty($val)) ? $val['bairro'] : ''; ?>"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>cidade</label>
+                            <input class="form-control" type="text" name="cidade" value="<?php echo (!empty($val)) ? $val['cidade'] : ''; ?>"/>
                         </div>
 
                         <div class="form-group">
