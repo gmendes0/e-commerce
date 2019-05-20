@@ -82,6 +82,51 @@
 
         }
 
+        public function readAllWhere($index, $id)
+        {
+
+            try{
+
+                $sql = "SELECT * FROM ".self::$tabela." WHERE $index = $id";
+                $stmt = Banco::getInstance()->query($sql);
+
+                return $stmt->fetchAll();
+
+            }catch(PDOException $e){
+
+                echo $e->getMessage();
+
+            }
+
+        }
+
+        public function readFieldWhere($fields, $index, $id)
+        {
+
+            try{
+
+                if(count($fields) > 1){
+
+                    $field = implode(',',$fields);
+
+                }else{
+
+                    $field = $fields[0];
+                }
+
+                $sql = "SELECT $field FROM ".self::$tabela." WHERE $index = $id";
+                $stmt = Banco::getInstance()->query($sql);
+
+                return $stmt->fetchAll();
+
+            }catch(PDOException $e){
+
+                echo $e->getMessage();
+
+            }
+
+        }
+
         public function update(Itensvenda $itensvenda)
         {
 

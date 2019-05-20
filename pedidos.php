@@ -27,11 +27,10 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-        <title><?php echo ($admmode) ? 'Pedidos' : 'Meus Pedidos' ?></title>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
         <link rel="stylesheet" href="css/style.css">
-        <title><?php echo $user['nome']; ?></title>
+        <title><?php echo ($admmode) ? 'Pedidos' : 'Meus Pedidos' ?></title>
         <script src="js/jquery.js"></script>
     </head>
 
@@ -40,12 +39,14 @@
 
         <div class="container">
 
-            <div class="table-responsive">
+            <h2 class="text-center mt-5 mb-5">Pedidos</h2>
+
+            <div class="table-responsive mt-5 mb-5">
                 <table class="table shadow-sm">
                     <thead class="thead-dark">
                         <tr>
                             <th class="text-center">Pedido</th>
-                            <th class="text-center">Usuario</th>
+                            <?php if($admmode){ ?><th class="text-center">Usuario</th><?php } ?>
                             <th>Total</th>
                             <th>Data</th>
                             <th>Ativo</th>
@@ -57,16 +58,16 @@
                         <?php foreach($pedidos as $pedido){ ?>
                             <tr>
                                 <th class="text-center"><?php echo $pedido['idpedvenda']; ?></th>
-                                <td class="text-center">
-                                    #
-                                    <?php
-                                        echo $pedido['usuario_idusuario'].' - ';
-                                        if($admmode){
+                                <?php if($admmode){ ?>
+                                    <td class="text-center">
+                                        #
+                                        <?php
+                                            echo $pedido['usuario_idusuario'].' - ';
                                             $usuario = DaoUsuario::getInstance()->readOne($pedido['usuario_idusuario']);
                                             echo $usuario['nome'];
-                                        }
-                                    ?>
-                                </td>
+                                        ?>
+                                    </td>
+                                <?php } ?>
                                 <td><?php echo $pedido['valortotal']; ?></td>
                                 <td><?php echo $pedido['data']; ?></td>
                                 <td><?php echo $pedido['ativo']; ?></td>

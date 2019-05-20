@@ -38,7 +38,7 @@
                 $aceito = false;
             }
 
-            if(empty($_SESSION[$this->getSession_login_field()])){
+            if(!isset($_SESSION[$this->getSession_login_field()])){
                 $aceito = false;
             }
 

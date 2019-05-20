@@ -23,11 +23,11 @@ if(!empty($_POST)){
 	// 			"cep"=>"79.070-452",
 	// 			"codigo_pagseguro"=>"");
 
-	$venda = array("codigo"=>"1",
+	$venda = array("codigo"=>"50",
 			"valor"=>$pedvenda->getValortotal(),
 			"descricao"=>$p['nome'],
 			"nome"=>$user['nome'],
-			"email"=>"ggg@sandbox.pagseguro.com.br",
+			"email"=>"aaaxxx@sandbox.pagseguro.com.br",
 			"telefone"=>"(19) 99999-9999",
 			"rua"=>$user['endereco'],
 			"numero"=>$user['numero'],

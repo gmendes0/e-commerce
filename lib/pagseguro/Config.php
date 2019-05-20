@@ -40,14 +40,16 @@
                     $this->setUrl_notificacao('https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/notifications/');
                     $this->setUrl_transactions('https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/');
 
-                }else if($this->getEnvmode() == 'production'){
-
-                    $this->setUrl('https://ws.pagseguro.uol.com.br/v2/checkout/');
-                    $this->setUrl_redirect('https://pagseguro.uol.com.br/v2/checkout/payment.html?code=');
-                    $this->setUrl_notificacao('https://ws.pagseguro.uol.com.br/v2/transactions/notifications/');
-                    $this->setUrl_transactions('https://ws.pagseguro.uol.com.br/v2/transactions/');
-
                 }
+                // else
+                // if($this->getEnvmode() == 'production'){
+
+                //     $this->setUrl('https://ws.pagseguro.uol.com.br/v2/checkout/');
+                //     $this->setUrl_redirect('https://pagseguro.uol.com.br/v2/checkout/payment.html?code=');
+                //     $this->setUrl_notificacao('https://ws.pagseguro.uol.com.br/v2/transactions/notifications/');
+                //     $this->setUrl_transactions('https://ws.pagseguro.uol.com.br/v2/transactions/');
+
+                // }
 
             }
 
