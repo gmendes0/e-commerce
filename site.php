@@ -14,10 +14,13 @@
         <link rel="stylesheet" href="css/bootstrap.css"/>
         <link rel="stylesheet" href="css/style.css">
         <title>Loja</title>
+        <script src="js/jquery.js"></script>
+        <script src="js/pesquisa.js"></script>
     </head>
 
     <body>
 
+        <?php $page = 'index'; ?>
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
 
@@ -26,14 +29,15 @@
 
             <!-- lista -->
             <div class="container">
+
+                <div id="pesquisado" class="justify-content-center"></div>
             
-                <?php require_once 'scripts/php/lista.php'; ?>
+                <div id="siteindex"><?php require_once 'scripts/php/lista.php'; ?></div>
 
             </div>
 
         </div>
 
-        <script src="js/jquery.js"></script>
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.js"></script>
 

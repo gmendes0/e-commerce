@@ -110,16 +110,17 @@
                 ?>
             </ul>
 
-            <!-- Barra de pesquisa -->
-            <form class="form-inline">
-                <div class="form-group">
-                    <input type="search" class="form-control" placeholder="buscar..."/>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-dark ml-1" type="submit">go</button>
-                </div>
-            </form>
-
+            <div class="form-inline ">
+                <!-- Barra de pesquisa -->
+                <?php if(isset($page) && $page == 'index'){ ?>
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="buscar..." id="busca"/>
+                        <!-- <div class="input-group-append">
+                            <button class="btn btn-dark" type="submit" id="go">go</button>
+                        </div> -->
+                    </div>
+                <?php } ?>
+            </div>
         </div>
 
     </div>
