@@ -30,7 +30,7 @@
             <!-- lista -->
             <div class="container">
 
-                <div id="pesquisado" class="justify-content-center"></div>
+                <div id="pesquisado" class="text-center"></div>
             
                 <div id="siteindex"><?php require_once 'scripts/php/lista.php'; ?></div>
 
