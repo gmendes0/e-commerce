@@ -14,6 +14,10 @@ $(document).ready(function(){
 
                         $('#pesquisado').html(resultado.display);
 
+                    }else{
+
+                        $('#pesquisado').html('<p class="text-center text-muted">'+resultado.erro+'</p>');
+
                     }
                 }
             });

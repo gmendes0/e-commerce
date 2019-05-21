@@ -34,7 +34,7 @@
             
         }else{
 
-            $resultado['erro'] = 'nenhum produto encontrado';
+            $resultado['erro'] = 'Nenhum produto encontrado com o nome "'.$busca.'" encontrado.';
 
         }
 
