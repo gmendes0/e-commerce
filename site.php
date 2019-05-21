@@ -34,6 +34,26 @@
             
                 <div id="siteindex"><?php require_once 'scripts/php/lista.php'; ?></div>
 
+                <nav class="mt-5 mb-5">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
+                            <a href="site.php?page=<?php echo ($page > 1) ? $page - 1 : '1'; ?>" class="page-link">
+                                <span>&laquo</span>
+                            </a>
+                        </li>
+                        <?php for($i = 0; $i < $npages; $i++){ ?>
+                            <li class="page-item">
+                                <a class="page-link" href="site.php?page=<?= $i + 1; ?>"><?= $i + 1; ?></a>
+                            </li>
+                        <?php } ?>
+                        <li class="page-item <?php echo ($page >= $npages) ? 'disabled' : ''; ?>">
+                            <a href="site.php?page=<?php echo ($page < $npages) ? $page + 1 : $npages; ?>" class="page-link">
+                                <span>&raquo</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
             </div>
 
         </div>
@@ -44,43 +64,3 @@
     </body>
 
 </html>
-
-<?php
-
-    /*
-
-        $c = 0;
-
-        while(true){
-
-            if($c > 2){
-
-                $c = 0;
-
-            }
-            
-            if($c == 0){
-
-                // <div> linha
-
-            }
-
-            // <div> coluna
-
-
-
-            // </div> coluna
-
-            if($c == 0){
-
-                // </div> linha
-
-            }
-
-            $c++;
-
-        }
-
-    */
-
-?>

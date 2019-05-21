@@ -6,15 +6,43 @@
 
             require_once 'banco.php';
             $tabela = 'produto';
+            $pdo = Banco::conectar();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $nprodpage = 10;
+
+            if(isset($_GET['page'])){
+                    
+                $page = $_GET['page'];
+
+                if(empty($page) || !filter_var($page, FILTER_VALIDATE_INT) || $page < 0){
+
+                    $page = 1;
+
+                }
+
+
+            }else{
+
+                $page = 1;
+
+            }
+
+            $controle = $page;
+            $inicio = $controle - 1;
+            $inicio = $inicio * $nprodpage;
 
             try{
 
-                $pdo = Banco::conectar();
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $ltdquery = "SELECT * FROM $tabela LIMIT $inicio, $nprodpage";
                 $query = "SELECT * FROM $tabela";
-                $q = $pdo->query($query);
 
-                while($prod = $q->fetch(PDO::FETCH_ASSOC)){
+                $ltd = $pdo->query($ltdquery);
+                $total = $pdo->query($query);
+                $npages = $total->rowCount();
+                $npages = ceil($npages / $nprodpage);
+
+                while($prod = $ltd->fetch(PDO::FETCH_ASSOC)){
         ?>
 
                     <div class="card mt-2" style="width: 16rem;">
