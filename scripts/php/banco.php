@@ -17,7 +17,7 @@
             }catch(PDOException $erro){
 
                 // Exibir erro
-                die("Falha de conexão com o banco de dadosa: ".$erro->getMessage());
+                die("Falha de conexão com o banco de dados: ".$erro->getMessage());
 
             }
 
