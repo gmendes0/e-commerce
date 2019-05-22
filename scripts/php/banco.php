@@ -6,7 +6,7 @@
 
             $host = 'localhost'; // Host
             $dbn = 'tcc3';  // Nome do banco
-            $user = 'root'; // Usuario do DB
+            $user = 'tcc3'; // Usuario do DB
             $senha = '	Gm6yd3~2_vuW'; // Senha do DB
 
             try{
