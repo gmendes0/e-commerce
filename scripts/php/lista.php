@@ -48,7 +48,7 @@
                     <div class="card mt-2" style="width: 16rem;">
                         
                         <!--- produto --->
-                        <img src="<?php echo explode(';', $prod['foto'])[0]; ?>" class="card-img-top"/>
+                        <img src="<?php echo utf8_encode(explode(';', $prod['foto'])[0]); ?>" class="card-img-top"/>
                         
                         <div class="card-body">
                             <a href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>"><?php echo $prod['nome']; ?></a><!-- link para a página do produto -->
