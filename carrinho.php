@@ -81,7 +81,7 @@
                                         $total += $produto['valor']*$qtd;
                             ?>
                                 <tr scope="row">
-                                    <td><?php echo $produto['nome']; ?></td>
+                                    <td><?php echo utf8_decode($produto['nome']); ?></td>
                                     <td><?php echo 'R$ '.$produto['valor']; ?></td>
                                     <td>
                                         <input class="form-control col-sm-3" type="number" name="qtd[<?php echo $prod; ?>]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/>
