@@ -47,7 +47,7 @@
 
                     <div class="card mt-2" style="width: 16rem;">
                         
-                        <!-- produto -->
+                        <!--- produto --->
                         <img src="<?php echo explode(';', $prod['foto'])[0]; ?>" class="card-img-top"/>
                         
                         <div class="card-body">
