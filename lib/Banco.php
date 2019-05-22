@@ -8,10 +8,10 @@
 
             if(!isset(self::$instance)){
 
-                $host = 'localhost';
+                $host = 'den1.mysql5.gear.host';
                 $dbname = 'tcc3';
-                $user = 'root';
-                $senha = '';
+                $user = 'tcc3';
+                $senha = 'Gm6yd3~2_vuW';
 
                 try {
 
