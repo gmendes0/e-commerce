@@ -72,8 +72,7 @@
                         }else{
                             
                             $_SESSION['venda'][$_GET['id_prod']] = 1;
-                            echo "<script>alert({$prod['idproduto']})</script>";
-                            header('Location: carrinho.php');
+                            echo "<script>window.location='carrinho.php'</script>";
                             exit;
                         }
                     }

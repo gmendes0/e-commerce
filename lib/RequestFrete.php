@@ -36,7 +36,12 @@
         //convert the XML result into array
         // $array_data = json_decode(json_encode(simplexml_load_string($data)), true);
         $array_data = json_encode(simplexml_load_string($data));
-        echo $array_data;
+
+        if(!isset($_POST['finalizar'])){
+            echo $array_data;
+        }else{
+            $array_data = json_decode($array_data);
+        }
     
         // print_r('<pre>');
         // print_r($array_data);

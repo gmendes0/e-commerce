@@ -40,61 +40,123 @@
 
                 if(intval($_POST['finalizar'] == 1) && isset($_SESSION['venda'])){
 
-                    require_once 'lib/ItensVenda.php';
-                    require_once 'lib/PedVenda.php';
-                    require_once 'lib/DaoUsuario.php';
-                    require_once 'lib/DaoItensVenda.php';
-                    require_once 'lib/DaoPedVenda.php';
+                    if(isset($_POST['destino']) && isset($_POST['destino'])){
 
-                    $user = DaoUsuario::getInstance()->readOne($_SESSION['usuario']);
+                        if(strlen($_POST['destino']) != 8){
 
-                    /**
-                     * Salva pedvenda
-                     */
-                    $pedvenda = new Pedvenda();
-                    $pedvenda->setValortotal($_SESSION['total']);
-                    $pedvenda->setData(date('Y-m-d H:i:s'));
-                    $pedvenda->setAtivo(1);
-                    $pedvenda->setFk_idusuario($_SESSION['usuario']);
-                    $insertPV = DaoPedvenda::getInstance()->create($pedvenda);
+                            $errocompra = true;
 
-                    if($insertPV){
+                        }else{
 
-                        /**
-                         * Recupera o ultimo ID do pedido do usuario
-                         */
-                        try{
-                            
-                            $idpedvenda = DaoPedvenda::getInstance()->lastIDpedvenda($_SESSION['usuario']);
-
-                        }catch(PDOException $e){
-
-                            $e->getMessage();
+                            $ch = curl_init();
+                            curl_setopt($ch, CURLOPT_URL, "viacep.com.br/ws/$_POST[destino]/json/");
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1500);
+                            $data = curl_exec($ch);
+                            curl_close($ch);
+    
+                            $viacep = json_decode($data);
+                            unset($data);
 
                         }
 
-                        /**
-                         * Arrumar: Salvar ID do Usuario + ID Itens Venda
-                         */
-                        $itensvenda = new Itensvenda();
-                    
-                        foreach($_SESSION['venda'] as $id => $q){
+                        if(isset($viacep) && !isset($viacep->erro)){
 
-                            $p = DaoProduto::getInstance()->readOne($id);
-                            $itensvenda->setQuantidade($q);
-                            $itensvenda->setValorunitario($p['valor']);
-                            $itensvenda->setValordesconto(0);
-                            $itensvenda->setFk_idproduto($id);
-                            $itensvenda->setFk_idpedvenda($idpedvenda['idpedvenda']);
-                            DaoItensvenda::getInstance()->create($itensvenda);
+                            if(!isset($_POST['servico'])){
+                                $errocompra = true;
+                            }else if($_POST['servico'] == 'sedex' || $_POST['servico'] == 'pac'){
+
+                                require_once 'lib/RequestFrete.php';
+                                require_once 'lib/ItensVenda.php';
+                                require_once 'lib/PedVenda.php';
+                                require_once 'lib/DaoUsuario.php';
+                                require_once 'lib/DaoItensVenda.php';
+                                require_once 'lib/DaoPedVenda.php';
+            
+                                /**
+                                 * Valor do frete
+                                 */
+                                $freteval = str_replace(',', '.', $array_data->cServico->Valor);
+            
+            
+                                $user = DaoUsuario::getInstance()->readOne($_SESSION['usuario']);
+            
+                                /**
+                                 * Salva pedvenda
+                                 */
+                                $total = $_SESSION['subtotal'] + $freteval;
+                                $pedvenda = new Pedvenda();
+                                $pedvenda->setValortotal($total);
+                                $pedvenda->setData(date('Y-m-d H:i:s'));
+                                $pedvenda->setAtivo(1);
+                                $pedvenda->setFk_idusuario($_SESSION['usuario']);
+                                $insertPV = DaoPedvenda::getInstance()->create($pedvenda);
+            
+                                if($insertPV){
+            
+                                    /**
+                                     * Recupera o ultimo ID do pedido do usuario
+                                     */
+                                    try{
+                                        
+                                        $idpedvenda = DaoPedvenda::getInstance()->lastIDpedvenda($_SESSION['usuario']);
+            
+                                    }catch(PDOException $e){
+            
+                                        $e->getMessage();
+            
+                                    }
+            
+                                    /**
+                                     * Arrumar: Salvar ID do Usuario + ID Itens Venda
+                                     */
+                                    $itensvenda = new Itensvenda();
+                                
+                                    foreach($_SESSION['venda'] as $id => $q){
+            
+                                        $p = DaoProduto::getInstance()->readOne($id);
+                                        $itensvenda->setQuantidade($q);
+                                        $itensvenda->setValorunitario($p['valor']);
+                                        $itensvenda->setValordesconto(0);
+                                        $itensvenda->setFk_idproduto($id);
+                                        $itensvenda->setFk_idpedvenda($idpedvenda['idpedvenda']);
+                                        DaoItensvenda::getInstance()->create($itensvenda);
+            
+                                    }
+            
+                                    unset($_SESSION['subtotal']);
+                                    unset($_SESSION['venda']);
+
+                                    function mascaraStr($mask,$str){
+
+                                        $str = str_replace("","",$str);
+                                    
+                                        for($i=0;$i<strlen($str);$i++){
+                                            $mask[strpos($mask,"0")] = $str[$i];
+                                        }
+                                    
+                                        return $mask;
+                                    
+                                    }
+
+                                    require_once 'lib/pagseguro/checkout.php';
+                                    // header('Location: site.php');
+            
+                                }
+
+                            }else{
+                                $errocompra = true;
+                            }
+
+                        }else{
+
+                            $errocompra = true;
 
                         }
 
-                        require_once 'lib/pagseguro/checkout.php';
+                    }else{
 
-                        // unset($_SESSION['subtotal']);
-                        // unset($_SESSION['venda']);
-                        // header('Location: site.php');
+                        $errocompra = true;
 
                     }
 
@@ -128,14 +190,52 @@
         <script>
             $(document).ready(function(){
                 $('#form').on('input', function(e){
-                    if($('#cep').val().length == 8){
-                        $.post('lib/Frete.php', {cep:$('#cep').val(), servico:$('#servico option:selected').val()}, function(data){
-                            $('#frete').html(data);
-                            $('#valorfrete').on('input').val(data);
-                            var total = parseFloat($('#subtotal').html());
-                            total = total + parseFloat((data).replace(',', '.'));
-                            $('#total').html((total).toFixed(2));
-                        });
+                    if($('#in-destino').val().length == 8){
+                        var cep = $('#in-destino').val().replace(/\D/g, '');
+                        if(cep != ""){
+
+                            $.getJSON('https://viacep.com.br/ws/'+cep+'/json/', function(dados){
+                            
+                                if(!dados.erro){
+                
+                                    var request = $.ajax({
+                                        method: 'POST',
+                                        url: 'lib/RequestFrete.php',
+                                        data: {destino: cep, servico: $('#frete-tipo').val()},
+                                        dataType: 'json',
+                                        beforeSend: function(){
+                                            $('#spinner-cep').removeAttr('style');
+                                        },
+                                        success: function(array_data){
+                                            
+                                            $('#frete').html(array_data['cServico']['Valor']);
+                                            var subtotal = parseFloat($('#subtotal').html());
+                                            var total = subtotal + parseFloat((array_data['cServico']['Valor']).replace(',', '.'));
+                                            $('#total').html((total).toFixed(2));
+                        
+                                        },
+                                        error: function(){
+                        
+                                            $('#freteResultado').html('Não foi possível realizar a consulta');
+                                            $('#freteResultado').addClass('text-danger');
+                                            $('#freteModal').modal('show');
+                        
+                                        }
+                                    });
+                        
+                                    request.done(function(){
+                                        $('#spinner-cep').css('display', 'none');
+                                    });
+                
+                                }else{
+                
+                                    $('#freteResultado').html('CEP Inválido');
+                                    $('#freteResultado').addClass('text-danger');
+                                    $('#freteModal').modal('show');
+                
+                                }
+                            });
+                        }
                     }
                 });
             });
@@ -240,20 +340,21 @@
             <form method="post" name="final" id="form">
                 
                 <div class="form-group row">
-                    <label class="col-sm-1 col-form-label" for="cep">CEP</label>
+                    <label class="col-sm-1 col-form-label" for="servico">Entrega</label>
                     <div class="col-sm-2">
-                        <input type="text" name="cep" id="cep" class="form-control" maxlength="8"/>
+                        <select name="servico" id="frete-tipo" class="form-control">
+                            <option value="sedex">SEDEX</option>
+                            <option value="pac">PAC</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-1 col-form-label" for="servico">Entrega</label>
+                    <label class="col-sm-1 col-form-label" for="cep">CEP</label>
                     <div class="col-sm-2">
-                        <select name="servico" id="servico" class="form-control">
-                            <option value="04014">SEDEX</option>
-                            <option value="04510">PAC</option>
-                        </select>
+                        <input type="text" name="destino" id="in-destino" class="form-control" maxlength="8"/>
                     </div>
+                    <span id="spinner-cep" class="spinner-grow spinner-grow-sm text-primary" role="status" aria-hidden="true" style="display: none;"></span>
                 </div>
 
                 <input type="hidden" name="finalizar" value="1"/>
@@ -269,6 +370,22 @@
 
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="freteModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Frete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="freteResultado" class="text-center text-danger"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.js"></script>
 
