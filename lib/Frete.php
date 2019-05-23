@@ -82,7 +82,7 @@
 
         }else{
 
-            $url = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?";
+            $url = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?";
             $url .= "nCdEmpresa=0";
             $url .= "&sDsSenha=0";
             $url .= "&nCdServico=".$_POST['servico'];

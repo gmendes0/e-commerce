@@ -39,6 +39,8 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
         <title>Carrinho</title>
+        <script src="js/jquery.js"></script>
+        <script src="js/carrinho.js"></script>
     </head>
 
     <body>
@@ -74,6 +76,9 @@
                                 if($content){
     
                                     $total = null;
+                                    $i_id = 0;
+                                    echo "<script>var nprod = null;</script>";
+                                    echo "<script>var preco = {};</script>";
     
                                     foreach($_SESSION['venda'] as $prod => $qtd){
     
@@ -82,18 +87,33 @@
                             ?>
                                 <tr scope="row">
                                     <td><?php echo $produto['nome']; ?></td>
-                                    <td><?php echo 'R$ '.$produto['valor']; ?></td>
+                                    <td><span id="<?= 'preco'.$i_id; ?>"><?php echo $produto['valor']; ?></span></td>
                                     <td>
-                                        <input class="form-control col-sm-3" type="number" name="qtd[<?php echo $prod; ?>]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/>
+                                        <div class="input-group col-sm-6">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" type="button" onclick="menos(<?= $i_id; ?>)">-</button>
+                                            </div>
+                                            <input id="<?= 'inqtd'.$i_id; ?>" type="text" name="qtd[<?php echo $prod; ?>]" class="form-control text-center" value="<?= $_SESSION['venda'][$prod]; ?>" readonly/>
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-outline-secondary" type="button" onclick="mais(<?= $i_id; ?>)">+</button>
+                                            </div>
+                                        </div>
+                                        <!-- <input class="form-control col-sm-3" type="number" name="qtd[<?php echo $prod; ?>]" id="qtd" min="1" value="<?php echo $_SESSION['venda'][$prod]; ?>"/> -->
                                     </td>
-                                    <td><?php echo 'R$ '.$produto['valor']*$qtd; ?></td>
+                                    <td><span id="<?= 'sub'.$i_id; ?>"><?php echo $produto['valor']*$qtd; ?></span></td>
                                     <td><a href="carrinho.php?remove=<?php echo $produto['idproduto']; ?>">remover</a></td>
                                 </tr>
                                 
-                            <?php } ?>
+                            <?php
+                                    echo "<script>nprod = nprod + 1;</script>";
+                                    echo "<script>sub[$i_id] = ".$produto['valor']*$qtd."</script>";
+                                    echo "<script>preco[$i_id] = ".$produto['valor']."</script>";
+                                    $i_id++;
+                                }
+                            ?>
     
                                 <tr>
-                                    <td colspan="5" align="right">Total = R$ <?php echo $total; ?></td>
+                                    <td colspan="5" align="right">Total = <span id="total"><?php echo $total; ?></span></td>
                                 </tr>
     
                                 <tr>
@@ -123,7 +143,6 @@
 
         </div>
 
-        <script src="js/jquery.js"></script>
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.js"></script>
 

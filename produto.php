@@ -60,15 +60,7 @@
         <link rel="stylesheet" href="css/style.css">
         <title><?php echo $prod['nome']; ?></title>
         <script src="js/jquery.js"></script>
-        <script>
-            $(document).ready(function(){
-                $('#btn-calc').click(function(){
-                    $.post('lib/Frete.php', {cep:$('#in-destino').val()}, function(data){
-                        $('#frete').html(data);
-                    });
-                });
-            });
-        </script>
+        <script src="js/requestfrete.js"></script>
     </head>
 
     <body>
@@ -77,7 +69,7 @@
         <?php include_once 'scripts/php/navbar.php'; ?>
 
         <!-- conteúdo do site -->
-        <div class="container">
+        <div class="container mb-5 mt-5">
 
             <div class="row mt-5">
 
@@ -126,17 +118,40 @@
             </div>
 
             <div class="col-sm-3 mt-3 mb-3">
-                <label class="text-muted">Digite seu cep</label>
+                <label class="text-muted">Consultar Frete:</label>
+                <select name="tipo" id="frete-tipo" class="form-control mb-3">
+                    <option value="pac">PAC</option>
+                    <option value="sedex">SEDEX</option>
+                </select>
                 <div class="input-group">
-                    <input id="in-destino" type="text" name="cep" class="form-control" maxlength="8"/>
+                    <input id="in-destino" type="text" name="cep" class="form-control" maxlength="8" placeholder="Digite seu CEP"/>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-primary" id="btn-calc">calcular</button>
+                        <button class="btn btn-outline-primary" id="btn-calc">
+                            <span id="spinner-cep" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span> calcular
+                        </button>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4" id="frete"></div>
 
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="freteModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Frete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="freteResultado" class="text-center text-danger"></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script src="js/popper.js"></script>
