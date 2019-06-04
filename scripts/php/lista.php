@@ -53,7 +53,7 @@
                         <div class="card-body">
                             <a href="produto.php?id_prod=<?php echo $prod['idproduto']; ?>"><?php echo $prod['nome']; ?></a><!-- link para a página do produto -->
                             <p><?php echo "R$ ".$prod['valor']; ?></p>
-                            <a href="site.php?id_prod=<?php echo $prod['idproduto']; ?>&add=true" class="btn btn-primary">adicionar para o carrinho</a>
+                            <a href="site.php?id_prod=<?php echo $prod['idproduto']; ?>&add=true" class="btn btn-primary">Adicionar ao Carrinho</a>
                         </div>
 
                     </div>

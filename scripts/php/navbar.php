@@ -2,7 +2,7 @@
 
     <div class="container-fluid">
 
-        <a href="site.php" class="navbar-brand h1 mb-0">Home</a>
+        <a href="site.php" class="navbar-brand h1 mb-0">Master Tech</a>
 
         <!-- Navbar Toggler -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navSite">
@@ -14,7 +14,7 @@
 
             <!-- conteúdos à esquerda -->
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a href="site.php" class="nav-link">Iníco</a></li>
+                <li class="nav-item"><a href="site.php" class="nav-link">Início</a></li>
                 <?php if(isset($_SESSION['adm'])){ ?>
                     <li class="nav-item dropdown">
                         <!-- Dropdown Toggler -->
@@ -45,7 +45,7 @@
 
             <!-- Direita -->
             <ul class="navbar-nav ml-auto mr-2">
-                <li class="nav-item"><a href="carrinho.php" class="nav-link">carrinho</a></li>
+                <li class="nav-item"><a href="carrinho.php" class="nav-link">Carrinho</a></li>
                 <?php
 
                     /**
@@ -100,8 +100,8 @@
 
                 ?>
 
-                        <li class="nav-item"><a href="cadastro.php" class="nav-link">crie sua conta</a></li>
-                        <li class="nav-item"><a href="login.php" class="nav-link">entre</a></li>
+                        <li class="nav-item"><a href="cadastro.php" class="nav-link">Crie sua Conta</a></li>
+                        <li class="nav-item"><a href="login.php" class="nav-link">login </a></li>
 
                 <?php
 
@@ -114,7 +114,7 @@
                 <!-- Barra de pesquisa -->
                 <?php if(isset($page) && $page == 'index'){ ?>
                     <div class="input-group">
-                        <input type="search" class="form-control" placeholder="buscar..." id="busca"/>
+                        <input type="search" class="form-control" placeholder="Buscar..." id="busca"/>
                         <!-- <div class="input-group-append">
                             <button class="btn btn-dark" type="submit" id="go">go</button>
                         </div> -->
