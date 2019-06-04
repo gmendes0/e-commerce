@@ -54,11 +54,17 @@
 
                 $pdf->Cell(0, 2, $titulo_pdf, 0, 1, 'C'); // titulo do pdf
 
+                /**
+                 * Nome
+                 */
                 $pdf->SetFont('Arial', 'B', 12);
                 $pdf->Cell(1.5, 1, 'Nome: ', 0, 0, 'L');
                 $pdf->SetFont('Arial', '', 12);
                 $pdf->Cell(0, 1, $usuario['nome'], 0, 1, 'L');
 
+                /**
+                 * CPF
+                 */
                 $pdf->SetFont('Arial', 'B', 12);
                 $pdf->Cell(1.5, 1, 'CPF: ', 0, 0, 'L');
                 $pdf->SetFont('Arial', '', 12);
