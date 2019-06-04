@@ -58,7 +58,7 @@
                  * Nome
                  */
                 $pdf->SetFont('Arial', 'B', 12);
-                $pdf->Cell(1.5, 1, 'Cliente: ', 0, 0, 'L');
+                $pdf->Cell(1.7, 1, 'Cliente: ', 0, 0, 'L');
                 $pdf->SetFont('Arial', '', 12);
                 $pdf->Cell(0, 1, $usuario['nome'], 0, 1, 'L');
 
