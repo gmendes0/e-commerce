@@ -45,11 +45,11 @@
 
                 require_once 'lib/fpdf181/fpdf.php';
 
-                $titulo_pdf = 'Titulo pdf';
+                $titulo_pdf = 'Pedido de venda';
 
                 $pdf = new FPDF('p', 'cm', 'A4');
                 $pdf->AddPage();
-                $pdf->SetTitle('titulo'); // titulo
+                $pdf->SetTitle('Pedido de venda'); // titulo
                 $pdf->SetFont('Arial', 'B', '14');
 
                 $pdf->Cell(0, 2, $titulo_pdf, 0, 1, 'C'); // titulo do pdf
@@ -58,7 +58,7 @@
                  * Nome
                  */
                 $pdf->SetFont('Arial', 'B', 12);
-                $pdf->Cell(1.5, 1, 'Nome: ', 0, 0, 'L');
+                $pdf->Cell(1.5, 1, 'Cliente: ', 0, 0, 'L');
                 $pdf->SetFont('Arial', '', 12);
                 $pdf->Cell(0, 1, $usuario['nome'], 0, 1, 'L');
 
