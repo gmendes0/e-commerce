@@ -1,6 +1,6 @@
-<div class="card-columns">
+<div class="align-self-center">
 
-    <div class="text-center">
+    <div class="card-columns text-center">
 
         <?php
 
@@ -9,7 +9,7 @@
             $pdo = Banco::conectar();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $nprodpage = 10;
+            $nprodpage = 12;
 
             if(isset($_GET['page'])){
                     

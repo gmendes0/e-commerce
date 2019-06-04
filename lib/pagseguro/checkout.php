@@ -27,7 +27,8 @@ if(!empty($_POST)){
 			"valor"=>$pedvenda->getValortotal(),
 			"descricao"=>$p['nome'],
 			"nome"=>$user['nome'],
-			"email"=>"aaaxxx@sandbox.pagseguro.com.br",
+			// "email"=>"aaaxxx@sandbox.pagseguro.com.br",
+			"email"=>explode('@', $user['email'])[0].'@sandbox.pagseguro.com.br',
 			"telefone"=>mascaraStr("(00) 00000-0000", $user['telefone']),
 			"rua"=>$user['endereco'],
 			"numero"=>$user['numero'],
@@ -37,7 +38,7 @@ if(!empty($_POST)){
 			"cep"=>mascaraStr("00.000-000", $_POST['destino']),
 			"codigo_pagseguro"=>"");
 				
-	$PagSeguro->executeCheckout($venda,"localhost/pagseguro/pedido/".$_GET['codigo']);
+	$PagSeguro->executeCheckout($venda,"localhost/e-commerce/site.php".$_GET['codigo']);
 
 	//----------------------------------------------------------------------------
 

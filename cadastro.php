@@ -151,98 +151,98 @@
             <form method="post" class="mt-5 mb-5">
             
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="nome">nome</label>
+                    <label class="col-sm-2 col-form-label" for="nome">Nome Completo</label>
                     <div class="col-sm-8">
                         <input id="nome" class="form-control" type="text" name="nome" value="<?php echo !empty($_POST['nome']) ? $_POST['nome'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="datanascimento">data de nascimento</label>
+                    <label class="col-sm-2 col-form-label" for="datanascimento">Data de Nascimento</label>
                     <div class="col-sm-8">
                         <input id="datanascimento" class="form-control" type="date" name="datanascimento" value="<?php echo !empty($_POST['datanascimento']) ? $_POST['datanascimento'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="login">login</label>
+                    <label class="col-sm-2 col-form-label" for="login">Login</label>
                     <div class="col-sm-8">
                         <input id="login" class="form-control" type="text" name="login" value="<?php echo !empty($_POST['login']) ? $_POST['login'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="senha">senha</label>
+                    <label class="col-sm-2 col-form-label" for="senha">Senha</label>
                     <div class="col-sm-8">
                         <input id="senha" class="form-control" type="password" name="senha"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="confirmacao">confirmar senha</label>
+                    <label class="col-sm-2 col-form-label" for="confirmacao">Confirmar Senha</label>
                     <div class="col-sm-8">
                         <input id="confirmacao" class="form-control" type="password" name="confirmacao"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="email">email</label>
+                    <label class="col-sm-2 col-form-label" for="email">E-mail</label>
                     <div class="col-sm-8">
                         <input id="email" class="form-control" type="text" name="email" value="<?php echo !empty($_POST['email']) ? $_POST['email'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="telefone">telefone</label>
+                    <label class="col-sm-2 col-form-label" for="telefone">Telefone</label>
                     <div class="col-sm-8">
                         <input id="telefone" class="form-control" type="text" name="telefone" value="<?php echo !empty($_POST['telefone']) ? $_POST['telefone'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="cpf">cpf</label>
+                    <label class="col-sm-2 col-form-label" for="cpf">CPF</label>
                     <div class="col-sm-8">
                         <input id="cpf" class="form-control" type="text" name="cpf" value="<?php echo !empty($_POST['cpf']) ? $_POST['cpf'] : ''; ?>"/>
                     </div>
                 </div>
                 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="cep">cep</label>
+                    <label class="col-sm-2 col-form-label" for="cep">CEP</label>
                     <div class="col-sm-8">
                         <input id="cep" class="form-control" type="text" name="cep" value="<?php echo !empty($_POST['cep']) ? $_POST['cep'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="endereco">endereço</label>
+                    <label class="col-sm-2 col-form-label" for="endereco">Endereço</label>
                     <div class="col-sm-8">
                         <input id="endereco" class="form-control" type="text" name="endereco" value="<?php echo !empty($_POST['endereco']) ? $_POST['endereco'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="numero">numero</label>
+                    <label class="col-sm-2 col-form-label" for="numero">Número</label>
                     <div class="col-sm-8">
                         <input id="numero" class="form-control" type="text" name="numero" value="<?php echo !empty($_POST['numero']) ? $_POST['numero'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="bairro">bairro</label>
+                    <label class="col-sm-2 col-form-label" for="bairro">Bairro</label>
                     <div class="col-sm-8">
                         <input id="bairro" class="form-control" type="text" name="bairro" value="<?php echo !empty($_POST['bairro']) ? $_POST['bairro'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="cidade">cidade</label>
+                    <label class="col-sm-2 col-form-label" for="cidade">Cidade</label>
                     <div class="col-sm-8">
                         <input id="cidade" class="form-control" type="text" name="cidade" value="<?php echo !empty($_POST['cidade']) ? $_POST['cidade'] : ''; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="estado">estado</label>
+                    <label class="col-sm-2 col-form-label" for="estado">Estado</label>
                     <div class="col-sm-8">
                         <select id="estado" class="form-control" name="estado">
                             <?php foreach($estados as $uf => $es_nome){ ?>
@@ -253,7 +253,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <input class="btn btn-primary" type="submit" value="cadastrar"/>
+                    <input class="btn btn-primary" type="submit" value="Cadastrar"/>
                 </div>
 
             </form>
