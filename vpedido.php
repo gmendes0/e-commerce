@@ -111,7 +111,7 @@
                     $valqtd = $value['valorunitario'] * $value['quantidade'];
                     $total = $total + $valqtd;
 
-                    $pdf->Cell(11.5, 0.7, $produto['nome'], 1, 0, 'C');
+                    $pdf->Cell(11.5, 0.7, utf8_decode($produto['nome']), 1, 0, 'C');
                     $pdf->Cell(1.5, 0.7, $value['quantidade'], 1, 0, 'C');
                     $pdf->Cell(6, 0.7, 'R$ '.number_format($valqtd, 2, ',', '.'), 1, 1, 'C');
 
