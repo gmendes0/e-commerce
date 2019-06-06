@@ -1,4 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-5">
+<script src="js/navbar.js"></script>
+<nav class="navbar navbar-expand-lg navbar-light bg-white p-4 sticky-top shadow-sm">
+
 
     <div class="container-fluid">
 

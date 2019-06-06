@@ -18,11 +18,14 @@
         <script src="js/pesquisa.js"></script>
     </head>
 
-    <body>
+    <body class="bg-light">
 
         <?php $page = 'index'; ?>
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
+
+        <!-- Carousel -->
+        <?php include_once 'carousel.php'; ?>
 
         <!-- conteúdo do site -->
         <div class="site">
