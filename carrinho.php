@@ -38,6 +38,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
         <title>Carrinho</title>
         <script src="js/jquery.js"></script>
         <script src="js/carrinho.js"></script>
@@ -48,10 +49,14 @@
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
 
+        <div class="row h-100 align-items-center p-5 titulo-bg">
+            <div class="col-12">
+                <h2 class="text-center">carrinho</h2>
+            </div>
+        </div>
+
         <!-- conteúdo do site -->
-        <div class="container">
-        
-            <h1 class="text-center">carrinho</h1>
+        <div class="container mt-5">
 
             <form method="post" action="comprar.php">
 
