@@ -7,6 +7,7 @@
         private $data;
         private $ativo;
         private $fk_idusuario;
+        private $pagseguro_id;
 
         /**
          * Get the value of idpedvenda
@@ -88,4 +89,24 @@
             $this->valortotal = $valortotal;
         }
 
+
+        /**
+         * Get the value of pagseguro_id
+         */ 
+        public function getPagseguro_id()
+        {
+            return $this->pagseguro_id;
+        }
+
+        /**
+         * Set the value of pagseguro_id
+         *
+         * @return  self
+         */ 
+        public function setPagseguro_id($pagseguro_id)
+        {
+            $this->pagseguro_id = $pagseguro_id;
+
+            return $this;
+        }
     }

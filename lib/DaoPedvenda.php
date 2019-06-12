@@ -24,13 +24,14 @@
 
             try{
 
-                $sql = "INSERT INTO ".self::$tabela."(valortotal, data, ativo, usuario_idusuario) VALUES(:valortotal, :data, :ativo, :idusuario)";
+                $sql = "INSERT INTO ".self::$tabela."(valortotal, data, ativo, usuario_idusuario, pagseguro_id) VALUES(:valortotal, :data, :ativo, :idusuario, :pagseguro_id)";
                 $stmt = Banco::getInstance()->prepare($sql);
 
                 $stmt->bindValue(":valortotal", $pedvenda->getValortotal());
                 $stmt->bindValue(":data", $pedvenda->getData());
                 $stmt->bindValue(":ativo", $pedvenda->getAtivo());
                 $stmt->bindValue(":idusuario", $pedvenda->getFk_idusuario());
+                $stmt->bindValue(":pagseguro_id", $pedvenda->getPagseguro_id());
 
                 return $stmt->execute();
 
