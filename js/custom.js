@@ -296,11 +296,17 @@ function recHash(){
                         getPsModal('Erro', '<p class="text-center text-danger">Não foi possível realizar a compra</p>')
                     }else{
                         getPsModal('Sucesso', '<p class="text-center text-success">Compra realizada com sucesso</p>')
+
+                        $('.psModalDismiss').on('click', function(){
+
+                            window.location = 'site.php';
+                        })
                     }
                     console.log('sucesso: ' + JSON.stringify(response))
                     // débito - link: response.dados.paymentLink
                 },
                 error: function(response){
+                    
                     getPsModal('Erro', '<p class="text-center text-danger">Não foi possível realizar a compra</p>')
                     console.log('erro: ' + JSON.stringify(response))
                 }

@@ -368,14 +368,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="psModalTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close psModalDismiss" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body" id="psModalBody">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary psModalDismiss" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -385,6 +385,7 @@
         <script src="js/popper.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="<?php echo $script_pagseguro; ?>"></script>
+        <script src="js/viacepct.js"></script>
         <script src="js/custom.js"></script>
         <script>pagamento('<?php echo $my_url; ?>')</script>
     </body>
