@@ -66,6 +66,10 @@
                         <input class="btn btn-success" type="submit" value="entrar"/>
                     </div>
                 </div>
+
+                <div class="text-center mt-3 mb-3">
+                    <a href="cadastro.php">Cadastre-se</a>
+                </div>
                 <!-- <div class="form-group row">
                     <label for="login" class="col-sm-1 col-form-label">Login</label>
                     <div class="col-sm-4">
