@@ -100,8 +100,6 @@
                 
                 return $stmt->fetchAll(PDO::FETCH_OBJ);
 
-                echo $sql;
-
             }catch(PDOException $th){
 
                 echo $th->getMessage();

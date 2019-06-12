@@ -174,14 +174,12 @@
             $pedvenda->setValortotal($total);
             $pedvenda->setData(date('Y-m-d H:i:s'));
             $pedvenda->setAtivo(1);
-
             /**
              * recupera o id do pagseguro
              */
             $idpagseguro = DaoPagseguro::getInstance()->allWhere(["usuario_id" => $_SESSION['usuario']], ['id' => 'DESC'], 'LIMIT 1');
-
+            $pedvenda->setPagseguro_id($idpagseguro[0]->id);
             $pedvenda->setFk_idusuario($_SESSION['usuario']);
-            // $pedvenda->setPagseguro_id();
             $insertPV = DaoPedvenda::getInstance()->create($pedvenda);
 
             if($insertPV){
@@ -216,8 +214,8 @@
 
                 }
 
-                // unset($_SESSION['subtotal']);
-                // unset($_SESSION['venda']);
+                unset($_SESSION['subtotal']);
+                unset($_SESSION['venda']);
             }
 
         }
