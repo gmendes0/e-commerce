@@ -1,25 +1,65 @@
 <?php
 
-    require_once 'lib/pagseguroct/config.php';
+    session_start();
+
     // require_once 'conexao.php';
+    require_once 'lib/pagseguroct/config.php';
+    require_once 'lib/Validacao.php';
+
+    $validacao = new Validacao;
+    $validacao->isLoggedIn();
 
     /**
-     * recupera a o total no banco
+     * Verifica se há itens
      */
-    // $sql = "SELECT valor_venda, qnt_produto, carrinho_id FROM carrinhos_produtos WHERE carrinho_id = 1";
-    // $stmt = $conn->prepare($sql);
-    // $stmt->execute();
-    // $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-    // $total_venda = 0;
+    if(!empty($_SESSION['venda'])){
 
-    // foreach($data as $i => $item){
-        
-    //     $total_venda += $item->valor_venda * $item->qnt_produto;
-    //     $carrinho_id = $item->carrinho_id;
-    // }
+        require_once 'lib/DaoProduto.php';
+        require_once 'lib/DaoFornecedor.php';
+        $subtotal = null;
 
-    // $total_venda = number_format($total_venda, 2, '.', '');
-    $total_venda = number_format(500, 2, '.', '');
+        if(!empty($_POST)){
+
+            if(isset($_POST['qtd'])){
+
+                foreach($_SESSION['venda'] as $prod => $qtd){
+                    
+                    $_SESSION['venda'][$prod] = intval($_POST['qtd'][$prod]);
+                }
+
+                /**
+                 * Atualiza a página destruindo o $_POST
+                 */
+                echo "</script>window.location='checkout.php'</script>";
+                exit;
+            }
+        }else{
+
+            $produtos_no_carrinho = 0;
+            $to_checkout = array();
+            /**
+             * Exibição de itens
+             */
+            foreach($_SESSION['venda'] as $prod => $qtd){
+
+                /**
+                 * Contador de itens no carrinho
+                 */
+                $produtos_no_carrinho++;
+                $produto = DaoProduto::getInstance()->readOne($prod);
+                $subtotal += $produto['valor'] * $qtd;
+
+            }
+            unset($produto);
+        }
+
+    }else{
+
+        echo "<script>window.location='site.php'</script>";
+        exit;
+    }
+
+    $total_venda = number_format($subtotal, 2, '.', '');
     $carrinho_id = 1;
 
 ?>
@@ -40,40 +80,38 @@
             <div class="text-center py-5">
                 <h2>Checkout</h2>
             </div>
-
+            
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Seu carrinho</span>
-                        <span class="badge badge-secondary badge-pill">3</span>
+                        <span class="badge badge-secondary badge-pill"><?php echo $produtos_no_carrinho; ?></span>
                     </h4>
 
                     <ul class="list-group mb-3">
                         <!-- Produtos -->
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Third item</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$5</span>
-                        </li>
+                        <?php
+                            foreach($_SESSION['venda'] as $prod => $qtd){
+
+                                $produto = DaoProduto::getInstance()->readOne($prod);
+                                $fornecedor = DaoFornecedor::getInstance()->readOne($produto['fornecedor_idfornecedor']);
+                        ?>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0"><?php echo $produto['nome']; ?></h6>
+                                    <small class="text-muted"><?php echo $fornecedor['nome']; ?> - x<span><?php echo $qtd; ?></span></small>
+                                </div>
+                                <span class="text-muted">
+                                    <span>R$ <?php echo number_format($produto['valor'] * $qtd, 2, ',', '.'); ?></span>
+                                </span>
+                            </li>
+                        <?php } ?>
                         <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
-                            <strong>$20</strong>
+                            <span>Total (BRL)</span>
+                            <strong>
+                                <span>R$ </span><span id="subtotal"><?php echo $subtotal; ?></span>
+                                <?php $_SESSION['subtotal'] = $subtotal; ?>
+                            </strong>
                         </li>
                     </ul>
                 </div>

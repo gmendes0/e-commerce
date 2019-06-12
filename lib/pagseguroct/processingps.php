@@ -1,7 +1,10 @@
 <?php
 
+    session_start();
+
     require_once 'config.php';
-    require_once 'conexao.php';
+    require_once '../Banco.php';
+    require_once '../DaoProduto.php';
 
     $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
@@ -28,28 +31,20 @@
         'extraAmount' => $data['extraAmount'],
     ];
 
-    /**
-     * recupera a o total no banco
-     */
-    $sql = "SELECT valor_venda, qnt_produto, produto_id, carrinho_id FROM carrinhos_produtos WHERE carrinho_id = ".$data['reference'];
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $query_data = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $i = 0;
 
-    foreach($query_data as $i => $item){
+    foreach($_SESSION['venda'] as $prod => $qtd){
 
-        $sql = "SELECT nome_produto, valor_venda, id FROM produtos WHERE id = ".$item->produto_id;
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $prod = $stmt->fetch(PDO::FETCH_OBJ);
-
+        $produto = DaoProduto::getInstance()->readOne($prod);
         $array_data += [
     
-            'itemId'.($i+1) => $item->produto_id,
-            'itemDescription'.($i+1) => $prod->nome_produto,
-            'itemAmount'.($i+1) => number_format($item->valor_venda, 2, '.', ''),
-            'itemQuantity'.($i+1) => $item->qnt_produto,
+            'itemId'.($i+1) => $produto['idproduto'],
+            'itemDescription'.($i+1) => $produto['nome'],
+            'itemAmount'.($i+1) => number_format($produto['valor'], 2, '.', ''),
+            'itemQuantity'.($i+1) => $qtd,
         ];
+
+        $i++;
     }
 
     $array_data += [
