@@ -53,9 +53,10 @@
          * select all com condições
          * @param array $condicoes
          * @param array $orderby
+         * @param string $adicional
          * exemplo ['nome = gabriel', 'idade = 19']
          */
-        public function allWhere($condicoes, $orderby = null)
+        public function allWhere($condicoes, $orderby = null, $adicional = null)
         {
             try{
 
@@ -88,6 +89,11 @@
 
                     }
 
+                }
+
+                if(!is_null($adicional)){
+
+                    $sql .= ' ORDER BY '.key($orderby).' '.$order.' '.$adicional;
                 }
 
                 $stmt = Banco::getInstance()->query($sql);

@@ -153,13 +153,75 @@
         $newinfo->setShippingCountry($xml->shipping->address->country);
         $newinfo->setShippingPostalCode($xml->shipping->address->postalCode);
 
-        DaoPagseguro::getInstance()->create($newinfo);
+        $insert_infos = DaoPagseguro::getInstance()->create($newinfo);
 
-        // require_once 'lib/ItensVenda.php';
-        // require_once 'lib/PedVenda.php';
-        // require_once 'lib/DaoUsuario.php';
-        // require_once 'lib/DaoItensVenda.php';
-        // require_once 'lib/DaoPedVenda.php';
+        if($insert_infos){
+
+            require_once '../ItensVenda.php';
+            require_once '../PedVenda.php';
+            require_once '../DaoUsuario.php';
+            require_once '../DaoItensVenda.php';
+            require_once '../DaoPedVenda.php';
+
+            $user = DaoUsuario::getInstance()->readOne($_SESSION['usuario']);
+            
+            /**
+             * Salva pedvenda
+             */
+            // $total = $_SESSION['subtotal'] + $freteval;
+            $total = $_SESSION['subtotal'];
+            $pedvenda = new Pedvenda();
+            $pedvenda->setValortotal($total);
+            $pedvenda->setData(date('Y-m-d H:i:s'));
+            $pedvenda->setAtivo(1);
+
+            /**
+             * recupera o id do pagseguro
+             */
+            $idpagseguro = DaoPagseguro::getInstance()->allWhere(["usuario_id = ".$_SESSION['usuario']], ['DESC']);
+
+            $pedvenda->setFk_idusuario($_SESSION['usuario']);
+            // $pedvenda->setPagseguro_id();
+            $insertPV = DaoPedvenda::getInstance()->create($pedvenda);
+
+            if($insertPV){
+
+                /**
+                 * Recupera o ultimo ID do pedido do usuario
+                 */
+                try{
+                    
+                    $idpedvenda = DaoPedvenda::getInstance()->lastIDpedvenda($_SESSION['usuario']);
+
+                }catch(PDOException $e){
+
+                    $e->getMessage();
+
+                }
+
+                /**
+                 * preparação para salvar itens
+                 */
+                $itensvenda = new Itensvenda();
+            
+                foreach($_SESSION['venda'] as $id => $q){
+
+                    $p = DaoProduto::getInstance()->readOne($id);
+                    $itensvenda->setQuantidade($q);
+                    $itensvenda->setValorunitario($p['valor']);
+                    $itensvenda->setValordesconto(0);
+                    $itensvenda->setFk_idproduto($id);
+                    $itensvenda->setFk_idpedvenda($idpedvenda['idpedvenda']);
+                    DaoItensvenda::getInstance()->create($itensvenda);
+
+                }
+
+                // unset($_SESSION['subtotal']);
+                // unset($_SESSION['venda']);
+            }
+
+        }
+
     }
     
     $response = [
