@@ -178,7 +178,7 @@
             /**
              * recupera o id do pagseguro
              */
-            $idpagseguro = DaoPagseguro::getInstance()->allWhere(["usuario_id = ".$_SESSION['usuario']], ['DESC']);
+            $idpagseguro = DaoPagseguro::getInstance()->allWhere(["usuario_id" => $_SESSION['usuario']], ['id' => 'DESC'], 'LIMIT 1');
 
             $pedvenda->setFk_idusuario($_SESSION['usuario']);
             // $pedvenda->setPagseguro_id();
