@@ -6,7 +6,8 @@
      */
     if(!isset($_SESSION['usuario'])){
 
-        header('Location: login.php');
+        // header('Location: login.php');
+        echo "<script>window.location='login.php'</script>";
         exit;
 
     }
@@ -29,7 +30,8 @@
 
                 }
 
-                header('Location: comprar.php'); // Atualiza a página destruindo o $_POST
+                // header('Location: comprar.php'); // Atualiza a página destruindo o $_POST
+                echo "<script>window.location='comprar.php'</script>";
 
             }
 
@@ -168,7 +170,8 @@
 
     }else{
 
-        header('Location: site.php');
+        // header('Location: site.php');
+        echo "<script>window.location='site.php'</script>";
         exit;
 
     }

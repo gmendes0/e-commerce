@@ -94,7 +94,8 @@
                         $update = DaoUsuario::getInstance()->update($usuario);
 
                         if($update){
-                            header('Location: perfil.php');
+                            // header('Location: perfil.php');
+                            echo "<script>window.location='perfil.php'</script>";
                         }
 
                     }
@@ -103,7 +104,8 @@
 
             }else{
 
-                header('Location: perfil.php');
+                // header('Location: perfil.php');
+                echo "<script>window.location='perfil.php'</script>";
 
             }
 

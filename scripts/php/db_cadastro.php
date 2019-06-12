@@ -2,7 +2,8 @@
 
     if(!defined('INCLUIDA')){
 
-        header('Location: ../../cadastro.php');
+        // header('Location: ../../cadastro.php');
+        echo "<script>window.location='../../cadastro.php'</script>";
         exit;
 
     }

@@ -21,7 +21,8 @@
         if(!empty($_GET['del'])){
 
             DaoProduto::getInstance()->del($_GET['del']);
-            header('Location: adm_lista.php');
+            // header('Location: adm_lista.php');
+            echo "<script>window.location='adm_lista.php'</script>";
 
         }
         /* Fim deletar */
@@ -54,7 +55,8 @@
                                     $produto->setAtivo($_POST['ativo']);
                                     DaoProduto::getInstance()->update($produto);
 
-                                    header('Location: adm_lista.php');
+                                    // header('Location: adm_lista.php');
+                                    echo "<script>window.location='adm_lista.php'</script>";
                                     /* Fim Insert */
 
                                 }

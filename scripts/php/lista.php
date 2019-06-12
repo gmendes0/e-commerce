@@ -66,7 +66,8 @@
                         if($_GET['add'] == null || $_GET['add'] != 'true'){
                             
                             unset($_GET['add']);
-                            header('Location: site.php');
+                            // header('Location: site.php');
+                            echo "<script>window.location='site.php'</script>";
                             exit;
 
                         }else{

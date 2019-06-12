@@ -16,7 +16,8 @@
 
     if(!isset($_GET['ped']) || !filter_var($_GET['ped'], FILTER_VALIDATE_INT)){
 
-        header('Location: pedidos.php');
+        // header('Location: pedidos.php');
+        echo "<script>window.location='pedidos.php'</script>";
         exit;
 
     }else{

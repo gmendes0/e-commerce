@@ -14,7 +14,8 @@
 
         if(isset($_GET['id'])){
 
-            header('Location: e_perfil.php?id='.$_GET['id']);
+            // header('Location: e_perfil.php?id='.$_GET['id']);
+            echo "<script>window.location='e_perfil.php?id=".$_GET['id']."'</script>";
 
         }
 

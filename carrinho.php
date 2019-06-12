@@ -23,7 +23,8 @@
         if(!empty($_GET['remove']) || $_GET['remove'] != null){
 
             unset($_SESSION['venda'][$_GET['remove']]);
-            header('Location: carrinho.php');
+            // header('Location: carrinho.php');
+            echo "<script>window.location='carrinho.php'</script>";
 
         }
 

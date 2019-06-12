@@ -37,13 +37,15 @@
             if($_GET['add'] == null || $_GET['add'] != 'true'){
                 
                 unset($_GET['add']);
-                header('Location: produto.php?id_prod='.$prod['idproduto']);
+                // header('Location: produto.php?id_prod='.$prod['idproduto']);
+                echo "<script>window.location='produto.php?id_prod=".$prod['idproduto']."'</script>";
                 exit;
         
             }else{
                 
                 $_SESSION['venda'][$_GET['id_prod']] = 1;
-                header('Location: carrinho.php');
+                // header('Location: carrinho.php');
+                echo "<script>window.location='carrinho.php'</script>";
                 exit;
             }
         }

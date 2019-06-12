@@ -67,7 +67,8 @@
                          */
                         $adm = $infos;
                         $_SESSION['adm'] = $infos->idadministrador;
-                        header('Location: site.php');
+                        // header('Location: site.php');
+                        echo "<script>window.location='site.php'</script>";
 
                     }
 

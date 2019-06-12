@@ -37,7 +37,9 @@
 
                             unset($_SESSION['adm']);
                             unset($_GET['a_sair']);
-                            header("Location: site.php");
+                            // header("Location: site.php");
+                            echo "<script>window.location='site.php'</script>";
+                            exit;
 
                         }
 
@@ -90,7 +92,9 @@
                                     $_SESSION = array();
                                     $_SESSION['adm'] = $adm;
                                     
-                                    header("Location: site.php");
+                                    // header("Location: site.php");
+                                    echo "<script>window.location='site.php'</script>";
+                                    exit;
 
                                 }
 

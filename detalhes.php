@@ -4,25 +4,29 @@
 
     function inicio()
     {
-        header('Location: site.php');
+        // header('Location: site.php');
+        echo "<script>window.location='site.php'</script>";
         exit;
     }
 
     function admlogin()
     {
-        header('Location: adm_login.php');
+        // header('Location: adm_login.php');
+        echo "<script>window.location='adm_login.php'</script>";
         exit;
     }
 
     function admFornecedorLista()
     {
-        header('Location: adm_fornecedor_lista.php');
+        // header('Location: adm_fornecedor_lista.php');
+        echo "<script>window.location='adm_fornecedor_lista.php'</script>";
         exit;
     }
 
     function admProdutoLista()
     {
-        header('Location: adm_lista.php');
+        // header('Location: adm_lista.php');
+        echo "<script>window.location='adm_lista.php'</script>";
         exit;
     }
 

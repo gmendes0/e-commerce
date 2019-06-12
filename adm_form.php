@@ -149,7 +149,8 @@
 
             if($insert){
 
-                header('Location: adm_login.php');
+                // header('Location: adm_login.php');
+                echo "<script>window.location='adm_login.php'</script>";
 
             }else{
 

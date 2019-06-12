@@ -20,7 +20,8 @@
     if(!empty($_GET['del'])){
 
         DaoFornecedor::getInstance()->del($_GET['del']);
-        header('Location: adm_fornecedor_lista.php');
+        // header('Location: adm_fornecedor_lista.php');
+        echo "<script>window.location='adm_fornecedor_lista.php'</script>";
 
     }
     /* Fim deletar */
@@ -103,7 +104,8 @@
                 $fornecedor->setIdfornecedor($val['idfornecedor']);
     
                 DaoFornecedor::getInstance()->update($fornecedor);
-                header('Location: adm_fornecedor_lista.php');
+                // header('Location: adm_fornecedor_lista.php');
+                echo "<script>window.location='adm_fornecedor_lista.php'</script>";
 
             }
 

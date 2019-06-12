@@ -43,7 +43,8 @@
             }
 
             if(!$aceito){
-                return header('Location: login.php');
+                // return header('Location: login.php');
+                echo "<script>window.location='login.php'</script>";
             }
 
         }
