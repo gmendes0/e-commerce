@@ -125,11 +125,48 @@
     curl_close($curl);
 
     $xml = simplexml_load_string($response);
+    
+    if(!isset($xml->error)){
 
+        require_once '../DaoPagseguro.php';
+        require_once '../Pagseguro.php';
+
+        $newinfo = new Pagseguro;
+        $newinfo->setDate($xml->date);
+        $newinfo->setCode($xml->code);
+        $newinfo->setPaymentMethod($array_data['paymentMethod']);
+        if(!empty($xml->paymentLink)){
+            $newinfo->setPaymentlink($xml->paymentLink);
+        }
+        $newinfo->setUsuarioid($_SESSION['usuario']);
+        $newinfo->setInstallmentCount($xml->installmentCount);
+        $newinfo->setSenderName($xml->sender->name);
+        $newinfo->setSenderEmail($xml->sender->email);
+        $newinfo->setSenderAreaCode($xml->sender->phone->areaCode);
+        $newinfo->setSenderFoneNumber($xml->sender->phone->number);
+        $newinfo->setShippingStreet($xml->shipping->address->street);
+        $newinfo->setShippingNumber($xml->shipping->address->number);
+        $newinfo->setShippingComplement($xml->shipping->address->complement);
+        $newinfo->setShipingDistrict($xml->shipping->address->district);
+        $newinfo->setShippingCity($xml->shipping->address->city);
+        $newinfo->setShippingState($xml->shipping->address->state);
+        $newinfo->setShippingCountry($xml->shipping->address->country);
+        $newinfo->setShippingPostalCode($xml->shipping->address->postalCode);
+
+        DaoPagseguro::getInstance()->create($newinfo);
+
+        // require_once 'lib/ItensVenda.php';
+        // require_once 'lib/PedVenda.php';
+        // require_once 'lib/DaoUsuario.php';
+        // require_once 'lib/DaoItensVenda.php';
+        // require_once 'lib/DaoPedVenda.php';
+    }
+    
     $response = [
         'erro' => false,
         'array_data' => $array_data,
         'dados' => $xml
     ];
+    
 
     echo json_encode($response);
