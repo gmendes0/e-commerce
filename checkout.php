@@ -153,6 +153,26 @@
                         <h4 class="text-muted mt-5 mb-3">Endereço de entrega</h4>
 
                         <div class="row">
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="shippingaddresspostalcode">CEP</label>
+                                <input type="text" name="shippingAddressPostalCode" id="shippingaddresspostalcode" class="form-control" maxlength="8"/>
+                            </div>
+    
+                            <div class="col-5 col-md-2 mb-3">
+                                <label for="shippingaddresscountry">País</label>
+                                <select name="shippingAddressCountry" id="shippingaddresscountry" class="form-control">
+                                    <option value="BRA">Brasil</option>
+                                </select>
+                            </div>
+
+                            <div class="col-7 col-md-4 mb-3">
+                                <label for="shippingaddressstate">Estado</label>
+                                <select name="shippingAddressState" id="shippingaddressstate" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
                             <div class="col-9 col-md-10 mb-3">
                                 <label for="shippingaddressstreet">Endereço</label>
                                 <input type="text" name="shippingAddressStreet" id="shippingaddressstreet" class="form-control"/>
@@ -177,26 +197,6 @@
                         <div class="mb-3">
                             <label for="shippingaddresscity">Cidade</label>
                             <input type="text" name="shippingAddressCity" id="shippingaddresscity" class="form-control"/>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="shippingaddresspostalcode">CEP</label>
-                                <input type="text" name="shippingAddressPostalCode" id="shippingaddresspostalcode" class="form-control" maxlength="8"/>
-                            </div>
-    
-                            <div class="col-5 col-md-2 mb-3">
-                                <label for="shippingaddresscountry">País</label>
-                                <select name="shippingAddressCountry" id="shippingaddresscountry" class="form-control">
-                                    <option value="BRA">Brasil</option>
-                                </select>
-                            </div>
-
-                            <div class="col-7 col-md-4 mb-3">
-                                <label for="shippingaddressstate">Estado</label>
-                                <select name="shippingAddressState" id="shippingaddressstate" class="form-control">
-                                </select>
-                            </div>
                         </div>
 
                         <div class="mb-3">
@@ -298,6 +298,26 @@
                             <h4 class="text-muted mt-5 mb-3">Endereço do titular</h4>
 
                             <div class="row">
+                                <div class="col-12 col-md-6 mb-3">
+                                    <label for="billingAddressPostalCode">CEP</label>
+                                    <input type="text" name="billingAddressPostalCode" id="billingAddressPostalCode" class="form-control"/>
+                                </div>
+
+                                <div class="col-5 col-md-2 mb-3">
+                                    <label for="billingAddressCountry">País</label>
+                                    <select name="billingAddressCountry" id="billingAddressCountry" class="form-control">
+                                        <option value="BRA">Brasil</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-7 col-md-4 mb-3">
+                                    <label for="billingAddressState">Estado</label>
+                                    <select name="billingAddressState" id="billingAddressState" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-9 col-md-10 mb-3">
                                     <label for="billingAddressStreet">Endereço</label>
                                     <input type="text" name="billingAddressStreet" id="billingAddressStreet" class="form-control"/>
@@ -322,26 +342,6 @@
                             <div class="mb-3">
                                 <label for="billingAddressCity">Cidade</label>
                                 <input type="text" name="billingAddressCity" id="billingAddressCity" class="form-control"/>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12 col-md-6 mb-3">
-                                    <label for="billingAddressPostalCode">CEP</label>
-                                    <input type="text" name="billingAddressPostalCode" id="billingAddressPostalCode" class="form-control"/>
-                                </div>
-
-                                <div class="col-5 col-md-2 mb-3">
-                                    <label for="billingAddressCountry">País</label>
-                                    <select name="billingAddressCountry" id="billingAddressCountry" class="form-control">
-                                        <option value="BRA">Brasil</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-7 col-md-4 mb-3">
-                                    <label for="billingAddressState">Estado</label>
-                                    <select name="billingAddressState" id="billingAddressState" class="form-control">
-                                    </select>
-                                </div>
                             </div>
 
                         </div>
