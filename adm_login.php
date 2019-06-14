@@ -94,9 +94,15 @@
 
     <body>
         
+        <div class="row h-100 align-items-center p-5 titulo-bg mb-5">
+            <div class="col-12">
+                <h2 class="text-center">Entrar como admnistrador</h2>
+            </div>
+        </div>
+
         <div class="container">
 
-            <h2 class="mt-5">Entrar como admnistrador</h2>
+            <!-- <h2 class="mt-5">Entrar como admnistrador</h2> -->
 
             <?php
 
@@ -104,7 +110,9 @@
 
                     foreach($errors as $erro){
             ?>
-                        <div class="col-sm-4 alert alert-danger"><?php echo $erro; ?></div>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-4 alert alert-danger text-center"><?php echo $erro; ?></div>
+                        </div>
             <?php
                     }
 
@@ -112,23 +120,25 @@
 
             ?>
 
-            <form class="mt-5" method="POST">
+            <form class="mt-3" method="POST">
             
-                <div class="form-group row">
-                    <label class="col-sm-1 col-form-label">Login:</label>
-                    <div class="col-sm-3">
+                <div class="row justify-content-center">
+                    <div class="col-10 col-sm-3 mb-3">
+                        <label>Login</label>
                         <input type="text" name="login" class="form-control"/>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-1 col-form-label">Senha:</label>
-                    <div class="col-sm-3">
+                <div class="row justify-content-center">
+                    <div class="col-10 col-sm-3 mb-3">
+                        <label>Senha</label>
                         <input type="password" name="senha" class="form-control"/>
                     </div>
                 </div>
 
-                <input type="submit" value="entrar" class="btn btn-primary"/>
+                <div class="text-center">
+                    <input type="submit" value="entrar" class="btn btn-success mt-3"/>
+                </div>
             
             </form>
         

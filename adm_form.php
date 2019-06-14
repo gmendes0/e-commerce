@@ -176,9 +176,15 @@
 
     <body>
         
+        <div class="row h-100 align-items-center p-5 titulo-bg mb-5">
+            <div class="col-12">
+                <h2 class="text-center">Novo admnistrador</h2>
+            </div>
+        </div>
+
         <div class="container">
 
-            <h2 class="mt-5">Novo admnistrador</h2>
+            <!-- <h2 class="mt-5">Novo admnistrador</h2> -->
 
             <?php
 

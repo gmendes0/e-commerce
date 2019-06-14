@@ -29,7 +29,8 @@
                             $dados = DaoUsuario::getInstance()->readOne($user['idusuario']);
                             $_SESSION['usuario'] = intval($dados['idusuario']);
                             $_SESSION['nome'] = $dados['nome'];
-                            echo "<meta http-equiv='refresh' content='3;url=site.php'/>";
+                            // echo "<meta http-equiv='refresh' content='3;url=site.php'/>";
+                            echo "<script>window.location='site.php'</script>";
                             break;
 
                         }else{

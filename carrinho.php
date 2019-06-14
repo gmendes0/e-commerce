@@ -50,7 +50,7 @@
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
 
-        <div class="row h-100 align-items-center p-5 titulo-bg">
+        <div class="row h-100 align-items-center titulo-bg p-5">
             <div class="col-12">
                 <h2 class="text-center">carrinho</h2>
             </div>

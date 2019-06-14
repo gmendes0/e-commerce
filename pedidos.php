@@ -37,9 +37,15 @@
     <body>
         <?php require_once 'scripts/php/navbar.php'; ?>
 
+        <div class="row h-100 align-items-center p-5 titulo-bg mb-5">
+            <div class="col-12">
+                <h2 class="text-center">Pedidos</h2>
+            </div>
+        </div>
+
         <div class="container">
 
-            <h2 class="text-center mt-5 mb-5">Pedidos</h2>
+            <!-- <h2 class="text-center mt-5 mb-5">Pedidos</h2> -->
 
             <div class="table-responsive mt-5 mb-5">
                 <table class="table shadow-sm">

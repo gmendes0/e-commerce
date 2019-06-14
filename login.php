@@ -23,6 +23,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
         <title>Login</title>
     </head>
 
@@ -31,9 +32,14 @@
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
 
+        <div class="row h-100 align-items-center p-5 titulo-bg mb-5">
+            <div class="col-12">
+                <h2 class="text-center">Login</h2>
+            </div>
+        </div>
+        
         <div class="container">
 
-            <h2 class="mt-5 mb-5 text-center">Login</h2>
 
             <?php if(!empty($n)){?>
                 <div class="row justify-content-center">

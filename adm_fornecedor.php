@@ -113,6 +113,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
         <title>Cadastrar - Fornecedor</title>
         <script src="js/jquery.js"></script>
         <script src="js/cep.js"></script>
@@ -140,8 +141,14 @@
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
 
+        <div class="row h-100 align-items-center p-5 titulo-bg mb-5">
+            <div class="col-12">
+                <h2 class="text-center">Novo Fornecedor</h2>
+            </div>
+        </div>
+
         <!-- Formulário Fornecedor -->
-        <div class="container" id="container1">
+        <div class="container mt-5" id="container1">
 
             <!-- Modal -->
             <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-hidden="true">
@@ -184,7 +191,7 @@
                 </div>
             </div>
 
-            <h2 class="text-center">Novo Fornecedor</h2>
+            <!-- <h2 class="text-center">Novo Fornecedor</h2> -->
 
             <!-- erros de validação -->
             <?php if(isset($validar)){ echo $validar->bootstrapGetErrors('danger', 'col-sm-5'); } ?>

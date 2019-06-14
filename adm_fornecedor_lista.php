@@ -123,6 +123,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style.css">
         <title>Fornecedores - Lista</title>
         <script src="js/jquery.js"></script>
         <script src="js/cep.js"></script>
@@ -132,6 +133,12 @@
         
         <!-- navbar -->
         <?php include_once 'scripts/php/navbar.php'; ?>
+
+        <div class="row h-100 align-items-center p-5 titulo-bg mb-5">
+            <div class="col-12">
+                <h2 class="text-center">Fornecedores</h2>
+            </div>
+        </div>
 
         <div class="container">
 
