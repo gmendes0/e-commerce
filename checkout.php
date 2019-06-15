@@ -107,10 +107,25 @@
                             </li>
                         <?php } ?>
                         <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (BRL)</span>
+                            <span>Subtotal (BRL)</span>
                             <strong>
                                 <span>R$ </span><span id="subtotal"><?php echo $subtotal; ?></span>
                                 <?php $_SESSION['subtotal'] = $subtotal; ?>
+                            </strong>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-danger">
+                                <h6 class="my-0">Frete (BRL)</h6>
+                                <small id="cepsmall">00000000</small>
+                            </div>
+                            <span id="valfrete" class="text-danger"></span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total (BRL)</span>
+                            <strong>
+                                <span>R$ </span><span id="total"><?php echo $subtotal; ?></span>
                             </strong>
                         </li>
                     </ul>
@@ -386,6 +401,7 @@
         <script src="js/bootstrap.js"></script>
         <script src="<?php echo $script_pagseguro; ?>"></script>
         <script src="js/viacepct.js"></script>
+        <script src="js/fretect.js"></script>
         <script src="js/custom.js"></script>
         <script>pagamento('<?php echo $my_url; ?>')</script>
     </body>

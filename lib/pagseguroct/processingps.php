@@ -52,9 +52,11 @@
         'notificationURL' => $ps_url_notificacao,
         'reference' => $data['reference'],
         'senderName' => $data['senderName'],
-        'senderCPF' => $data['senderCPF'],
+        // 'senderCPF' => $data['senderCPF'],
+        'senderCPF' => str_replace('-', '', filter_var($data['senderCPF'], FILTER_SANITIZE_NUMBER_INT)),
         'senderAreaCode' => $data['senderAreaCode'],
-        'senderPhone' => $data['senderPhone'],
+        // 'senderPhone' => $data['senderPhone'],
+        'senderPhone' => str_replace('-', '', $data['senderPhone']),
         
     ];
 
