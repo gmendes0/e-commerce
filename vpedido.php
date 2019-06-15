@@ -67,45 +67,90 @@
 
                 $pdf->Cell(0, 2, $titulo_pdf, 0, 1, 'C'); // titulo do pdf
 
-                /**
-                 * Nome
-                 */
-                $pdf->SetFont('Arial', 'B', 12);
-                $pdf->Cell(1.7, 1, 'Cliente: ', 0, 0, 'L');
-                $pdf->SetFont('Arial', '', 12);
-                $pdf->Cell(0, 1, utf8_decode($usuario['nome']), 0, 1, 'L');
+                if(isset($pagseguro)){
 
-                /**
-                 * CPF
-                 */
-                $pdf->SetFont('Arial', 'B', 12);
-                $pdf->Cell(1.3, 1, 'CPF: ', 0, 0, 'L');
-                $pdf->SetFont('Arial', '', 12);
-                $pdf->Cell(0, 1, mascaraStr('000.000.000-00', $usuario['cpf']), 0, 1, 'L');
 
-                /**
-                 * Endereço
-                 */
-                $pdf->SetFont('Arial', 'B', 12);
-                $pdf->Cell(2.6, 1, utf8_decode('Endereço: '), 0, 0, 'L');
-                $pdf->SetFont('Arial', '', 12);
-                $pdf->Cell(0, 1, utf8_decode($usuario['endereco'].' nº '.$usuario['numero']), 0, 1, 'L');
+                    /**
+                     * Nome
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(1.7, 1, 'Cliente: ', 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, utf8_decode($pagseguro->senderName), 0, 1, 'L');
+    
+                    /**
+                     * CPF
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(1.3, 1, 'CPF: ', 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, mascaraStr('000.000.000-00', $usuario['cpf']), 0, 1, 'L');
+    
+                    /**
+                     * Endereço
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(2.6, 1, utf8_decode('Endereço: '), 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, utf8_decode($usuario['endereco'].' nº '.$usuario['numero']), 0, 1, 'L');
+    
+                    /**
+                     * Bairro
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(1.7, 1, 'Bairro: ', 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, utf8_decode($usuario['bairro']), 0, 1, 'L');
+    
+                    /**
+                     * Cidade
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(1.8, 1, 'Cidade: ', 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, utf8_decode($usuario['cidade'].' - '.$usuario['estado']), 0, 1, 'L');
+                }else{
 
-                /**
-                 * Bairro
-                 */
-                $pdf->SetFont('Arial', 'B', 12);
-                $pdf->Cell(1.7, 1, 'Bairro: ', 0, 0, 'L');
-                $pdf->SetFont('Arial', '', 12);
-                $pdf->Cell(0, 1, utf8_decode($usuario['bairro']), 0, 1, 'L');
+                    /**
+                     * Nome
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(1.7, 1, 'Cliente: ', 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, utf8_decode($usuario['nome']), 0, 1, 'L');
+    
+                    /**
+                     * CPF
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(1.3, 1, 'CPF: ', 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, mascaraStr('000.000.000-00', $usuario['cpf']), 0, 1, 'L');
 
-                /**
-                 * Cidade
-                 */
-                $pdf->SetFont('Arial', 'B', 12);
-                $pdf->Cell(1.8, 1, 'Cidade: ', 0, 0, 'L');
-                $pdf->SetFont('Arial', '', 12);
-                $pdf->Cell(0, 1, utf8_decode($usuario['cidade'].' - '.$usuario['estado']), 0, 1, 'L');
+                    /**
+                     * Endereço
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(2.6, 1, utf8_decode('Endereço: '), 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, utf8_decode($pagseguro->shippingStreet.' nº '.$pagseguro->shippingNumber.' '.$pagseguro->shippingComplement), 0, 1, 'L');
+    
+                    /**
+                     * Bairro
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(1.7, 1, 'Bairro: ', 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, utf8_decode($pagseguro->shipingDistrict), 0, 1, 'L');
+    
+                    /**
+                     * Cidade
+                     */
+                    $pdf->SetFont('Arial', 'B', 12);
+                    $pdf->Cell(1.8, 1, 'Cidade: ', 0, 0, 'L');
+                    $pdf->SetFont('Arial', '', 12);
+                    $pdf->Cell(0, 1, utf8_decode($pagseguro->shippingCity.' - '.$pagseguro->shippingState), 0, 1, 'L');
+                }
 
                 $pdf->Ln(1);
 
