@@ -34,10 +34,11 @@
 
                 $sql = "INSERT INTO ".self::$tabela."(`code`, `date`, `paymentLink`, `paymentMethod`, `usuario_id`, `installmentCount`, `senderName`, ";
                 $sql .= "`senderEmail`, `senderAreaCode`, `senderFoneNumber`, `shippingStreet`, `shippingNumber`, `shippingComplement`, ";
-                $sql .= "`shipingDistrict`, `shippingCity`, `shippingState`, `shippingCountry`, `shippingPostalCode`, `shippingType`, `shippingCost`)";
+                $sql .= "`shipingDistrict`, `shippingCity`, `shippingState`, `shippingCountry`, `shippingPostalCode`, `shippingType`, `shippingCost`, ";
+                $sql .= " `netAmount`, `feeAmount`, `grossAmount`, `discountAmount`, `extraAmount`)";
                 $sql .= " VALUES(:code, :date, :paymentLink, :paymentMethod, :usuario_id, :installmentCount, :senderName, ";
                 $sql .= ":senderEmail, :senderAreaCode, :senderFoneNumber, :shippingStreet, :shippingNumber, :shippingComplement, ";
-                $sql .= ":shipingDistrict, :shippingCity, :shippingState, :shippingCountry, :shippingPostalCode, :shippingType, :shippingCost)";
+                $sql .= ":shipingDistrict, :shippingCity, :shippingState, :shippingCountry, :shippingPostalCode, :shippingType, :shippingCost, :netAmount, :feeAmount, :grossAmount, :discountAmount, :extraAmount)";
                 $stmt = Banco::getInstance()->prepare($sql);
     
                 $stmt->bindValue(':code', $pagseguro->getCode());
@@ -60,6 +61,11 @@
                 $stmt->bindValue(':shippingPostalCode', $pagseguro->getShippingPostalCode());
                 $stmt->bindValue(':shippingType', $pagseguro->getShippingType());
                 $stmt->bindValue(':shippingCost', $pagseguro->getShippingCost());
+                $stmt->bindValue(':netAmount', $pagseguro->getNetAmount());
+                $stmt->bindValue(':feeAmount', $pagseguro->getFeeAmount());
+                $stmt->bindValue(':grossAmount', $pagseguro->getGrossAmount());
+                $stmt->bindValue(':discountAmount', $pagseguro->getDiscountAmount());
+                $stmt->bindValue(':extraAmount', $pagseguro->getExtraAmount());
     
                 return $stmt->execute();
 
@@ -80,7 +86,8 @@
                 $sql .= "`paymentMethod` = :paymentMethod, `usuario_id` = :usuario_id, `installmentCount` = :installmentCount, ";
                 $sql .= "`senderName` = :senderName, `senderEmail` = :senderEmail, `senderAreaCode` = :senderAreaCode, `senderFoneNumber` = :senderFoneNumber, ";
                 $sql .= "`shippingComplement` = :shippingComplement, `shipingDistrict` = :shipingDistrict, `shippingCity` = :shippingCity, ";
-                $sql .= "`shippingState` = :shippingState, `shippingCountry` = :shippingCountry, `shippingPostalCode` = :shippingPostalCode, `shippingType` = :shippingType, `shippingCost` = :shippingCost) WHERE ".self::$pk." = :id";
+                $sql .= "`shippingState` = :shippingState, `shippingCountry` = :shippingCountry, `shippingPostalCode` = :shippingPostalCode, `shippingType` = :shippingType, `shippingCost` = :shippingCost, ";
+                $sql .= "`netAmount` = :netAmount, `feeAmount` = :feeAmount, `grossAmount` = :grossAmount, `discountAmount` = :discountAmount, `extraAmount` = :extraAmount) WHERE ".self::$pk." = :id";
                 $stmt = Banco::getInstance()->prepare($sql);
     
                 $stmt->bindValue(':code', $pagseguro->getCode());
@@ -103,6 +110,11 @@
                 $stmt->bindValue(':shippingPostalCode', $pagseguro->getShippingPostalCode());
                 $stmt->bindValue(':shippingType', $pagseguro->getShippingType());
                 $stmt->bindValue(':shippingCost', $pagseguro->getShippingCost());
+                $stmt->bindValue(':netAmount', $pagseguro->getNetAmount());
+                $stmt->bindValue(':feeAmount', $pagseguro->getFeeAmount());
+                $stmt->bindValue(':grossAmount', $pagseguro->getGrossAmount());
+                $stmt->bindValue(':discountAmount', $pagseguro->getDiscountAmount());
+                $stmt->bindValue(':extraAmount', $pagseguro->getExtraAmount());
                 $stmt->bindValue(':id', $pagseguro->getId());
     
                 return $stmt->execute();

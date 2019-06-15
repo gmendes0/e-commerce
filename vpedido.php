@@ -193,13 +193,18 @@
                     <?php if($pagseguro->paymentMethod == 'creditCard'){ ?>
                         <h6 class="card-title text-center"><span class="text-muted">Método de pagamento:</span> Cartão de crédito</h6>
                         <h6 class="card-title text-center"><span class="text-muted">Parcelas:</span> <?php echo $pagseguro->installmentCount; ?></h6>
-                        <!-- <h6 class="card-title text-center"><span class="text-muted">Valor:</span> <?php echo $pagseguro->netAmount; ?></h6>
-                        <h6 class="card-title text-center"><span class="text-muted">Juros:</span> <?php echo $pagseguro->feeAmount; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Valor:</span> <?php echo $pagseguro->netAmount; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Taxa:</span> <?php echo $pagseguro->feeAmount; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Desconto:</span> <?php echo $pagseguro->discountAmount; ?></h6>
                         <h6 class="card-title text-center"><span class="text-muted">Total:</span> <?php echo $pagseguro->grossAmount; ?></h6>
-                        <h6 class="card-title text-center"><span class="text-muted">Total:</span> <?php echo $pagseguro->discountAmount; ?></h6> -->
+                        <h6 class="card-title text-center"><span class="text-muted">Tipo de frete:</span> <?php echo $fretetype[$pagseguro->shippingType]; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Valor do frete:</span> R$ <?php echo $pagseguro->shippingCost; ?></h6>
+                    <?php }else{ ?>
+                        <h6 class="card-title text-center"><span class="text-muted">Tipo de frete:</span> <?php echo $fretetype[$pagseguro->shippingType]; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Valor do frete:</span> R$ <?php echo $pagseguro->shippingCost; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Desconto:</span> <?php echo $pagseguro->discountAmount; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Total:</span> <?php echo $pagseguro->grossAmount; ?></h6>
                     <?php } ?>
-                    <h6 class="card-title text-center"><span class="text-muted">Tipo de frete:</span> <?php echo $fretetype[$pagseguro->shippingType]; ?></h6>
-                    <h6 class="card-title text-center"><span class="text-muted">Valor do frete:</span> R$ <?php echo $pagseguro->shippingCost; ?></h6>
                     <?php if(!empty($pagseguro->paymentLink)){ ?>
                         <?php if($pagseguro->paymentMethod == 'boleto'){ ?>
                             <h6 class="card-title text-center"><span class="text-muted">Método de pagamento:</span> Boleto</h6>

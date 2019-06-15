@@ -23,6 +23,11 @@
         public $usuarioid;
         public $shippingCost;
         public $shippingType;
+        public $netAmount;
+        public $feeAmount;
+        public $grossAmount;
+        public $discountAmount;
+        public $extraAmount;
 
         /**
          * Get the value of id
@@ -428,6 +433,106 @@
         public function setShippingType($shippingType)
         {
             $this->shippingType = $shippingType;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of netAmount
+         */ 
+        public function getNetAmount()
+        {
+            return $this->netAmount;
+        }
+
+        /**
+         * Set the value of netAmount
+         *
+         * @return  self
+         */ 
+        public function setNetAmount($netAmount)
+        {
+            $this->netAmount = $netAmount;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of feeAmount
+         */ 
+        public function getFeeAmount()
+        {
+            return $this->feeAmount;
+        }
+
+        /**
+         * Set the value of feeAmount
+         *
+         * @return  self
+         */ 
+        public function setFeeAmount($feeAmount)
+        {
+            $this->feeAmount = $feeAmount;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of grossAmount
+         */ 
+        public function getGrossAmount()
+        {
+            return $this->grossAmount;
+        }
+
+        /**
+         * Set the value of grossAmount
+         *
+         * @return  self
+         */ 
+        public function setGrossAmount($grossAmount)
+        {
+            $this->grossAmount = $grossAmount;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of discountAmount
+         */ 
+        public function getDiscountAmount()
+        {
+            return $this->discountAmount;
+        }
+
+        /**
+         * Set the value of discountAmount
+         *
+         * @return  self
+         */ 
+        public function setDiscountAmount($discountAmount)
+        {
+            $this->discountAmount = $discountAmount;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of extraAmount
+         */ 
+        public function getExtraAmount()
+        {
+            return $this->extraAmount;
+        }
+
+        /**
+         * Set the value of extraAmount
+         *
+         * @return  self
+         */ 
+        public function setExtraAmount($extraAmount)
+        {
+            $this->extraAmount = $extraAmount;
 
             return $this;
         }

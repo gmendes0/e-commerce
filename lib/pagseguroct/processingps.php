@@ -158,6 +158,11 @@
         $newinfo->setShippingPostalCode($xml->shipping->address->postalCode);
         $newinfo->setShippingType($xml->shipping->type);
         $newinfo->setShippingCost($xml->shipping->cost);
+        $newinfo->setNetAmount($xml->netAmount);
+        $newinfo->setFeeAmount($xml->feeAmount);
+        $newinfo->setGrossAmount($xml->grossAmount);
+        $newinfo->setDiscountAmount($xml->discountAmount);
+        $newinfo->setExtraAmount($xml->extraAmount);
 
         $insert_infos = DaoPagseguro::getInstance()->create($newinfo);
 
