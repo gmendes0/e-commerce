@@ -99,10 +99,12 @@
             'installmentValue' => $data['valorParcelas'],
             'noInterestInstallmentQuantity' => 3,
             'creditCardHolderName' => $data['creditCardHolderName'],
-            'creditCardHolderCPF' => $data['creditCardHolderCPF'],
+            // 'creditCardHolderCPF' => $data['creditCardHolderCPF'],
+            'creditCardHolderCPF' => str_replace('-', '', filter_var($data['creditCardHolderCPF'], FILTER_SANITIZE_NUMBER_INT)),
             'creditCardHolderBirthDate' => $data['creditCardHolderBirthDate'],
             'creditCardHolderAreaCode' => $data['creditCardHolderAreaCode'],
-            'creditCardHolderPhone' => $data['creditCardHolderPhone'],
+            // 'creditCardHolderPhone' => $data['creditCardHolderPhone'],
+            'creditCardHolderPhone' => str_replace('-', '', $data['creditCardHolderPhone']),
             'billingAddressStreet' => $data['billingAddressStreet'],
             'billingAddressNumber' => $data['billingAddressNumber'],
             'billingAddressComplement' => $data['billingAddressComplement'],
@@ -154,6 +156,8 @@
         $newinfo->setShippingState($xml->shipping->address->state);
         $newinfo->setShippingCountry($xml->shipping->address->country);
         $newinfo->setShippingPostalCode($xml->shipping->address->postalCode);
+        $newinfo->setShippingType($xml->shipping->type);
+        $newinfo->setShippingCost($xml->shipping->cost);
 
         $insert_infos = DaoPagseguro::getInstance()->create($newinfo);
 

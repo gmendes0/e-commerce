@@ -35,10 +35,22 @@
         require_once 'lib/DaoItensvenda.php';
         require_once 'lib/DaoProduto.php';
         require_once 'lib/DaoUsuario.php';
+        require_once 'lib/DaoPagseguro.php';
 
         $pedido = DaoPedvenda::getInstance()->readOne($_GET['ped']);
         $itens = DaoItensvenda::getInstance()->readAllWhere('pedvenda_idpedvenda', $_GET['ped']);
         $usuario = DaoUsuario::getInstance()->readOne($pedido['usuario_idusuario']);
+
+        if(!is_null($pedido['pagseguro_id'])){
+
+            $pagseguro = DaoPagseguro::getInstance()->find($pedido['pagseguro_id']);
+            $fretetype = [
+                '0' => 'DESCONHECIDO',
+                '1' => 'PAC',
+                '2' => 'SEDEX',
+                '3' => 'DESCONHECIDO',
+            ];
+        }
 
         if(!empty($_GET['ped']) && !empty($_GET['print'])){
 
@@ -147,7 +159,7 @@
     <body>
         <?php require_once 'scripts/php/navbar.php'; ?>
 
-        <div class="container">
+        <div class="container mt-5 mb-5">
 
         <div class="card">
             <div class="card-header text-center h6">
@@ -163,7 +175,41 @@
                         <span class="text-muted">Item <?php echo $key.': x'.$item['quantidade'].' '.$item['valorunitario'] ?></span> <?php echo $produto['nome'] ?>
                     </h6>
                 <?php } ?>
-                <h6 class="card-title text-center"><span class="text-muted">Lista:</span> <a href="<?php echo 'vpedido.php?ped='.$_GET['ped'].'&print=s'; ?>">Imprimir</a></h6>
+                <h6 class="card-title text-center"><span class="text-muted">Lista:</span> <a href="<?php echo 'vpedido.php?ped='.$_GET['ped'].'&print=s'; ?>" target="_blank">Imprimir</a></h6>
+                <?php if(isset($pagseguro)){ ?>
+                    <hr>
+                    <h6 class="card-title text-center">Pagseguro</h6>
+                    <h6 class="card-title text-center"><span class="text-muted">Código:</span> <?php echo $pagseguro->code; ?></h6>
+                    <h6 class="card-title text-center"><span class="text-muted">Nome do comprador:</span> <?php echo $pagseguro->senderName; ?></h6>
+                    <h6 class="card-title text-center"><span class="text-muted">
+                        Endereço de entrega:</span> <?php echo $pagseguro->shippingStreet; ?> n° <?php echo $pagseguro->shippingNumber; ?> 
+                        <?php echo $pagseguro->shippingComplement; ?>,
+                        <?php echo $pagseguro->shipingDistrict; ?>, 
+                        <?php echo $pagseguro->shippingCity; ?>, 
+                        <?php echo $pagseguro->shippingState; ?>, 
+                        <?php echo $pagseguro->shippingCountry; ?>
+                    </h6>
+                    <h6 class="card-title text-center"><span class="text-muted">CEP:</span> <?php echo $pagseguro->shippingPostalCode; ?></h6>
+                    <?php if($pagseguro->paymentMethod == 'creditCard'){ ?>
+                        <h6 class="card-title text-center"><span class="text-muted">Método de pagamento:</span> Cartão de crédito</h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Parcelas:</span> <?php echo $pagseguro->installmentCount; ?></h6>
+                        <!-- <h6 class="card-title text-center"><span class="text-muted">Valor:</span> <?php echo $pagseguro->netAmount; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Juros:</span> <?php echo $pagseguro->feeAmount; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Total:</span> <?php echo $pagseguro->grossAmount; ?></h6>
+                        <h6 class="card-title text-center"><span class="text-muted">Total:</span> <?php echo $pagseguro->discountAmount; ?></h6> -->
+                    <?php } ?>
+                    <h6 class="card-title text-center"><span class="text-muted">Tipo de frete:</span> <?php echo $fretetype[$pagseguro->shippingType]; ?></h6>
+                    <h6 class="card-title text-center"><span class="text-muted">Valor do frete:</span> R$ <?php echo $pagseguro->shippingCost; ?></h6>
+                    <?php if(!empty($pagseguro->paymentLink)){ ?>
+                        <?php if($pagseguro->paymentMethod == 'boleto'){ ?>
+                            <h6 class="card-title text-center"><span class="text-muted">Método de pagamento:</span> Boleto</h6>
+                            <h6 class="card-title text-center"><span class="text-muted">Imprimir boleto:</span> <a href="<?php echo $pagseguro->paymentLink; ?>" target="_blank">Imprimir</a></h6>
+                        <?php }else if($pagseguro->paymentMethod == 'eft'){ ?>
+                            <h6 class="card-title text-center"><span class="text-muted">Método de pagamento:</span> Débito online</h6>
+                            <h6 class="card-title text-center"><span class="text-muted">Link de pagamento:</span> <a href="<?php echo $pagseguro->paymentLink; ?>" target="_blank">Redirecionar</a></h6>
+                        <?php } ?>
+                    <?php } ?>
+                <?php } ?>
             </div>
         </div>
 

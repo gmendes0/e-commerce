@@ -21,6 +21,8 @@
         public $shippingCountry;
         public $shippingPostalCode;
         public $usuarioid;
+        public $shippingCost;
+        public $shippingType;
 
         /**
          * Get the value of id
@@ -386,6 +388,46 @@
         public function setShippingPostalCode($shippingPostalCode)
         {
             $this->shippingPostalCode = $shippingPostalCode;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of shippingCost
+         */ 
+        public function getShippingCost()
+        {
+            return $this->shippingCost;
+        }
+
+        /**
+         * Set the value of shippingCost
+         *
+         * @return  self
+         */ 
+        public function setShippingCost($shippingCost)
+        {
+            $this->shippingCost = $shippingCost;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of shippingType
+         */ 
+        public function getShippingType()
+        {
+            return $this->shippingType;
+        }
+
+        /**
+         * Set the value of shippingType
+         *
+         * @return  self
+         */ 
+        public function setShippingType($shippingType)
+        {
+            $this->shippingType = $shippingType;
 
             return $this;
         }

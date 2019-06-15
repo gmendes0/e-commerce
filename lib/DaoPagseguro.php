@@ -34,10 +34,10 @@
 
                 $sql = "INSERT INTO ".self::$tabela."(`code`, `date`, `paymentLink`, `paymentMethod`, `usuario_id`, `installmentCount`, `senderName`, ";
                 $sql .= "`senderEmail`, `senderAreaCode`, `senderFoneNumber`, `shippingStreet`, `shippingNumber`, `shippingComplement`, ";
-                $sql .= "`shipingDistrict`, `shippingCity`, `shippingState`, `shippingCountry`, `shippingPostalCode`)";
+                $sql .= "`shipingDistrict`, `shippingCity`, `shippingState`, `shippingCountry`, `shippingPostalCode`, `shippingType`, `shippingCost`)";
                 $sql .= " VALUES(:code, :date, :paymentLink, :paymentMethod, :usuario_id, :installmentCount, :senderName, ";
                 $sql .= ":senderEmail, :senderAreaCode, :senderFoneNumber, :shippingStreet, :shippingNumber, :shippingComplement, ";
-                $sql .= ":shipingDistrict, :shippingCity, :shippingState, :shippingCountry, :shippingPostalCode)";
+                $sql .= ":shipingDistrict, :shippingCity, :shippingState, :shippingCountry, :shippingPostalCode, :shippingType, :shippingCost)";
                 $stmt = Banco::getInstance()->prepare($sql);
     
                 $stmt->bindValue(':code', $pagseguro->getCode());
@@ -58,6 +58,8 @@
                 $stmt->bindValue(':shippingState', $pagseguro->getShippingState());
                 $stmt->bindValue(':shippingCountry', $pagseguro->getShippingCountry());
                 $stmt->bindValue(':shippingPostalCode', $pagseguro->getShippingPostalCode());
+                $stmt->bindValue(':shippingType', $pagseguro->getShippingType());
+                $stmt->bindValue(':shippingCost', $pagseguro->getShippingCost());
     
                 return $stmt->execute();
 
@@ -78,7 +80,7 @@
                 $sql .= "`paymentMethod` = :paymentMethod, `usuario_id` = :usuario_id, `installmentCount` = :installmentCount, ";
                 $sql .= "`senderName` = :senderName, `senderEmail` = :senderEmail, `senderAreaCode` = :senderAreaCode, `senderFoneNumber` = :senderFoneNumber, ";
                 $sql .= "`shippingComplement` = :shippingComplement, `shipingDistrict` = :shipingDistrict, `shippingCity` = :shippingCity, ";
-                $sql .= "`shippingState` = :shippingState, `shippingCountry` = :shippingCountry, `shippingPostalCode` = :shippingPostalCode) WHERE ".self::$pk." = :id";
+                $sql .= "`shippingState` = :shippingState, `shippingCountry` = :shippingCountry, `shippingPostalCode` = :shippingPostalCode, `shippingType` = :shippingType, `shippingCost` = :shippingCost) WHERE ".self::$pk." = :id";
                 $stmt = Banco::getInstance()->prepare($sql);
     
                 $stmt->bindValue(':code', $pagseguro->getCode());
@@ -99,6 +101,8 @@
                 $stmt->bindValue(':shippingState', $pagseguro->getShippingState());
                 $stmt->bindValue(':shippingCountry', $pagseguro->getShippingCountry());
                 $stmt->bindValue(':shippingPostalCode', $pagseguro->getShippingPostalCode());
+                $stmt->bindValue(':shippingType', $pagseguro->getShippingType());
+                $stmt->bindValue(':shippingCost', $pagseguro->getShippingCost());
                 $stmt->bindValue(':id', $pagseguro->getId());
     
                 return $stmt->execute();

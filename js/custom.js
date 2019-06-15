@@ -179,7 +179,7 @@ $('#ncartao').on('keyup', function(){
 function recParcelas(bandeira){
 
     PagSeguroDirectPayment.getInstallments({
-        amount: amount,
+        amount: Number.parseFloat(amount) + Number.parseFloat($('#shippingcost').val()),
         maxInstallmentNoInterest: 3,
         brand: bandeira,
         success: function(retorno){
