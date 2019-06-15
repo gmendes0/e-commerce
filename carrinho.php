@@ -59,7 +59,8 @@
         <!-- conteúdo do site -->
         <div class="container mt-5">
 
-            <form method="post" action="comprar.php">
+            <!-- <form method="post" action="comprar.php"> -->
+            <form method="post" action="checkout.php">
 
                 <div class="table-responsive">
                     <table class="table">

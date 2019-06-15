@@ -30,7 +30,7 @@
                 /**
                  * Atualiza a página destruindo o $_POST
                  */
-                echo "</script>window.location='checkout.php'</script>";
+                echo "<script>window.location='checkout.php'</script>";
                 exit;
             }
         }else{
