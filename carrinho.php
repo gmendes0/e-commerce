@@ -52,7 +52,7 @@
 
         <div class="row h-100 align-items-center titulo-bg p-5">
             <div class="col-12">
-                <h2 class="text-center">carrinho</h2>
+                <h2 class="text-center">Carrinho</h2>
             </div>
         </div>
 

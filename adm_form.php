@@ -1,6 +1,12 @@
 <?php
 
     session_start();
+    if(!isset($_SESSION['adm'])){
+
+        echo "<script>window.location='site.php'</script>";
+        exit;
+
+    }
 
     if(!empty($_POST)){
 

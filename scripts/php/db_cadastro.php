@@ -145,7 +145,8 @@
                             $cad['ativo'],
                         ));
                         Banco::desconectar();
-                        echo "<meta http-equiv='refresh' content='3;url=login.php'/>";
+                        // echo "<meta http-equiv='refresh' content='3;url=login.php'/>";
+                        echo "<script>window.location='login.php'</script>";
                         $msg['success'] = 'cadastrado com sucesso';
 
                     }catch(PDOException $e){
