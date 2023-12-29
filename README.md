@@ -10,4 +10,4 @@ Para rodar basta subir os containers utilizando o docker compose.
 docker compose up -d
 ```
 
-Após isso, a aplicação estará disponível em https://127.0.0.1:8018/site.php
+Após isso, a aplicação estará disponível em http://127.0.0.1:8018/site.php
