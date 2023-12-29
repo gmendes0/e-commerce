@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: ./docker
+      dockerfile: server.Dockerfile
+    ports:
+      - 8018:80
+    volumes:
+      - .:/usr/src/app
+
+  db:
+    build:
+      context: ./docker
+      dockerfile: database.Dockerfile
+    ports:
+      - 3314:3306
+    volumes:
+      - ./docker/database:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: tcc3
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
